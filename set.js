@@ -4,12 +4,11 @@ var List = require("./list");
 var FastSet = require("./fast-set");
 var GenericCollection = require("./generic-collection");
 var GenericSet = require("./generic-set");
-var ObservableObject = require("./observable-object");
-var ObservableRange = require("./observable-range");
-var equalsOperator = require("./operators/equals");
-var hashOperator = require("./operators/hash");
-var noop = require("./operators/noop");
-var addEach = require("./operators/add-each");
+var ObservableObject = require("pop-observe/observable-object");
+var ObservableRange = require("pop-observe/observable-range");
+var equalsOperator = require("pop-equals");
+var hashOperator = require("pop-hash");
+var copy = require("./copy");
 
 module.exports = Set;
 
@@ -43,10 +42,10 @@ function Set(values, equals, hash, getDefault) {
 
 Set.Set = Set; // hack so require("set").Set will work in MontageJS
 
-addEach(Set.prototype, GenericCollection.prototype);
-addEach(Set.prototype, GenericSet.prototype);
-addEach(Set.prototype, ObservableObject.prototype);
-addEach(Set.prototype, ObservableRange.prototype);
+copy(Set.prototype, GenericCollection.prototype);
+copy(Set.prototype, GenericSet.prototype);
+copy(Set.prototype, ObservableObject.prototype);
+copy(Set.prototype, ObservableRange.prototype);
 
 Set.prototype.Order = List;
 Set.prototype.Store = FastSet;
@@ -161,6 +160,10 @@ Set.prototype.reduceRight = function (callback, basis /*, thisp*/) {
     }, basis, this);
 };
 
+Set.prototype.toArray = function () {
+    return this.order.toArray();
+};
+
 Set.prototype.iterate = function () {
     return this.order.iterate();
 };
@@ -172,6 +175,7 @@ Set.prototype.log = function () {
 
 Set.prototype.makeRangeChangesObservable = function () {
     this.order.makeRangeChangesObservable();
-    ObservableRange.prototype.makeRangeChangesObservable.call(this);
 };
+
+function noop() {}
 

@@ -4,12 +4,14 @@ module.exports = List;
 
 var GenericCollection = require("./generic-collection");
 var GenericOrder = require("./generic-order");
-var ObservableObject = require("./observable-object");
-var ObservableRange = require("./observable-range");
+var ObservableObject = require("pop-observe/observable-object");
+var ObservableRange = require("pop-observe/observable-range");
 var Iterator = require("./iterator");
-var equalsOperator = require("./operators/equals");
-var noop = require("./operators/noop");
-var addEach = require("./operators/add-each");
+var equalsOperator = require("pop-equals");
+var arrayify = require("pop-arrayify");
+var copy = require("./copy");
+
+var emptyArray = [];
 
 function List(values, equals, getDefault) {
     if (!(this instanceof List)) {
@@ -26,10 +28,10 @@ function List(values, equals, getDefault) {
 
 List.List = List; // hack so require("list").List will work in MontageJS
 
-addEach(List.prototype, GenericCollection.prototype);
-addEach(List.prototype, GenericOrder.prototype);
-addEach(List.prototype, ObservableObject.prototype);
-addEach(List.prototype, ObservableRange.prototype);
+copy(List.prototype, GenericCollection.prototype);
+copy(List.prototype, GenericOrder.prototype);
+copy(List.prototype, ObservableObject.prototype);
+copy(List.prototype, ObservableRange.prototype);
 
 List.prototype.constructClone = function (values) {
     return new this.constructor(values, this.contentEquals, this.getDefault);
@@ -40,7 +42,9 @@ List.prototype.findValue = function (value, equals) {
     var head = this.head;
     var at = head.next;
     while (at !== head) {
-        if (equals(at.value, value)) {
+        // Note that the given value occurs first so that it can be a matcher
+        // like an Any(Number) object.
+        if (equals(value, at.value)) {
             return at;
         }
         at = at.next;
@@ -52,7 +56,7 @@ List.prototype.findLastValue = function (value, equals) {
     var head = this.head;
     var at = head.prev;
     while (at !== head) {
-        if (equals(at.value, value)) {
+        if (equals(value, at.value)) {
             return at;
         }
         at = at.prev;
@@ -83,8 +87,8 @@ List.prototype['delete'] = function (value, equals) {
         found['delete']();
         this.length--;
         if (this.dispatchesRangeChanges) {
-            this.updateIndexes(found.next, found.index);
             this.dispatchRangeChange(plus, minus, found.index);
+            this.updateIndexes(found.next, found.index);
         }
         return true;
     }
@@ -135,7 +139,7 @@ List.prototype.push = function () {
     }
     this.length += arguments.length;
     if (this.dispatchesRangeChanges) {
-        this.updateIndexes(start.next, start.index === undefined ? 0 : start.index + 1);
+        this.updateIndexes(start, start.index);
         this.dispatchRangeChange(plus, minus, index);
     }
 };
@@ -155,7 +159,7 @@ List.prototype.unshift = function () {
     }
     this.length += arguments.length;
     if (this.dispatchesRangeChanges) {
-        this.updateIndexes(this.head.next, 0);
+        this.updateIndexes(this.head, -1);
         this.dispatchRangeChange(plus, minus, 0);
     }
 };
@@ -193,7 +197,7 @@ List.prototype.shift = function () {
         head.next['delete']();
         this.length--;
         if (this.dispatchesRangeChanges) {
-            this.updateIndexes(this.head.next, 0);
+            this.updateIndexes(this.head, -1);
             this.dispatchRangeChange(plus, minus, 0);
         }
     }
@@ -284,7 +288,7 @@ List.prototype.swap = function (start, length, plus) {
     if (length == null) {
         length = Infinity;
     }
-    plus = Array.from(plus);
+    plus = arrayify(plus);
 
     // collect the minus array
     var minus = [];
@@ -327,9 +331,9 @@ List.prototype.swap = function (start, length, plus) {
     // after range change
     if (this.dispatchesRangeChanges) {
         if (start === this.head) {
-            this.updateIndexes(this.head.next, 0);
+            this.updateIndexes(this.head, -1);
         } else {
-            this.updateIndexes(startNode.next, startNode.index + 1);
+            this.updateIndexes(startNode, startNode.index);
         }
         this.dispatchRangeChange(plus, minus, index);
     }
@@ -384,16 +388,19 @@ List.prototype.reduceRight = function (callback, basis /*, thisp*/) {
 };
 
 List.prototype.updateIndexes = function (node, index) {
-    while (node !== this.head) {
+    do {
         node.index = index++;
         node = node.next;
-    }
+    } while (node !== this.head);
 };
 
 List.prototype.makeRangeChangesObservable = function () {
-    this.head.index = -1;
-    this.updateIndexes(this.head.next, 0);
-    ObservableRange.prototype.makeRangeChangesObservable.call(this);
+    this.updateIndexes(this.head, -1);
+    this.dispatchesRangeChanges = true;
+};
+
+List.prototype.toArray = function () {
+    return this.slice();
 };
 
 List.prototype.iterate = function () {
@@ -450,4 +457,6 @@ Node.prototype.addAfter = function (node) {
     next.prev = node;
     node.prev = this;
 };
+
+function noop() {}
 
