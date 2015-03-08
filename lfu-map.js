@@ -3,7 +3,7 @@
 var LfuSet = require("./lfu-set");
 var GenericCollection = require("./generic-collection");
 var GenericMap = require("./generic-map");
-var ObservableObject = require("./observable-object");
+var ObservableObject = require("pop-observe/observable-object");
 var equalsOperator = require("pop-equals");
 var hashOperator = require("pop-hash");
 var copy = require("./copy");
@@ -60,14 +60,19 @@ LfuMap.prototype.stringify = function (item, leader) {
 };
 
 LfuMap.prototype.observeMapChange = function () {
-    if (!this.dispatchesMapChanges) {
-        // Detect LRU deletions in the LfuSet and emit as MapChanges.
-        // Array and Heap have no store.
-        // Dict and FastMap define no listeners on their store.
-        this.store.observeRangeWillChange(this, "store");
-        this.store.observeRangeChange(this, "store");
-    }
     return GenericMap.prototype.observeMapChange.apply(this, arguments);
+};
+
+LfuMap.prototype.makeMapChangesObservable = function () {
+    if (this.dispatchesMapChanges) {
+        return;
+    }
+    // Detect LRU deletions in the LfuSet and emit as MapChanges.
+    // Array and Heap have no store.
+    // Dict and FastMap define no listeners on their store.
+    this.store.observeRangeWillChange(this, "store");
+    this.store.observeRangeChange(this, "store");
+    this.dispatchMapChanges = true;
 };
 
 LfuMap.prototype.handleStoreRangeWillChange = function (plus, minus, index) {

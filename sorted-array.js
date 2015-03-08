@@ -3,8 +3,8 @@
 module.exports = SortedArray;
 
 var GenericCollection = require("./generic-collection");
-var ObservableObject = require("./observable-object");
-var ObservableRange = require("./observable-range");
+var ObservableObject = require("pop-observe/observable-object");
+var ObservableRange = require("pop-observe/observable-range");
 var equalsOperator = require("pop-equals");
 var compareOperator = require("pop-compare");
 var hasOperator = require("pop-has");

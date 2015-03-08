@@ -4,8 +4,8 @@ module.exports = SortedSet;
 
 var GenericCollection = require("./generic-collection");
 var GenericSet = require("./generic-set");
-var ObservableObject = require("./observable-object");
-var ObservableRange = require("./observable-range");
+var ObservableObject = require("pop-observe/observable-object");
+var ObservableRange = require("pop-observe/observable-range");
 var Iterator = require("./iterator");
 var TreeLog = require("./tree-log");
 var equalsOperator = require("pop-equals");

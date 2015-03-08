@@ -4,8 +4,8 @@ module.exports = List;
 
 var GenericCollection = require("./generic-collection");
 var GenericOrder = require("./generic-order");
-var ObservableObject = require("./observable-object");
-var ObservableRange = require("./observable-range");
+var ObservableObject = require("pop-observe/observable-object");
+var ObservableRange = require("pop-observe/observable-range");
 var Iterator = require("./iterator");
 var equalsOperator = require("pop-equals");
 var arrayify = require("pop-arrayify");
@@ -87,8 +87,8 @@ List.prototype['delete'] = function (value, equals) {
         found['delete']();
         this.length--;
         if (this.dispatchesRangeChanges) {
-            this.updateIndexes(found.next, found.index);
             this.dispatchRangeChange(plus, minus, found.index);
+            this.updateIndexes(found.next, found.index);
         }
         return true;
     }
@@ -139,7 +139,7 @@ List.prototype.push = function () {
     }
     this.length += arguments.length;
     if (this.dispatchesRangeChanges) {
-        this.updateIndexes(start.next, start.index === undefined ? 0 : start.index + 1);
+        this.updateIndexes(start, start.index);
         this.dispatchRangeChange(plus, minus, index);
     }
 };
@@ -159,7 +159,7 @@ List.prototype.unshift = function () {
     }
     this.length += arguments.length;
     if (this.dispatchesRangeChanges) {
-        this.updateIndexes(this.head.next, 0);
+        this.updateIndexes(this.head, -1);
         this.dispatchRangeChange(plus, minus, 0);
     }
 };
@@ -197,7 +197,7 @@ List.prototype.shift = function () {
         head.next['delete']();
         this.length--;
         if (this.dispatchesRangeChanges) {
-            this.updateIndexes(this.head.next, 0);
+            this.updateIndexes(this.head, -1);
             this.dispatchRangeChange(plus, minus, 0);
         }
     }
@@ -331,9 +331,9 @@ List.prototype.swap = function (start, length, plus) {
     // after range change
     if (this.dispatchesRangeChanges) {
         if (start === this.head) {
-            this.updateIndexes(this.head.next, 0);
+            this.updateIndexes(this.head, -1);
         } else {
-            this.updateIndexes(startNode.next, startNode.index + 1);
+            this.updateIndexes(startNode, startNode.index);
         }
         this.dispatchRangeChange(plus, minus, index);
     }
@@ -388,16 +388,15 @@ List.prototype.reduceRight = function (callback, basis /*, thisp*/) {
 };
 
 List.prototype.updateIndexes = function (node, index) {
-    while (node !== this.head) {
+    do {
         node.index = index++;
         node = node.next;
-    }
+    } while (node !== this.head);
 };
 
 List.prototype.makeRangeChangesObservable = function () {
-    this.head.index = -1;
-    this.updateIndexes(this.head.next, 0);
-    ObservableRange.prototype.makeRangeChangesObservable.call(this);
+    this.updateIndexes(this.head, -1);
+    this.dispatchesRangeChanges = true;
 };
 
 List.prototype.toArray = function () {

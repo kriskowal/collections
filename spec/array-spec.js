@@ -1,5 +1,4 @@
 
-require("../observable-array");
 var is = require("../operators").is;
 var compare = require("pop-compare");
 var GenericCollection = require("../generic-collection");

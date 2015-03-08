@@ -2,7 +2,7 @@
 
 var GenericCollection = require("./generic-collection");
 var GenericMap = require("./generic-map");
-var ObservableObject = require("./observable-object");
+var ObservableObject = require("pop-observe/observable-object");
 var Iterator = require("./iterator");
 var copy = require("./copy");
 

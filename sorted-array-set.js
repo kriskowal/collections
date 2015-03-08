@@ -2,7 +2,7 @@
 
 var SortedArray = require("./sorted-array");
 var GenericSet = require("./generic-set");
-var ObservableObject = require("./observable-object");
+var ObservableObject = require("pop-observe/observable-object");
 var copy = require("./copy");
 
 module.exports = SortedArraySet;

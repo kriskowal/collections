@@ -2,11 +2,11 @@
 // Adapted from Eloquent JavaScript by Marijn Haverbeke
 // http://eloquentjavascript.net/appendix2.html
 
-require("./observable-array");
 var GenericCollection = require("./generic-collection");
-var ObservableObject = require("./observable-object");
-var ObservableRange = require("./observable-range");
-var ObservableMap = require("./observable-map");
+var ObservableObject = require("pop-observe/observable-object");
+var ObservableRange = require("pop-observe/observable-range");
+var ObservableMap = require("pop-observe/observable-map");
+var O = require("pop-observe");
 var equalsOperator = require("pop-equals");
 var compareOperator = require("pop-compare");
 var copy = require("./copy");
@@ -231,13 +231,22 @@ Heap.prototype.reduceRight = function (callback, basis /*, thisp*/) {
 };
 
 Heap.prototype.makeMapChangesObservable = function () {
-    this.content.observeMapChange(this, "content");
-    this.content.observeMapWillChange(this, "content");
+    this.makeChangesObservable();
+    this.dispatchesMapChanges = true;
 };
 
 Heap.prototype.makeRangeChangesObservable = function () {
-    this.content.observeRangeChange(this, "content");
-    this.content.observeRangeWillChange(this, "content");
+    this.makeChangesObservable();
+    this.dispatchesRangeChanges = true;
+};
+
+Heap.prototype.makeChangesObservable = function () {
+    if (this.dispatchesChanges) {
+        return;
+    }
+    O.observeMapChange(this.content, this, "content");
+    O.observeMapWillChange(this.content, this, "content");
+    this.dispatchesChanges = true;
 };
 
 Heap.prototype.handleContentRangeChange = function (plus, minus, index) {

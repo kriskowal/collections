@@ -113,7 +113,6 @@ describe("Set", function () {
             expect(set.toArray()).toEqual([3, 2]);
             expect(spy).toHaveBeenCalledWith([], [1], 0);
 
-            var spy = sinon.spy();
             expect(set.pop()).toEqual(2);
             expect(set.toArray()).toEqual([3]);
             expect(spy).toHaveBeenCalledWith([], [2], 1);

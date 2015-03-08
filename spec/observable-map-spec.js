@@ -2,7 +2,7 @@
 
 var sinon = require("sinon");
 var extendSpyExpectation = require("./spy-expectation");
-var ObservableMap = require("../observable-map");
+var ObservableMap = require("pop-observe/observable-map");
 
 describe("ObservableMap", function () {
 

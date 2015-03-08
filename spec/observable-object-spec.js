@@ -11,7 +11,7 @@
 
 var sinon = require("sinon");
 var extendSpyExpectation = require("./spy-expectation");
-var ObservableObject = require("../observable-object");
+var ObservableObject = require("pop-observe/observable-object");
 var observePropertyChange = ObservableObject.observePropertyChange;
 var makePropertyObservable = ObservableObject.makePropertyObservable;
 var preventPropertyObserver = ObservableObject.preventPropertyObserver;

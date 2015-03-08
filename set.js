@@ -4,8 +4,8 @@ var List = require("./list");
 var FastSet = require("./fast-set");
 var GenericCollection = require("./generic-collection");
 var GenericSet = require("./generic-set");
-var ObservableObject = require("./observable-object");
-var ObservableRange = require("./observable-range");
+var ObservableObject = require("pop-observe/observable-object");
+var ObservableRange = require("pop-observe/observable-range");
 var equalsOperator = require("pop-equals");
 var hashOperator = require("pop-hash");
 var copy = require("./copy");
@@ -175,7 +175,6 @@ Set.prototype.log = function () {
 
 Set.prototype.makeRangeChangesObservable = function () {
     this.order.makeRangeChangesObservable();
-    ObservableRange.prototype.makeRangeChangesObservable.call(this);
 };
 
 function noop() {}

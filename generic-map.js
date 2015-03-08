@@ -1,7 +1,7 @@
 "use strict";
 
-var ObservableMap = require("./observable-map");
-var ObservableObject = require("./observable-object");
+var ObservableMap = require("pop-observe/observable-map");
+var ObservableObject = require("pop-observe/observable-object");
 var Iterator = require("./iterator");
 var equalsOperator = require("pop-equals");
 var compareOperator = require("pop-compare");
