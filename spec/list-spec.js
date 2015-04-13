@@ -41,7 +41,7 @@ describe("List", function () {
     // List(values) node.addBefore(node)
     // List(values) node.addAfter(node)
 
-    // List(values).{add,remove}RangeChangeListener
+    // List(values).observeRangeChange
     //      add
     //      delete
     //      push
@@ -50,7 +50,7 @@ describe("List", function () {
     //      unshift
     //      splice
     //      swap
-    // List(values).{add,remove}BeforeRangeChangeListener
+    // List(values).observeRange{,Will}Change
     //      add
     //      delete
     //      push

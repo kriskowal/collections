@@ -131,7 +131,7 @@ SortedArray.prototype.get = function (value) {
 SortedArray.prototype.add = function (value) {
     var index = searchForInsertionIndex(this.array, value, this.contentCompare);
     if (this.dispatchesRangeChanges) {
-        this.dispatchBeforeRangeChange([value], [], index);
+        this.dispatchRangeWillChange([value], [], index);
     }
     this.array.splice(index, 0, value);
     this.length++;
@@ -145,7 +145,7 @@ SortedArray.prototype["delete"] = function (value) {
     var index = searchFirst(this.array, value, this.contentCompare, this.contentEquals);
     if (index !== -1) {
         if (this.dispatchesRangeChanges) {
-            this.dispatchBeforeRangeChange([], [value], index);
+            this.dispatchRangeWillChange([], [value], index);
         }
         this.array.splice(index, 1);
         this.length--;
@@ -215,9 +215,10 @@ SortedArray.prototype.swap = function (index, length, plus) {
     }
     var minus = this.slice(index, index + length);
     if (this.dispatchesRangeChanges) {
-        this.dispatchBeforeRangeChange(plus, minus, index);
+        this.dispatchRangeWillChange(plus, minus, index);
     }
-    this.array.splice(index, length);
+    swap(this.array, index, length);
+    this.length += plus.length - length;
     this.addEach(plus);
     if (this.dispatchesRangeChanges) {
         this.dispatchRangeChange(plus, minus, index);
@@ -259,7 +260,7 @@ SortedArray.prototype.clear = function () {
     var minus;
     if (this.dispatchesRangeChanges) {
         minus = this.array.slice();
-        this.dispatchBeforeRangeChange([], minus, 0);
+        this.dispatchRangeWillChange([], minus, 0);
     }
     this.length = 0;
     clear(this.array);
