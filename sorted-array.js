@@ -10,6 +10,7 @@ var compareOperator = require("pop-compare");
 var hasOperator = require("pop-has");
 var iterateOperator = require("pop-iterate");
 var clear = require("pop-clear");
+var swap = require("pop-swap/swap");
 var copy = require("./copy");
 
 function SortedArray(values, equals, compare, getDefault) {
@@ -214,12 +215,12 @@ SortedArray.prototype.swap = function (index, length, plus) {
         length = Infinity;
     }
     var minus = this.slice(index, index + length);
+    plus = plus || [];
     if (this.dispatchesRangeChanges) {
         this.dispatchRangeWillChange(plus, minus, index);
     }
-    swap(this.array, index, length);
+    swap(this.array, index, length, plus);
     this.length += plus.length - length;
-    this.addEach(plus);
     if (this.dispatchesRangeChanges) {
         this.dispatchRangeChange(plus, minus, index);
     }
