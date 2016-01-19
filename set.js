@@ -40,7 +40,7 @@ function Set(values, equals, hash, getDefault) {
     this.addEach(values);
 }
 
-Set.Set = Set; // hack so require("set").Set will work in MontageJS
+Set.Set = Set; // hack for MontageJS
 
 copy(Set.prototype, GenericCollection.prototype);
 copy(Set.prototype, GenericSet.prototype);

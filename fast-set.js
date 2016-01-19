@@ -31,7 +31,7 @@ function FastSet(values, equals, hash, getDefault) {
     this.addEach(values);
 }
 
-FastSet.FastSet = FastSet; // hack so require("fast-set").FastSet will work in MontageJS
+FastSet.FastSet = FastSet; // hack for MontageJS
 
 copy(FastSet.prototype, GenericCollection.prototype);
 copy(FastSet.prototype, GenericSet.prototype);

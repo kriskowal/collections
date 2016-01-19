@@ -26,7 +26,7 @@ function List(values, equals, getDefault) {
     this.addEach(values);
 }
 
-List.List = List; // hack so require("list").List will work in MontageJS
+List.List = List; // hack for MontageJS
 
 copy(List.prototype, GenericCollection.prototype);
 copy(List.prototype, GenericOrder.prototype);

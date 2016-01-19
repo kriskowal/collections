@@ -26,7 +26,7 @@ function Heap(values, equals, compare) {
     this.addEach(values);
 }
 
-Heap.Heap = Heap; // hack so require("heap").Heap will work in MontageJS
+Heap.Heap = Heap; // hack for MontageJS
 
 copy(Heap.prototype, GenericCollection.prototype);
 copy(Heap.prototype, ObservableObject.prototype);

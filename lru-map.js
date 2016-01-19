@@ -35,7 +35,7 @@ function LruMap(values, capacity, equals, hash, getDefault) {
     this.addEach(values);
 }
 
-LruMap.LruMap = LruMap; // hack so require("lru-map").LruMap will work in MontageJS
+LruMap.LruMap = LruMap; // hack for MontageJS
 
 copy(LruMap.prototype, GenericCollection.prototype);
 copy(LruMap.prototype, GenericMap.prototype);

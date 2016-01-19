@@ -33,7 +33,7 @@ function FastMap(values, equals, hash, getDefault) {
     this.addEach(values);
 }
 
-FastMap.FastMap = FastMap; // hack so require("fast-map").FastMap will work in MontageJS
+FastMap.FastMap = FastMap; // hack for MontageJS
 
 copy(FastMap.prototype, GenericCollection.prototype);
 copy(FastMap.prototype, GenericMap.prototype);

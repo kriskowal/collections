@@ -14,7 +14,7 @@ function SortedArraySet(values, equals, compare, getDefault) {
     SortedArray.call(this, values, equals, compare, getDefault);
 }
 
-// hack so require("sorted-array-set".SortedArraySet works in MontageJS
+// hack for MontageJS
 SortedArraySet.SortedArraySet = SortedArraySet;
 
 SortedArraySet.prototype = Object.create(SortedArray.prototype);

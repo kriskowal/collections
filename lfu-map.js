@@ -34,7 +34,7 @@ function LfuMap(values, maxLength, equals, hash, getDefault) {
     this.addEach(values);
 }
 
-LfuMap.LfuMap = LfuMap; // hack so require("lfu-map").LfuMap will work in MontageJS
+LfuMap.LfuMap = LfuMap; // hack for MontageJS
 
 copy(LfuMap.prototype, GenericCollection.prototype);
 copy(LfuMap.prototype, GenericMap.prototype);

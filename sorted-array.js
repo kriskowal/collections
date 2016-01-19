@@ -31,7 +31,7 @@ function SortedArray(values, equals, compare, getDefault) {
     this.addEach(values);
 }
 
-// hack so require("sorted-array").SortedArray will work in MontageJS
+// hack for MontageJS
 SortedArray.SortedArray = SortedArray;
 
 copy(SortedArray.prototype, GenericCollection.prototype);

@@ -43,7 +43,7 @@ function LfuSet(values, capacity, equals, hash, getDefault) {
     this.addEach(values);
 }
 
-LfuSet.LfuSet = LfuSet; // hack so require("lfu-set").LfuSet will work in MontageJS
+LfuSet.LfuSet = LfuSet; // hack for MontageJS
 
 copy(LfuSet.prototype, GenericCollection.prototype);
 copy(LfuSet.prototype, GenericSet.prototype);
