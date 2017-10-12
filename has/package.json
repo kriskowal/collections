@@ -1,0 +1,27 @@
+{
+  "name": "@collections/has",
+  "version": "1.0.0",
+  "description": "Polymorphic has operator for finding whether a collection contains an equivalent value",
+  "homepage": "http://collectionsjs.com",
+  "license": "MIT",
+  "keywords": [
+    "pop",
+    "polymoprhic",
+    "operator",
+    "has"
+  ],
+  "main": "./has.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kriskowal/collections"
+  },
+  "bugs": {
+    "url": "https://github.com/kriskowal/collections/issues"
+  },
+  "dependencies": {
+    "@collections/equals": "^1.0.0"
+  },
+  "directories": {
+    "test": "test"
+  }
+}

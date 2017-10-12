@@ -1,0 +1,15 @@
+{
+  "name": "@collections/tree-log",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "http://collectionsjs.com",
+  "keywords": [],
+  "main": "./tree-log.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kriskowal/collections"
+  },
+  "bugs": {
+    "url": "https://github.com/kriskowal/collections/issues"
+  }
+}

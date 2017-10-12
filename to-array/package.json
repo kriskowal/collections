@@ -1,0 +1,22 @@
+{
+  "name": "@collections/to-array",
+  "version": "1.0.0",
+  "description": "Transforms various collections into arrays by whatever means they support",
+  "homepage": "http://collectionsjs.com",
+  "license": "MIT",
+  "keywords": [
+    "pop",
+    "polymorphic",
+    "operator",
+    "array",
+    "coerce"
+  ],
+  "main": "to-array.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kriskowal/collections"
+  },
+  "bugs": {
+    "url": "https://github.com/kriskowal/collections/issues"
+  }
+}

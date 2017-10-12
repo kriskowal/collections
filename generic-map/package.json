@@ -1,0 +1,22 @@
+{
+  "name": "@collections/generic-map",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "http://collectionsjs.com",
+  "keywords": [],
+  "main": "./generic-map.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kriskowal/collections"
+  },
+  "bugs": {
+    "url": "https://github.com/kriskowal/collections/issues"
+  },
+  "dependencies": {
+    "@collections/observable": "^1",
+    "@collections/iterator": "^1",
+    "@collections/equals": "^1",
+    "@collections/compare": "^1",
+    "@collections/copy": "^1"
+  }
+}

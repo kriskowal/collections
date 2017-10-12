@@ -1,0 +1,24 @@
+{
+  "name": "@collections/clone",
+  "version": "1.0.0",
+  "description": "A polymorphic clone operator for arbitrary object graphs",
+  "homepage": "http://collectionsjs.com",
+  "license": "BSD 3-Clause",
+  "keywords": [
+    "pop",
+    "polymorphic",
+    "operator",
+    "clone"
+  ],
+  "main": "clone.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kriskowal/collections"
+  },
+  "bugs": {
+    "url": "https://github.com/kriskowal/collections/issues"
+  },
+  "dependencies": {
+    "@collections/mini-map": "^1.0.0"
+  }
+}

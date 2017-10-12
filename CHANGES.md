@@ -1,3 +1,8 @@
+# Forked from MontageJS Collections
+
+This change log chronices the history of versions of the collections package
+before it became a single repository with multiple projects.
+Hereafter, individual packages are versioned and logged separately.
 
 ## v2.0.0 :warning: BACKWARD INCOMPATIBLE
 
@@ -157,4 +162,3 @@
 -   The `observable` module provides generics methods for observables.
     New collections need only call the appropriate dispatch functions if
     `isObservable` is true.
-

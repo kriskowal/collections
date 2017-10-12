@@ -1,0 +1,27 @@
+{
+  "name": "@collections/iterate",
+  "version": "1.0.1",
+  "description": "A polymorphic iterate operator for arrays and other iterables",
+  "homepage": "http://collectionsjs.com",
+  "license": "MIT",
+  "keywords": [
+    "pop",
+    "polymorphic",
+    "operator",
+    "iterate"
+  ],
+  "main": "iterate.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kriskowal/collections"
+  },
+  "bugs": {
+    "url": "https://github.com/kriskowal/collections/issues"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "@collections/iterator": "^1"
+  }
+}

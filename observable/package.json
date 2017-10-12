@@ -1,0 +1,33 @@
+{
+  "name": "@collections/observable",
+  "version": "1.0.0",
+  "description": "Property, range, map, and set content change observers for arrays, objects, and other instances.",
+  "homepage": "http://collectionsjs.com",
+  "license": "MIT",
+  "keywords": [
+    "observable",
+    "observe",
+    "observers",
+    "polymorphic",
+    "pop",
+    "change",
+    "object",
+    "array",
+    "map",
+    "set",
+    "range"
+  ],
+  "main": "observable.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kriskowal/collections"
+  },
+  "bugs": {
+    "url": "https://github.com/kriskowal/collections/issues"
+  },
+  "dependencies": {
+    "@collections/equals": "^1.0.0",
+    "@collections/has": "^1.0.0",
+    "@collections/swap": "^1.0.0"
+  }
+}

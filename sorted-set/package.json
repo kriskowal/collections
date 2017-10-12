@@ -1,0 +1,25 @@
+{
+  "name": "@collections/sorted-set",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "http://collectionsjs.com",
+  "keywords": [],
+  "main": "./sorted-set.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kriskowal/collections"
+  },
+  "bugs": {
+    "url": "https://github.com/kriskowal/collections/issues"
+  },
+  "dependencies": {
+    "@collections/generic-collection": "^1",
+    "@collections/generic-set": "^1",
+    "@collections/observable": "^1",
+    "@collections/iterator": "^1",
+    "@collections/tree-log": "^1",
+    "@collections/equals": "^1",
+    "@collections/compare": "^1",
+    "@collections/copy": "^1"
+  }
+}

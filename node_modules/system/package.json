@@ -1,0 +1,40 @@
+{
+  "name": "system",
+  "version": "2.0.1",
+  "author": "Kris Kowal <kris@cixar.com>",
+  "description": "Flexible module and resource system",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/gutentags/system.git"
+  },
+  "keywords": [
+    "module",
+    "resource",
+    "system",
+    "commonjs",
+    "npm"
+  ],
+  "bugs": {
+    "url": "https://github.com/gutentags/system/issues"
+  },
+  "homepage": "https://github.com/gutentags/system#readme",
+  "main": "./system.js",
+  "bin": {
+    "jscat": "./bundle.js"
+  },
+  "browser": {
+    "./url.js": "./browser-url.js",
+    "./system.js": "./browser-system.js"
+  },
+  "devDependencies": {
+    "eslint": "^2.13.1",
+    "istanbul": "^0.4.5"
+  },
+  "scripts": {
+    "test": "npm ls >/dev/null && node test && eslint . && echo pass",
+    "cover": "istanbul cover --report html test",
+    "build": "node bundle.js boot-entry.js > boot.js",
+    "lint": "eslint ."
+  }
+}

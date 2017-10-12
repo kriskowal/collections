@@ -1,0 +1,19 @@
+{
+  "name": "@collections/generic-order",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "http://collectionsjs.com",
+  "keywords": [],
+  "main": "./generic-order.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kriskowal/collections"
+  },
+  "bugs": {
+    "url": "https://github.com/kriskowal/collections/issues"
+  },
+  "dependencies": {
+    "@collections/compare": "^1",
+    "@collections/equals": "^1"
+  }
+}

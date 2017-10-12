@@ -1,0 +1,28 @@
+{
+  "name": "@collections/equals",
+  "version": "1.0.0",
+  "description": "Polymorphic deep equals operator",
+  "homepage": "http://collectionsjs.com",
+  "license": "BSD 3-Clause",
+  "keywords": [
+    "pop",
+    "polymorphic",
+    "operator",
+    "deep",
+    "equals"
+  ],
+  "main": "./equals.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kriskowal/collections"
+  },
+  "bugs": {
+    "url": "https://github.com/kriskowal/collections/issues"
+  },
+  "dependencies": {
+    "@collections/mini-map": "^1.0.0"
+  },
+  "directories": {
+    "test": "test"
+  }
+}
