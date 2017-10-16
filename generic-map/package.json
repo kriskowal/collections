@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@collections/observable": "^1",
-    "@collections/iterator": "^1",
+    "@collections/iterate": "^1",
     "@collections/equals": "^1",
     "@collections/compare": "^1",
     "@collections/copy": "^1"

@@ -6,7 +6,7 @@ var GenericCollection = require("@collections/generic-collection");
 var GenericOrder = require("@collections/generic-order");
 var ObservableObject = require("@collections/observable/object");
 var ObservableRange = require("@collections/observable/range");
-var Iterator = require("@collections/iterator");
+var Iteration = require("@collections/iterate/iteration");
 var equalsOperator = require("@collections/equals");
 var toArray = require("@collections/to-array");
 var copy = require("@collections/copy");
@@ -411,16 +411,13 @@ function ListIterator(head) {
     this.index = 0;
 }
 
-ListIterator.prototype = Object.create(Iterator.prototype);
-ListIterator.prototype.constructor = ListIterator;
-
 ListIterator.prototype.next = function () {
     if (this.at === this.head) {
-        return Iterator.done;
+        return Iteration.done;
     } else {
         var at = this.at;
         this.at = this.at.next;
-        return new Iterator.Iteration(
+        return new Iteration(
             at.value,
             false,
             this.index++
@@ -458,4 +455,3 @@ Node.prototype.addAfter = function (node) {
 };
 
 function noop() {}
-

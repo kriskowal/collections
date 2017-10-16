@@ -6,7 +6,7 @@ var GenericCollection = require("@collections/generic-collection");
 var GenericSet = require("@collections/generic-set");
 var ObservableObject = require("@collections/observable/object");
 var ObservableRange = require("@collections/observable/range");
-var Iterator = require("@collections/iterator");
+var Iteration = require("@collections/iterate/iteration");
 var TreeLog = require("@collections/tree-log");
 var equalsOperator = require("@collections/equals");
 var compareOperator = require("@collections/compare");
@@ -732,9 +732,6 @@ function SortedSetIterator(set, start, end) {
     this.index = 0;
 }
 
-SortedSetIterator.prototype = Object.create(SortedSetIterator.prototype);
-SortedSetIterator.prototype.constructor = SortedSetIterator;
-
 SortedSetIterator.prototype.next = function () {
     var next;
     if (this.prev) {
@@ -743,7 +740,7 @@ SortedSetIterator.prototype.next = function () {
         next = this.set.findLeast();
     }
     if (!next) {
-        return Iterator.done;
+        return Iteration.done;
     }
     if (
         this.end !== undefined &&
@@ -752,7 +749,7 @@ SortedSetIterator.prototype.next = function () {
         return Iterator.done;
     }
     this.prev = next;
-    return new Iterator.Iteration(
+    return new Iteration(
         next.value,
         false,
         this.index++

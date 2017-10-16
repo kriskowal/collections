@@ -2,7 +2,7 @@
 
 var ObservableMap = require("@collections/observable/map");
 var ObservableObject = require("@collections/observable/object");
-var Iterator = require("@collections/iterator");
+var Iteration = require("@collections/iterate/iteration");
 var equalsOperator = require("@collections/equals");
 var compareOperator = require("@collections/compare");
 var copy = require("@collections/copy");
@@ -195,18 +195,15 @@ Entry.prototype.compare = function (that) {
 };
 
 function GenericMapIterator(map) {
-    this.storeIterator = new Iterator(map.store);
+    this.storeIterator = map.store.iterate();
 }
-
-GenericMapIterator.prototype = Object.create(Iterator.prototype);
-GenericMapIterator.prototype.constructor = GenericMapIterator;
 
 GenericMapIterator.prototype.next = function () {
     var iteration = this.storeIterator.next();
     if (iteration.done) {
         return iteration;
     } else {
-        return new Iterator.Iteration(
+        return new Iteration(
             iteration.value.value,
             false,
             iteration.value.key

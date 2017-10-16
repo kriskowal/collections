@@ -75,9 +75,9 @@
     "weak-map": "^1"
   },
   "devDependencies": {
-    "colors": "^1.1.2",
-    "optimist": "^0.6.1",
-    "sinon": "^1.17.7",
-    "weak-map": "^1.0.5"
+    "colors": "^1",
+    "optimist": "~0.6",
+    "sinon": "^1",
+    "weak-map": "^1"
   }
 }

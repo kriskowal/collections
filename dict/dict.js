@@ -2,8 +2,9 @@
 
 var GenericCollection = require("@collections/generic-collection");
 var GenericMap = require("@collections/generic-map");
+var Iteration = require("@collections/iterate/iteration");
+var ObjectIterator = require("@collections/iterate/object");
 var ObservableObject = require("@collections/observable/object");
-var Iterator = require("@collections/iterator");
 var copy = require("@collections/copy");
 
 // Burgled from https://github.com/domenic/dict
@@ -137,7 +138,7 @@ Dict.prototype.one = function () {
 };
 
 Dict.prototype.iterate = function () {
-    return new this.Iterator(new Iterator(this.store));
+    return new this.Iterator(new ObjectIterator(this.store));
 };
 
 Dict.prototype.Iterator = DictIterator;
@@ -151,7 +152,7 @@ DictIterator.prototype.next = function () {
     if (iteration.done) {
         return iteration;
     } else {
-        return new Iterator.Iteration(
+        return new Iteration(
             iteration.value,
             false,
             unmangle(iteration.index)

@@ -4,7 +4,7 @@ var GenericCollection = require("@collections/generic-collection");
 var GenericOrder = require("@collections/generic-order");
 var ObservableRange = require("@collections/observable/range");
 var ObservableObject = require("@collections/observable/object");
-var Iterator = require("@collections/iterator");
+var Iteration = require("@collections/iterate/iteration");
 var copyProperties = require("@collections/copy");
 var equalsOperator = require("@collections/equals");
 
@@ -453,15 +453,12 @@ function DequeIterator(deque, start, stop, step) {
     this.step = step;
 }
 
-DequeIterator.prototype = Object.create(Iterator.prototype);
-DequeIterator.prototype.constructor = DequeIterator;
-
 DequeIterator.prototype.next = function () {
     if (this.start < this.stop) {
         var deque = this.deque;
         var mask = deque.capacity - 1;
         var offset = (deque.front + this.start) & mask;
-        var iteration = new Iterator.Iteration(
+        var iteration = new Iteration(
             deque[offset],
             false,
             this.start
@@ -469,7 +466,7 @@ DequeIterator.prototype.next = function () {
         this.start += this.step;
         return iteration;
     } else {
-        return Iterator.done;
+        return new Iteration(undefined, true);
     }
 };
 
