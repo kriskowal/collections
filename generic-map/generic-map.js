@@ -208,6 +208,7 @@ GenericMapIterator.prototype.next = function () {
     } else {
         return new Iterator.Iteration(
             iteration.value.value,
+            false,
             iteration.value.key
         );
     }

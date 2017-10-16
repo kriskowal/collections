@@ -3,13 +3,16 @@
 Iterator provides a rich interface for iteration, based on the JavaScript
 iterator protocol.
 
-The iterator package provides implementations for iterating
-arrays and objects, as well as anything that implements `iterate` or upgrades
-iterators that merely implement `next`.
-
 ```
 npm install @collections/iterator
 ```
+
+The Iterator constructor upgrades iterators that merely implement `next` into a
+feature-rich iterator with methods like `map`, `filter`, `takeWhile`, and
+`dropWhile`.
+
+The iterator constructor also provides functions like `count`, `repeat`, and
+`cycle` for creating common iterations from scratch.
 
 ## Collections
 

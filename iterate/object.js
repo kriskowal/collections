@@ -17,4 +17,3 @@ ObjectIterator.prototype.next = function () {
     var key = iteration.value;
     return new Iteration(this.object[key], false, key);
 };
-

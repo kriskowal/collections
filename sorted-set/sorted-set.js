@@ -754,6 +754,7 @@ SortedSetIterator.prototype.next = function () {
     this.prev = next;
     return new Iterator.Iteration(
         next.value,
+        false,
         this.index++
     );
 };

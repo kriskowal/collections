@@ -3,21 +3,50 @@
 var Iteration = require("./iteration");
 
 module.exports = ArrayIterator;
+
+// creates an iterator for Array and String
 function ArrayIterator(iterable, start, stop, step) {
-    this.array = iterable;
-    this.start = start || 0;
-    this.stop = stop || Infinity;
-    this.step = step || 1;
+    if (step == null) {
+        step = 1;
+    }
+    if (stop == null) {
+        stop = start;
+        start = 0;
+    }
+    if (start == null) {
+        start = 0;
+    }
+    if (step == null) {
+        step = 1;
+    }
+    if (stop == null) {
+        stop = iterable.length;
+    }
+    this.iterable = iterable;
+    this.start = start;
+    this.stop = stop;
+    this.step = step;
 }
 
 ArrayIterator.prototype.next = function () {
-    var iteration;
-    if (this.start < Math.min(this.array.length, this.stop)) {
-        iteration = new Iteration(this.array[this.start], false, this.start);
-        this.start += this.step;
-    } else {
-        iteration =  new Iteration(undefined, true);
+    // Advance to next owned entry
+    if (typeof this.iterable !== "string") {
+        while (!(this.start in this.iterable)) {
+            if (this.start >= this.stop) {
+                return Iteration.done;
+            } else {
+                this.start += this.step;
+            }
+        }
     }
+    if (this.start >= this.stop) { // end of string
+        return Iteration.done;
+    }
+    var iteration = new Iteration(
+        this.iterable[this.start],
+        false,
+        this.start
+    );
+    this.start += this.step;
     return iteration;
 };
-

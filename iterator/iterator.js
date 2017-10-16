@@ -2,7 +2,8 @@
 
 module.exports = Iterator;
 
-var WeakMap = require("weak-map");
+var iterate = require("@collections/iterate");
+var Iteration = require("@collections/iterate/iteration");
 var GenericCollection = require("@collections/generic-collection");
 
 // upgrades an iterable to a Iterator
@@ -13,27 +14,9 @@ function Iterator(iterable, start, stop, step) {
         return iterable;
     } else if (!(this instanceof Iterator)) {
         return new Iterator(iterable, start, stop, step);
-    } else if (Array.isArray(iterable) || typeof iterable === "string") {
-        iterators.set(this, new IndexIterator(iterable, start, stop, step));
-        return;
     }
-    iterable = Object(iterable);
-    if (iterable.next) {
-        iterators.set(this, iterable);
-    } else if (iterable.iterate) {
-        iterators.set(this, iterable.iterate(start, stop, step));
-    } else if (Object.prototype.toString.call(iterable) === "[object Function]") {
-        this.next = iterable;
-    } else if (Object.getPrototypeOf(iterable) === Object.prototype) {
-        iterators.set(this, new ObjectIterator(iterable));
-    } else {
-        throw new TypeError("Can't iterate " + iterable);
-    }
+    this.iterator = iterate(iterable, start, stop, step);
 }
-
-// Using iterators as a hidden table associating a full-fledged Iterator with
-// an underlying, usually merely "nextable", iterator.
-var iterators = new WeakMap();
 
 // Selectively apply generic methods of GenericCollection
 Iterator.prototype.forEach = GenericCollection.prototype.forEach;
@@ -64,12 +47,7 @@ Iterator.prototype.constructClone = function (values) {
 // A level of indirection so a full-interface iterator can proxy for a simple
 // nextable iterator.
 Iterator.prototype.next = function () {
-    var nextable = iterators.get(this);
-    if (nextable) {
-        return nextable.next();
-    } else {
-        return Iterator.done;
-    }
+    return this.iterator.next();
 };
 
 Iterator.prototype.iterateMap = function (callback /*, thisp*/) {
@@ -99,6 +77,7 @@ MapIterator.prototype.next = function () {
                 iteration.index,
                 this.iteration
             ),
+            false,
             iteration.index
         );
     }
@@ -282,69 +261,9 @@ RecountIterator.prototype.next = function () {
     } else {
         return new Iteration(
             iteration.value,
+            false,
             this.index++
         );
-    }
-};
-
-// creates an iterator for Array and String
-function IndexIterator(iterable, start, stop, step) {
-    if (step == null) {
-        step = 1;
-    }
-    if (stop == null) {
-        stop = start;
-        start = 0;
-    }
-    if (start == null) {
-        start = 0;
-    }
-    if (step == null) {
-        step = 1;
-    }
-    if (stop == null) {
-        stop = iterable.length;
-    }
-    this.iterable = iterable;
-    this.start = start;
-    this.stop = stop;
-    this.step = step;
-}
-
-IndexIterator.prototype.next = function () {
-    // Advance to next owned entry
-    if (typeof this.iterable === "object") { // as opposed to string
-        while (!(this.start in this.iterable)) {
-            if (this.start >= this.stop) {
-                return Iterator.done;
-            } else {
-                this.start += this.step;
-            }
-        }
-    }
-    if (this.start >= this.stop) { // end of string
-        return Iterator.done;
-    }
-    var iteration = new Iteration(
-        this.iterable[this.start],
-        this.start
-    );
-    this.start += this.step;
-    return iteration;
-};
-
-function ObjectIterator(object) {
-    this.object = object;
-    this.iterator = new Iterator(Object.keys(object));
-}
-
-ObjectIterator.prototype.next = function () {
-    var iteration = this.iterator.next();
-    if (iteration.done) {
-        return iteration;
-    } else {
-        var key = iteration.value;
-        return new Iteration(this.object[key], key);
     }
 };
 
@@ -412,7 +331,7 @@ ChainIterator.prototype.next = function () {
 };
 
 Iterator.unzip = function (iterators) {
-    iterators = Iterator(iterators).map(Iterator);
+    var iterators = Iterator(iterators).map(Iterator);
     if (iterators.length === 0)
         return new Iterator.empty;
     return new UnzipIterator(iterators);
@@ -439,7 +358,7 @@ UnzipIterator.prototype.next = function () {
     if (done) {
         return Iterator.done;
     } else {
-        return new Iteration(result, this.index++);
+        return new Iteration(result, false, this.index++);
     }
 };
 
@@ -480,7 +399,7 @@ RangeIterator.prototype.next = function () {
     } else {
         var result = this.start;
         this.start += this.step;
-        return new Iteration(result, this.index++);
+        return new Iteration(result, false, this.index++);
     }
 };
 
@@ -502,7 +421,7 @@ RepeatIterator.prototype.constructor = RepeatIterator;
 
 RepeatIterator.prototype.next = function () {
     if (this.index < this.times) {
-        return new Iteration(this.value, this.index++);
+        return new Iteration(this.value, false, this.index++);
     } else {
         return Iterator.done;
     }
@@ -523,35 +442,5 @@ EmptyIterator.prototype.next = function () {
 
 Iterator.empty = new EmptyIterator();
 
-// Iteration and DoneIteration exist here only to encourage hidden classes.
-// Otherwise, iterations are merely duck-types.
-
-function Iteration(value, index) {
-    this.value = value;
-    this.index = index;
-}
-
-Iteration.prototype.done = false;
-
-Iteration.prototype.equals = function (that, equals, memo) {
-    if (!that) return false;
-    return (
-        equals(this.value, that.value, equals, memo) &&
-        this.index === that.index &&
-        this.done === that.done
-    );
-
-};
-
-function DoneIteration(value) {
-    Iteration.call(this, value);
-    this.done = true; // reflected on the instance to make it more obvious
-}
-
-DoneIteration.prototype = Object.create(Iteration.prototype);
-DoneIteration.prototype.constructor = DoneIteration;
-DoneIteration.prototype.done = true;
-
 Iterator.Iteration = Iteration;
-Iterator.DoneIteration = DoneIteration;
-Iterator.done = new DoneIteration();
+Iterator.done = Iteration.done;

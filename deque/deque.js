@@ -463,6 +463,7 @@ DequeIterator.prototype.next = function () {
         var offset = (deque.front + this.start) & mask;
         var iteration = new Iterator.Iteration(
             deque[offset],
+            false,
             this.start
         );
         this.start += this.step;

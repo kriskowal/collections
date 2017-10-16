@@ -153,6 +153,7 @@ DictIterator.prototype.next = function () {
     } else {
         return new Iterator.Iteration(
             iteration.value,
+            false,
             unmangle(iteration.index)
         );
     }

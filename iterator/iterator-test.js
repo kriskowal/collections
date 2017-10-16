@@ -106,24 +106,10 @@ function describeIterator(Iterator) {
                 } else {
                     return new Iterator_.Iteration(
                         n,
+                        false,
                         n - 1
                     );
                 }
-            }
-        });
-        expectCommonIterator(iterator);
-    });
-
-    it("wraps a pure next function", function () {
-        var n = 0;
-        var iterator = Iterator(function () {
-            if (++n > 3) {
-                return Iterator_.done;
-            } else {
-                return new Iterator_.Iteration(
-                    n,
-                    n - 1
-                );
             }
         });
         expectCommonIterator(iterator);
@@ -292,16 +278,16 @@ function describeIterator(Iterator) {
                 Iterator([1, "B", "y", "I"]),
                 Iterator([2, "C"])
             ]).iterateUnzip();
-            expect(equalsOperator(iterator.next(), {
+            expect(iterator.next()).toEqual({
                 value: [0, 1, 2],
                 index: 0, done: false
-            })).toBe(true);
-            expect(equalsOperator(iterator.next(), {
+            });
+            expect(iterator.next()).toEqual({
                 value: ["A", "B", "C"],
                 index: 1, done: false
-            })).toBe(true);
-            expect(equalsOperator(iterator.next(), {value: undefined, index: undefined, done: true})).toBe(true);
-            expect(equalsOperator(iterator.next(), {value: undefined, index: undefined, done: true})).toBe(true);
+            });
+            expect(iterator.next()).toEqual({value: undefined, index: undefined, done: true});
+            expect(iterator.next()).toEqual({value: undefined, index: undefined, done: true});
         });
     });
 

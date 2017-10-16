@@ -1,6 +1,5 @@
 "use strict";
 
-var Iterator = require("@collections/iterator");
 var ArrayIterator = require("./array");
 var ObjectIterator = require("./object");
 
@@ -8,7 +7,7 @@ module.exports = iterate;
 function iterate(iterable, start, stop, step) {
     if (!iterable) {
         return Iterator.empty;
-    } else if (Array.isArray(iterable)) {
+    } else if (Array.isArray(iterable) || typeof iterable === "string") {
         return new ArrayIterator(iterable, start, stop, step);
     } else if (typeof iterable.next === "function") {
         return iterable;
@@ -20,4 +19,3 @@ function iterate(iterable, start, stop, step) {
         throw new TypeError("Can't iterate " + iterable);
     }
 }
-

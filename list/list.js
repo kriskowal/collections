@@ -422,6 +422,7 @@ ListIterator.prototype.next = function () {
         this.at = this.at.next;
         return new Iterator.Iteration(
             at.value,
+            false,
             this.index++
         );
     }

@@ -14,6 +14,6 @@
   },
   "dependencies": {
     "@collections/generic-collection": "^1",
-    "weak-map": "^1"
+    "@collections/iterate": "^1"
   }
 }

@@ -22,6 +22,6 @@
     "test": "test"
   },
   "dependencies": {
-    "@collections/iterator": "^1"
+    "@collections/equals": "^1"
   }
 }
