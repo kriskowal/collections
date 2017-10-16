@@ -746,7 +746,7 @@ SortedSetIterator.prototype.next = function () {
         this.end !== undefined &&
         this.set.contentCompare(next.value, this.end) >= 0
     ) {
-        return Iterator.done;
+        return Iteration.done;
     }
     this.prev = next;
     return new Iteration(
