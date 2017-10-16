@@ -43,23 +43,24 @@ module.exports = equals;
 function equals(a, b, equals, memo) {
     equals = equals || module.exports;
     // unbox objects
-    if (a && typeof a.valueOf === "function") {
+    if (a != null && typeof a.valueOf === "function") {
         a = a.valueOf();
     }
-    if (b && typeof b.valueOf === "function") {
+    if (b != null && typeof b.valueOf === "function") {
         b = b.valueOf();
     }
     if (a === b)
         return true;
+    // Equivocate null and undefined.
+    if (a == null)
+        return b == null;
     // NaN !== NaN, but they are equal.
     // NaNs are the only non-reflexive value, i.e., if x !== x,
     // then x is a NaN.
     // isNaN is broken: it converts its argument to number, so
     // isNaN("foo") => true
-    // We have established that a !== b, but if a !== a && b !== b, they are
-    // both NaN.
-    if (a !== a && b !== b)
-        return true;
+    if (a !== a)
+        return b !== b;
     if (!a || !b)
         return false;
     if (typeof a === "object") {

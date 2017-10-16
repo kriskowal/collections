@@ -18,7 +18,10 @@ describe("equals", function () {
             return this;
         },
         equals: function (n) {
-            return n === 10 || !!n && n.value === 10;
+            if (typeof n === "object") {
+                return n.value === 10;
+            }
+            return n === 10;
         }
     };
 
@@ -47,20 +50,23 @@ describe("equals", function () {
             "NaN": NaN
         },
         {
-            "undefined": undefined
-        },
-        {
+            "undefined": undefined,
             "null": null
         }
     ];
+
+    // Add clones to each equivalence class.
+    equivalenceClasses.forEach(function (equivalenceClass) {
+        Object.keys(equivalenceClass).forEach(function (ak, ai) {
+            var a = equivalenceClass[ak];
+            equivalenceClass[ai + " clone"] = clone(a);
+        });
+    });
 
     // positives:
     // everything should be equal to every other thing in
     // its equivalence class
     equivalenceClasses.forEach(function (equivalenceClass) {
-        equivalenceClasses.forEach(function (a, ai) {
-            equivalenceClass[ai + " clone"] = clone(a);
-        });
         // within each pair of class, test exhaustive combinations to cover
         // the commutative property
         Object.keys(equivalenceClass).forEach(function (ak, ai) {
@@ -70,7 +76,6 @@ describe("equals", function () {
                     var b = equivalenceClass[bk];
                     it("equals " + bi, function () {
                         expect(equals(a, b)).toBe(true);
-                        //expect(a).toEqual(b);
                     });
                 });
             });
@@ -94,8 +99,8 @@ describe("equals", function () {
                 var a = aClass[ak];
                 Object.keys(bClass).forEach(function (bk, bi) {
                     var b = bClass[bk];
-                    it(ai + " not equals " + bi, function () {
-                        expect(equals(a, b)).toBe(false);
+                    it(ak + " not equals " + bk, function () {
+                        expect(!equals(a, b)).toBe(true);
                     });
                 });
             });
@@ -130,4 +135,3 @@ describe("equals", function () {
     });
 
 });
-

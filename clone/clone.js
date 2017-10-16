@@ -22,7 +22,7 @@ var objectPrototype = Object.prototype;
  */
 module.exports = cloneOperator;
 function cloneOperator(value, depth, memo) {
-    if (value && value.valueOf) {
+    if (value != null && value.valueOf) {
         value = value.valueOf();
     }
     if (depth == null) { // null or undefined
@@ -30,7 +30,7 @@ function cloneOperator(value, depth, memo) {
     } else if (depth === 0) {
         return value;
     }
-    if (value && typeof value === "object") {
+    if (value != null && typeof value === "object") {
         memo = memo || new MiniMap();
         if (!memo.has(value)) {
             if (value && typeof value.clone === "function") {

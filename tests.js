@@ -43,4 +43,5 @@ require("./clear/object-test");
 require("./clear/clear-test");
 
 require("./compare/compare-test");
+require("./equals/equals-test");
 require("./has/has-test");
