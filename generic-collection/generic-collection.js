@@ -236,11 +236,9 @@ GenericCollection.prototype.sorted = function (compare, by, order) {
             by: by(item),
             value: item
         };
-    })
-    .sort(function (a, b) {
+    }).sort(function (a, b) {
         return compare(a.by, b.by) * order;
-    })
-    .map(function (pair) {
+    }).map(function (pair) {
         return pair.value;
     });
 };

@@ -212,8 +212,7 @@ function describeIterator(Iterator) {
 
     describe("dropWhile", function () {
         it("drops while the guard is true", function () {
-            var iterator = new Iterator([-1, -2, -3, 1, 2, 3])
-            .dropWhile(function (n) {
+            var iterator = new Iterator([-1, -2, -3, 1, 2, 3]).dropWhile(function (n) {
                 return n < 0;
             });
             expect(equalsOperator(iterator.next(), {value: 1, index: 3, done: false})).toBe(true);
@@ -226,8 +225,7 @@ function describeIterator(Iterator) {
 
     describe("takeWhile", function () {
         it("takes while the guard is true", function () {
-            var iterator = new Iterator([1, 2, 3, 4, 5, 6])
-            .takeWhile(function (n) {
+            var iterator = new Iterator([1, 2, 3, 4, 5, 6]).takeWhile(function (n) {
                 return n < 4;
             });
             expectCommonIterator(iterator);

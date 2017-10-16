@@ -8,7 +8,7 @@ var GenericCollection = require("@collections/generic-collection");
 
 // upgrades an iterable to a Iterator
 function Iterator(iterable, start, stop, step) {
-    if (!iterable) {
+    if (iterable == null) {
         return Iterator.empty;
     } else if (iterable instanceof Iterator) {
         return iterable;
@@ -431,7 +431,8 @@ Iterator.enumerate = function (values, start) {
     return Iterator.count(start).iterateZip(new Iterator(values));
 };
 
-function EmptyIterator() {}
+function EmptyIterator() {
+}
 
 EmptyIterator.prototype = Object.create(Iterator.prototype);
 EmptyIterator.prototype.constructor = EmptyIterator;
@@ -440,7 +441,6 @@ EmptyIterator.prototype.next = function () {
     return Iterator.done;
 };
 
-Iterator.empty = new EmptyIterator();
-
 Iterator.Iteration = Iteration;
+Iterator.empty = new EmptyIterator();
 Iterator.done = Iteration.done;

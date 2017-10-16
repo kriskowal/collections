@@ -49,7 +49,7 @@ function compare(a, b, compare) {
         return a - b;
     if (aType === "string" && bType === "string")
         return a < b ? -Infinity : Infinity;
-        // the possibility of equality elimiated above
+    // the possibility of equality elimiated above
     compare = compare || module.exports;
     if (Array.isArray(a) && Array.isArray(b)) {
         for (var index in a) {

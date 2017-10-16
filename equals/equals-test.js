@@ -57,9 +57,9 @@ describe("equals", function () {
 
     // Add clones to each equivalence class.
     equivalenceClasses.forEach(function (equivalenceClass) {
-        Object.keys(equivalenceClass).forEach(function (ak, ai) {
+        Object.keys(equivalenceClass).forEach(function (ak) {
             var a = equivalenceClass[ak];
-            equivalenceClass[ai + " clone"] = clone(a);
+            equivalenceClass[ak + " clone"] = clone(a);
         });
     });
 
@@ -69,9 +69,9 @@ describe("equals", function () {
     equivalenceClasses.forEach(function (equivalenceClass) {
         // within each pair of class, test exhaustive combinations to cover
         // the commutative property
-        Object.keys(equivalenceClass).forEach(function (ak, ai) {
+        Object.keys(equivalenceClass).forEach(function (ak) {
             var a = equivalenceClass[ak];
-            describe(ai, function () {
+            describe(ak, function () {
                 Object.keys(equivalenceClass).forEach(function (bk, bi) {
                     var b = equivalenceClass[bk];
                     it("equals " + bi, function () {
@@ -95,9 +95,9 @@ describe("equals", function () {
                 return;
             // but within each pair of classes, test exhaustive
             // combinations to cover the commutative property
-            Object.keys(aClass).forEach(function (ak, ai) {
+            Object.keys(aClass).forEach(function (ak) {
                 var a = aClass[ak];
-                Object.keys(bClass).forEach(function (bk, bi) {
+                Object.keys(bClass).forEach(function (bk) {
                     var b = bClass[bk];
                     it(ak + " not equals " + bk, function () {
                         expect(!equals(a, b)).toBe(true);

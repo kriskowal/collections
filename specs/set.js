@@ -137,7 +137,7 @@ function describeSet(Set, sorted) {
     it("dispatches change events when cleared", function () {
         var set = new Set([1, 2, 3]);
 
-        if (set.constructor.name == "FastSet") {
+        if (set.constructor.name === "FastSet") {
             return;
         }
 

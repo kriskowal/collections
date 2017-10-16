@@ -5,8 +5,8 @@ var ObjectIterator = require("./object");
 
 module.exports = iterate;
 function iterate(iterable, start, stop, step) {
-    if (!iterable) {
-        return Iterator.empty;
+    if (iterable == null) {
+        throw new TypeError("Can't iterate " + iterable);
     } else if (Array.isArray(iterable) || typeof iterable === "string") {
         return new ArrayIterator(iterable, start, stop, step);
     } else if (typeof iterable.next === "function") {
