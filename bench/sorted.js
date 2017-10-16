@@ -38,15 +38,17 @@ var Fuzz = require("../specs/set-fuzz");
         return stop - start;
     }
 
-    var sortedSetSpeed = time(function () {
+    var sortedSetDuration = time(function () {
         bench(SortedSet);
     });
-    var sortedArraySetSpeed = time(function () {
+    var sortedArraySetDuration = time(function () {
         bench(SortedArraySet);
     });
 
-    console.log(size + ":", (sortedSetSpeed < sortedArraySetSpeed ? "SortedSet WINS" : "SortedArraySet WINS"));
-    console.log("     SortedSet:", sortedSetSpeed);
-    console.log("SortedArraySet:", sortedArraySetSpeed);
+    var victory = sortedSetDuration < sortedArraySetDuration ? "<winner" : "winner>";
+    console.log(("                " + size).slice(-14) + ": SortedSet " + victory + " SortedArraySet");
+    console.log("     SortedSet:", sortedSetDuration);
+    console.log("SortedArraySet:", sortedArraySetDuration);
+    console.log("");
 
 });
