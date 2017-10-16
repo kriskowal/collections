@@ -69,13 +69,13 @@ describe("swap", function () {
         expect(array).toEqual([4, 5]);
     });
 
-    it("should ignore non array like plus value", function () {
+    it("ignores non array like plus value", function () {
         swap(array, 0, array.length, 4);
         expect(array).toEqual([]);
 
     });
 
-    it("should ignore extra arguments", function () {
+    it("ignores extra arguments", function () {
         swap(array, 0, array.length, 4, 5, 6);
         expect(array).toEqual([]);
     });

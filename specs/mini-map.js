@@ -14,7 +14,7 @@ function describeMiniMap(Map, values) {
         var b = values[1] || {};
         var c = values[2] || {};
 
-        function shouldHaveTheUsualContent(map) {
+        function expectTheUsualContent(map) {
             expect(map.has(a)).toBe(true);
             expect(map.has(b)).toBe(true);
             expect(map.has(c)).toBe(false);
@@ -29,14 +29,14 @@ function describeMiniMap(Map, values) {
                 var map = new Map();
                 map.set(a, 10);
                 map.set(b, 20);
-                shouldHaveTheUsualContent(map);
+                expectTheUsualContent(map);
             });
             it("overwrites values", function () {
                 var map = new Map();
                 map.set(a, 10);
                 map.set(b, 10);
                 map.set(b, 20);
-                shouldHaveTheUsualContent(map);
+                expectTheUsualContent(map);
             });
         });
 
@@ -47,14 +47,14 @@ function describeMiniMap(Map, values) {
                 map.set(b, 20);
                 map.set(c, 30);
                 expect(map.delete(c)).toBe(true);
-                shouldHaveTheUsualContent(map);
+                expectTheUsualContent(map);
             });
             it("fails to remove a non-existant key", function () {
                 var map = new Map();
                 map.set(a, 10);
                 map.set(b, 20);
                 expect(map.delete({})).toBe(false);
-                shouldHaveTheUsualContent(map);
+                expectTheUsualContent(map);
             });
         });
 

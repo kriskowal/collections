@@ -16,7 +16,7 @@ function describeDeque(Deque) {
     describe("add(value)", function () {
         if (!Deque.prototype.add)
             return;
-        it("should be an alias for push", function () {
+        it("is an alias for push", function () {
             var collection = Deque([1, 2, 3]);
             collection.add(4);
             expect(toArray(collection)).toEqual([1, 2, 3, 4]);
@@ -24,7 +24,7 @@ function describeDeque(Deque) {
     });
 
     describe("push(value)", function () {
-        it("should add one value to the end", function () {
+        it("adds one value to the end", function () {
             var collection = Deque([1, 2, 3]);
             collection.push(4);
             expect(toArray(collection)).toEqual([1, 2, 3, 4]);
@@ -32,13 +32,13 @@ function describeDeque(Deque) {
     });
 
     describe("push(...values)", function () {
-        it("should add many values to the end", function () {
+        it("adds many values to the end", function () {
             var collection = Deque([1, 2, 3]);
             collection.push(4, 5, 6);
             expect(toArray(collection)).toEqual([1, 2, 3, 4, 5, 6]);
         });
 
-        it("should add many values to the end variadically", function () {
+        it("adds many values to the end variadically", function () {
             var collection = Deque([1, 2, 3]);
             collection.push.apply(collection, [4, 5, 6]);
             expect(toArray(collection)).toEqual([1, 2, 3, 4, 5, 6]);
@@ -46,7 +46,7 @@ function describeDeque(Deque) {
     });
 
     describe("unshift(value)", function () {
-        it("should add a value to the beginning", function () {
+        it("adds a value to the beginning", function () {
             var collection = Deque([1, 2, 3]);
             collection.unshift(0);
             expect(toArray(collection)).toEqual([0, 1, 2, 3]);
@@ -54,13 +54,13 @@ function describeDeque(Deque) {
     });
 
     describe("unshift(...values)", function () {
-        it("should add many values to the beginning", function () {
+        it("adds many values to the beginning", function () {
             var collection = Deque([1, 2, 3]);
             collection.unshift(-2, -1, 0);
             expect(toArray(collection)).toEqual([-2, -1, 0, 1, 2, 3]);
         });
 
-        it("should add many values to the beginning", function () {
+        it("adds many values to the beginning", function () {
             var collection = Deque([1, 2, 3]);
             collection.unshift.apply(collection, [-2, -1, 0]);
             expect(toArray(collection)).toEqual([-2, -1, 0, 1, 2, 3]);
@@ -68,7 +68,7 @@ function describeDeque(Deque) {
     });
 
     describe("pop", function () {
-        it("should remove one value from the end and return it", function () {
+        it("removes one value from the end and returns it", function () {
             var collection = Deque([1, 2, 3]);
             expect(collection.pop()).toEqual(3);
             expect(toArray(collection)).toEqual([1, 2]);
@@ -76,7 +76,7 @@ function describeDeque(Deque) {
     });
 
     describe("shift", function () {
-        it("should remove one value from the beginning and return it", function () {
+        it("removes one value from the beginning and returns it", function () {
             var collection = Deque([1, 2, 3]);
             expect(collection.shift()).toEqual(1);
             expect(toArray(collection)).toEqual([2, 3]);
@@ -84,7 +84,7 @@ function describeDeque(Deque) {
     });
 
     describe("concat", function () {
-        it("should concatenate variadic mixed-type collections", function () {
+        it("concatenates variadic mixed-type collections", function () {
             var collection = Deque([1, 2, 3]).concat(
                 [4, 5, 6],
                 Deque([7, 8, 9])
@@ -99,33 +99,33 @@ function describeDeque(Deque) {
 
         var collection = Deque([1, 2, 3, 4]);
 
-        it("should slice all values with no arguments", function () {
+        it("slices all values with no arguments", function () {
             expect(toArray(collection)).toEqual([1, 2, 3, 4]);
         });
 
-        it("should slice all after an index", function () {
+        it("slices all after an index", function () {
             expect(collection.slice(2)).toEqual([3, 4]);
         });
 
-        it("should slice from the middle by indexed positions", function () {
+        it("slices from the middle by indexed positions", function () {
             expect(collection.slice(1, 3)).toEqual([2, 3]);
         });
 
-        it("should slice from a negative index", function () {
+        it("slices from a negative index", function () {
             expect(collection.slice(-2)).toEqual([3, 4]);
         });
 
-        it("should slice from a negative index to a positive", function () {
+        it("slices from a negative index to a positive", function () {
             expect(collection.slice(-2, 3)).toEqual([3]);
         });
 
-        it("should slice from a negative index to a negative", function () {
+        it("slices from a negative index to a negative", function () {
             expect(collection.slice(-2, -1)).toEqual([3]);
         });
 
         // TODO
         /*
-        it("should slice from a negative index to zero", function () {
+        it("slices from a negative index to zero", function () {
             expect(collection.slice(-2, 0)).toEqual([]); // Array
             expect(collection.slice(-2, 0)).toEqual([3, 4]); // List
         });
@@ -137,55 +137,55 @@ function describeDeque(Deque) {
         if (!Deque.prototype.splice)
             return;
 
-        it("should do nothing with no arguments", function () {
+        it("does nothing with no arguments", function () {
             var collection = Deque([1, 2, 3, 4]);
             expect(collection.splice()).toEqual([]);
             expect(toArray(collection)).toEqual([1, 2, 3, 4]);
         });
 
-        it("should splice to end with only an offset argument", function () {
+        it("splices to end with only an offset argument", function () {
             var collection = Deque([1, 2, 3, 4]);
             expect(collection.splice(2)).toEqual([3, 4]);
             expect(toArray(collection)).toEqual([1, 2]);
         });
 
-        it("should splice nothing with no length", function () {
+        it("splices nothing with no length", function () {
             var collection = Deque([1, 2, 3, 4]);
             expect(collection.splice(2, 0)).toEqual([]);
             expect(toArray(collection)).toEqual([1, 2, 3, 4]);
         });
 
-        it("should splice all values", function () {
+        it("splices all values", function () {
             var collection = Deque([1, 2, 3, 4]);
             expect(collection.splice(0, collection.length)).toEqual([1, 2, 3, 4]);
             expect(toArray(collection)).toEqual([]);
         });
 
-        it("should splice from negative offset", function () {
+        it("splices from negative offset", function () {
             var collection = Deque([1, 2, 3, 4]);
             expect(collection.splice(-2)).toEqual([3, 4]);
             expect(toArray(collection)).toEqual([1, 2]);
         });
 
-        it("should inject values at a numeric offset", function () {
+        it("injects values at a numeric offset", function () {
             var collection = Deque([1, 2, 5, 6]);
             expect(collection.splice(2, 0, 3, 4)).toEqual([]);
             expect(toArray(collection)).toEqual([1, 2, 3, 4, 5, 6]);
         });
 
-        it("should replace values at a numeric offset", function () {
+        it("replaces values at a numeric offset", function () {
             var collection = Deque([1, 2, 3, 6]);
             expect(collection.splice(1, 2, 4, 5)).toEqual([2, 3]);
             expect(toArray(collection)).toEqual([1, 4, 5, 6]);
         });
 
-        it("should inject values with implied position and length", function () {
+        it("injects values with implied position and length", function () {
             var collection = Deque([1, 2, 3, 4]);
             expect(collection.splice(null, null, -1, 0)).toEqual([]);
             expect(toArray(collection)).toEqual([-1, 0, 1, 2, 3, 4]);
         });
 
-        it("should append values", function () {
+        it("appends values", function () {
             var collection = Deque([1, 2, 3, 4]);
             expect(collection.splice(4, 0, 5, 6)).toEqual([]);
             expect(toArray(collection)).toEqual([1, 2, 3, 4, 5, 6]);
@@ -197,55 +197,55 @@ function describeDeque(Deque) {
         if (!Deque.prototype.swap)
             return;
 
-        it("should do nothing with no arguments", function () {
+        it("does nothing with no arguments", function () {
             var collection = Deque([1, 2, 3, 4]);
             expect(collection.swap()).toEqual([]);
             expect(toArray(collection)).toEqual([1, 2, 3, 4]);
         });
 
-        it("should splice to end with only an offset argument", function () {
+        it("splices to end with only an offset argument", function () {
             var collection = Deque([1, 2, 3, 4]);
             expect(collection.swap(2)).toEqual([3, 4]);
             expect(toArray(collection)).toEqual([1, 2]);
         });
 
-        it("should splice nothing with no length", function () {
+        it("splices nothing with no length", function () {
             var collection = Deque([1, 2, 3, 4]);
             expect(collection.swap(2, 0)).toEqual([]);
             expect(toArray(collection)).toEqual([1, 2, 3, 4]);
         });
 
-        it("should splice all values", function () {
+        it("splices all values", function () {
             var collection = Deque([1, 2, 3, 4]);
             expect(collection.swap(0, collection.length)).toEqual([1, 2, 3, 4]);
             expect(toArray(collection)).toEqual([]);
         });
 
-        it("should splice from negative offset", function () {
+        it("splices from negative offset", function () {
             var collection = Deque([1, 2, 3, 4]);
             expect(collection.swap(-2)).toEqual([3, 4]);
             expect(toArray(collection)).toEqual([1, 2]);
         });
 
-        it("should inject values at a numeric offset", function () {
+        it("injects values at a numeric offset", function () {
             var collection = Deque([1, 2, 5, 6]);
             expect(collection.swap(2, 0, [3, 4])).toEqual([]);
             expect(toArray(collection)).toEqual([1, 2, 3, 4, 5, 6]);
         });
 
-        it("should replace values at a numeric offset", function () {
+        it("replaces values at a numeric offset", function () {
             var collection = Deque([1, 2, 3, 6]);
             expect(collection.swap(1, 2, [4, 5])).toEqual([2, 3]);
             expect(toArray(collection)).toEqual([1, 4, 5, 6]);
         });
 
-        it("should inject values with implied position and length", function () {
+        it("injects values with implied position and length", function () {
             var collection = Deque([1, 2, 3, 4]);
             expect(collection.swap(null, null, [-1, 0])).toEqual([]);
             expect(toArray(collection)).toEqual([-1, 0, 1, 2, 3, 4]);
         });
 
-        it("should append values", function () {
+        it("appends values", function () {
             var collection = Deque([1, 2, 3, 4]);
             expect(collection.swap(4, 0, [5, 6])).toEqual([]);
             expect(toArray(collection)).toEqual([1, 2, 3, 4, 5, 6]);
@@ -261,7 +261,7 @@ function describeDeque(Deque) {
     describe("peek and poke", function () {
         if (!Deque.prototype.poke && !Deque.prototype.peek)
             return;
-        it("should operate on the first value in the deque", function () {
+        it("operates on the first value in the deque", function () {
             var deque = Deque([1, 2, 3, 4, 5, 6, 7, 8]);
             expect(deque.peek()).toBe(1);
             expect(deque.poke(2)).toBe(undefined);
@@ -274,7 +274,7 @@ function describeDeque(Deque) {
         if (!Deque.prototype.pokeBack && !Deque.prototype.peekBack)
             return;
         var deque = Deque([1, 2, 3, 4, 5, 6, 7, 8]);
-        it("should operate on the last value in the deque", function () {
+        it("operates on the last value in the deque", function () {
             expect(deque.peekBack()).toBe(8);
             expect(deque.pokeBack(9)).toBe(undefined);
             expect(deque.pop()).toBe(9);
@@ -339,7 +339,7 @@ function describeDeque(Deque) {
     });
 
     describe("clear", function () {
-        it("should clear the deque", function() {
+        it("clears the deque", function() {
             var a = Deque([1,2,3,4]);
             if (a.clear) {
                 a.clear();

@@ -9,7 +9,7 @@ describe("LfuMap", function () {
 
     describeMap(LfuMap);
 
-    it("should remove stale entries", function () {
+    it("removes stale entries", function () {
         var map = LfuMap({a: 10, b: 20, c: 30}, 3);
         map.get("a");
         map.get("b");
@@ -18,7 +18,7 @@ describe("LfuMap", function () {
         expect(map.length).toBe(3);
     });
 
-    it("should not grow when re-adding", function () {
+    it("grows when re-adding", function () {
         var map = LfuMap({a: 10, b: 20, c: 30}, 3);
 
         expect(map.keys()).toEqual(["a", "b", "c"]);
@@ -33,7 +33,7 @@ describe("LfuMap", function () {
         expect(map.length).toBe(3);
     });
 
-    it("should grow when adding new values", function () {
+    it("grows when adding new values", function () {
         var map = LfuMap({}, 3);
         expect(map.length).toBe(0);
 
@@ -62,7 +62,7 @@ describe("LfuMap", function () {
         expect(map.length).toBe(3);
     });
 
-    it("should dispatch deletion for stale entries", function () {
+    it("dispatches deletion for stale entries", function () {
         var map = LfuMap({a: 10, b: 20, c: 30}, 3);
         var spy = sinon.spy();
         map.observeMapWillChange(function (plus, minus, key) {

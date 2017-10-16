@@ -57,7 +57,7 @@ describe("SortedSet", function () {
             return lines;
         }
 
-        it("should degenerate for sorted values", function () {
+        it("degenerates for sorted values", function () {
             var set = SortedSet([1, 2, 3]);
             expect(draw(set)).toEqual([
                 "  .-- 1",
@@ -66,7 +66,7 @@ describe("SortedSet", function () {
             ]);
         });
 
-        it("should splay middle value", function () {
+        it("splays middle value", function () {
             var set = SortedSet([1, 2, 3]);
             set.get(2);
             expect(draw(set)).toEqual([
@@ -76,7 +76,7 @@ describe("SortedSet", function () {
             ]);
         });
 
-        it("should splay middle value", function () {
+        it("splays middle value", function () {
             var set = SortedSet([1, 2, 3]);
             set.get(2);
             set.delete(1);
@@ -166,7 +166,7 @@ describe("SortedSet", function () {
     });
 
     describe("splayIndex", function () {
-        it("should find the index of every element", function () {
+        it("finds the index of every element", function () {
             var numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
             var rand = Fuzz.makeRandom(0);
             numbers.sort(function () {
@@ -190,7 +190,7 @@ describe("SortedSet", function () {
                 numbers.sort(function () {
                     return rand() - .5;
                 });
-                it("should discern the position of every value in " + numbers.join(", "), function () {
+                it("discerns the position of every value in " + numbers.join(", "), function () {
                     var set = SortedSet(numbers);
                     numbers.forEach(function (n) {
                         expect(set.indexOf(n)).toBe(n);
@@ -208,7 +208,7 @@ describe("SortedSet", function () {
 
         describe("find", function() {
 
-            it("should find the node for existing values", function() {
+            it("finds the node for existing values", function() {
                 expect(set.findValue(1).value).toBe(1);
                 expect(set.findValue(5).value).toBe(5);
                 expect(set.findValue(9).value).toBe(9);
@@ -216,7 +216,7 @@ describe("SortedSet", function () {
                 expect(set.findValue(34).value).toBe(34);
             });
 
-            it("should return undefined for non-existent values", function() {
+            it("returns undefined for non-existent values", function() {
                 expect(set.findValue(4)).toBe(undefined);
                 expect(set.findValue(13)).toBe(undefined);
                 expect(set.findValue(31)).toBe(undefined);
@@ -226,7 +226,7 @@ describe("SortedSet", function () {
 
         describe("findGreatest", function () {
 
-            it("should return the highest value in the set", function() {
+            it("returns the highest value in the set", function() {
                 expect(set.findGreatest().value).toBe(34);
             });
 
@@ -234,7 +234,7 @@ describe("SortedSet", function () {
 
         describe("findLeast", function () {
 
-            it("should return the lowest value in the set", function() {
+            it("returns the lowest value in the set", function() {
                 expect(set.findLeast().value).toBe(1);
             });
 
@@ -242,13 +242,13 @@ describe("SortedSet", function () {
 
         describe("findGreatestLessThanOrEqual", function () {
 
-            it("should return values that exist in the set", function() {
+            it("returns values that exist in the set", function() {
                 expect(set.findGreatestLessThanOrEqual(5).value).toBe(5);
                 expect(set.findGreatestLessThanOrEqual(7).value).toBe(7);
                 expect(set.findGreatestLessThanOrEqual(9).value).toBe(9);
             });
 
-            it("should return the next highest value", function() {
+            it("returns the next highest value", function() {
                 expect(set.findGreatestLessThanOrEqual(14).value).toBe(12);
                 expect(set.findGreatestLessThanOrEqual(24).value).toBe(23);
                 expect(set.findGreatestLessThanOrEqual(31).value).toBe(30);
@@ -257,7 +257,7 @@ describe("SortedSet", function () {
                 expect(set.findGreatestLessThanOrEqual(25).value).toBe(23);
             });
 
-            it("should return undefined for values out of range", function() {
+            it("returns undefined for values out of range", function() {
                 expect(set.findGreatestLessThanOrEqual(0)).toBe(undefined);
             });
 
@@ -265,14 +265,14 @@ describe("SortedSet", function () {
 
         describe("findGreatestLessThan", function () {
 
-            it("should return next highest for values that exist in the set", function() {
+            it("returns next highest for values that exist in the set", function() {
                 expect(set.findGreatestLessThan(5).value).toBe(3);
                 expect(set.findGreatestLessThan(7).value).toBe(6);
                 expect(set.findGreatestLessThan(9).value).toBe(7);
                 expect(set.findGreatestLessThan(26).value).toBe(23);
             });
 
-            it("should return the next highest value", function() {
+            it("returns the next highest value", function() {
                 expect(set.findGreatestLessThan(14).value).toBe(12);
                 expect(set.findGreatestLessThan(24).value).toBe(23);
                 expect(set.findGreatestLessThan(31).value).toBe(30);
@@ -282,7 +282,7 @@ describe("SortedSet", function () {
             });
 
 
-            it("should return undefined for value at bottom of range", function() {
+            it("returns undefined for value at bottom of range", function() {
                 expect(set.findGreatestLessThan(1)).toBe(undefined);
             });
 
@@ -290,13 +290,13 @@ describe("SortedSet", function () {
 
         describe("findLeastGreaterThanOrEqual", function () {
 
-            it("should return values that exist in the set", function() {
+            it("returns values that exist in the set", function() {
                 expect(set.findLeastGreaterThanOrEqual(5).value).toBe(5);
                 expect(set.findLeastGreaterThanOrEqual(7).value).toBe(7);
                 expect(set.findLeastGreaterThanOrEqual(9).value).toBe(9);
             });
 
-            it("should return the next value", function() {
+            it("returns the next value", function() {
                 expect(set.findLeastGreaterThanOrEqual(13).value).toBe(15);
                 expect(set.findLeastGreaterThanOrEqual(24).value).toBe(26);
                 expect(set.findLeastGreaterThanOrEqual(31).value).toBe(32);
@@ -305,7 +305,7 @@ describe("SortedSet", function () {
                 expect(set.findLeastGreaterThanOrEqual(25).value).toBe(26);
             });
 
-            it("should return undefined for values out of range", function() {
+            it("returns undefined for values out of range", function() {
                 expect(set.findLeastGreaterThanOrEqual(36)).toBe(undefined);
             });
 
@@ -313,14 +313,14 @@ describe("SortedSet", function () {
 
         describe("findLeastGreaterThan", function () {
 
-            it("should return next value for values that exist in the set", function() {
+            it("returns next value for values that exist in the set", function() {
                 expect(set.findLeastGreaterThan(5).value).toBe(6);
                 expect(set.findLeastGreaterThan(7).value).toBe(9);
                 expect(set.findLeastGreaterThan(9).value).toBe(10);
                 expect(set.findLeastGreaterThan(26).value).toBe(27);
             });
 
-            it("should return the next value", function() {
+            it("returns the next value", function() {
                 expect(set.findLeastGreaterThan(14).value).toBe(15);
                 expect(set.findLeastGreaterThan(24).value).toBe(26);
                 expect(set.findLeastGreaterThan(31).value).toBe(32);
@@ -329,7 +329,7 @@ describe("SortedSet", function () {
                 expect(set.findLeastGreaterThan(25).value).toBe(26);
             });
 
-            it("should return undefined for value at top of range", function() {
+            it("returns undefined for value at top of range", function() {
                 expect(set.findLeastGreaterThan(34)).toBe(undefined);
             });
 
@@ -346,7 +346,7 @@ describe("SortedSet", function () {
                 numbers.sort(function () {
                     return rand() - .5;
                 });
-                it("should bind content changes to an array for " + numbers.join(", "), function () {
+                it("binds content changes to an array for " + numbers.join(", "), function () {
                     var mirror = [];
                     var set = SortedSet();
                     set.observeRangeChange(function (plus, minus, index) {
@@ -386,7 +386,7 @@ describe("SortedSet", function () {
             return lines;
         }
 
-        it("should draw a simple box", function () {
+        it("draws a simple box", function () {
             var set = SortedSet([1]);
             expect(draw(set)).toEqual([
                 "  +---+",
@@ -395,7 +395,7 @@ describe("SortedSet", function () {
             ]);
         });
 
-        it("should draw a graph of two ascending", function () {
+        it("draws a graph of two ascending", function () {
             var set = SortedSet([1, 2]);
             expect(draw(set)).toEqual([
                 "    +---+",
@@ -407,7 +407,7 @@ describe("SortedSet", function () {
             ]);
         });
 
-        it("should draw a graph of two descending", function () {
+        it("draws a graph of two descending", function () {
             var set = SortedSet([2, 1]);
             expect(draw(set)).toEqual([
                 "  +---+",
@@ -419,7 +419,7 @@ describe("SortedSet", function () {
             ]);
         });
 
-        it("should draw a graph of three", function () {
+        it("draws a graph of three", function () {
             var set = SortedSet([3, 1, 2]);
             expect(draw(set)).toEqual([
                 "    +---+",
@@ -434,7 +434,7 @@ describe("SortedSet", function () {
             ]);
         });
 
-        it("should draw a complex graph", function () {
+        it("draws a complex graph", function () {
             var set = SortedSet([8, 6, 5, 3, 7, 2, 1, 4]);
             expect(draw(set)).toEqual([
                 "      +---+",

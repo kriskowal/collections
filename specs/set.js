@@ -11,7 +11,7 @@ function describeSet(Set, sorted) {
     extendSpyExpectation();
 
     describe("Set constructor", function () {
-        it("should establish uniqueness of values", function () {
+        it("establishes uniqueness of values", function () {
             var set = Set([1, 2, 3, 1, 2, 3]);
             expect(set.toArray().sort()).toEqual([1, 2, 3]);
         });
@@ -34,17 +34,19 @@ function describeSet(Set, sorted) {
         });
     });
 
-    it("should be initially empty", function () {
+    it("is initially empty", function () {
         expect(new Set().length).toBe(0);
     });
 
-    it("cleared set should be empty", function () {
-        var set = new Set([1, 2]);
-        expect(set.length).toBe(2);
-        set.delete(1);
-        expect(set.length).toBe(1);
-        set.clear();
-        expect(set.length).toBe(0);
+    describe("cleared set", function () {
+        it("is empty", function () {
+            var set = new Set([1, 2]);
+            expect(set.length).toBe(2);
+            set.delete(1);
+            expect(set.length).toBe(1);
+            set.clear();
+            expect(set.length).toBe(0);
+        });
     });
 
     it("can add and delete an object", function () {
@@ -117,20 +119,20 @@ function describeSet(Set, sorted) {
         expect(array).toEqual([1, 2, 3, 4, 5, 6]);
     });
 
-    it("should compute unions", function () {
+    it("computes unions", function () {
         expect(Set([1, 2, 3]).union([2, 3, 4]).sorted()).toEqual([1, 2, 3, 4]);
         expect(Set([1, 2, 3]).union([2, 3, 4]).equals([1, 2, 3, 4])).toBe(true);
     });
 
-    it("should compute intersections", function () {
+    it("computes intersections", function () {
         expect(Set([1, 2, 3]).intersection([2, 3, 4]).sorted()).toEqual([2, 3]);
     });
 
-    it("should compute differences", function () {
+    it("computes differences", function () {
         expect(Set([1, 2, 3]).difference([2, 3, 4]).sorted()).toEqual([1]);
     });
 
-    it("should compute symmetric differences", function () {
+    it("computes symmetric differences", function () {
         expect(Set([1, 2, 3]).symmetricDifference([2, 3, 4]).sorted()).toEqual([1, 4]);
     });
 

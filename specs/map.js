@@ -23,7 +23,7 @@ function describeMap(Map, values) {
         var b = values[1] || {};
         var c = values[2] || {};
 
-        function shouldHaveTheUsualContent(map) {
+        function expectTheUsualContent(map) {
             expect(map.has(a)).toBe(true);
             expect(map.has(b)).toBe(true);
             expect(map.has(c)).toBe(false);
@@ -44,22 +44,22 @@ function describeMap(Map, values) {
             ]);
         }
 
-        it("should be constructable from entry duples with object keys", function () {
+        it("is constructable from entry duples with object keys", function () {
             var map = Map([[a, 10], [b, 20]]);
-            shouldHaveTheUsualContent(map);
+            expectTheUsualContent(map);
         });
 
-        it("should be constructable from an interable", function () {
+        it("is constructable from an interable", function () {
             var map = Map({
                 forEach: function (callback, thisp) {
                     callback.call(thisp, [a, 10]);
                     callback.call(thisp, [b, 20]);
                 }
             });
-            shouldHaveTheUsualContent(map);
+            expectTheUsualContent(map);
         });
 
-        it("should support filter", function () {
+        it("supports filter", function () {
             var map = Map({a: 10, b: 20, c: 30});
             expect(map.filter(function (value, key) {
                 return key === "a" || value === 30;
@@ -105,7 +105,7 @@ function describeMap(Map, values) {
             it("removes one entry", function () {
                 var map = Map([[a, 10], [b, 20], [c, 30]]);
                 expect(map.delete(c)).toBe(true);
-                shouldHaveTheUsualContent(map);
+                expectTheUsualContent(map);
             });
         });
 

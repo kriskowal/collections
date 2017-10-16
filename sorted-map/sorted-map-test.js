@@ -8,7 +8,7 @@ describe("SortedMap", function () {
     describeDict(SortedMap);
 
     describe("reduceRight", function () {
-        it("should reduce entries from right to left", function () {
+        it("reduces entries from right to left", function () {
             var map = SortedMap([
                 [1, 2],
                 [2, 4],

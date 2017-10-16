@@ -21,7 +21,7 @@ describe("SortedArray", function () {
     });
 
     describe("non-uniqueness", function () {
-        it("should sort non-unique values", function () {
+        it("sorts non-unique values", function () {
             var array = SortedArray([1, 2, 3, 1, 2, 3]);
             expect(array.slice()).toEqual([1, 1, 2, 2, 3, 3]);
         });

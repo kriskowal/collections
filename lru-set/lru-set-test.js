@@ -19,7 +19,7 @@ describe("LruSet", function () {
         describeSet(LruSet);
     });
 
-    it("should remove stale entries", function () {
+    it("removes stale entries", function () {
         var set = LruSet([4, 3, 1, 2, 3], 3);
         expect(set.length).toBe(3);
         set.add(3);
@@ -28,7 +28,7 @@ describe("LruSet", function () {
         expect(set.toArray()).toEqual([2, 3, 4]);
     });
 
-    it("should emit LRU changes as singleton operation", function () {
+    it("emits LRU changes as singleton operation", function () {
         var a = 1, b = 2, c = 3, d = 4;
         var lruset = LruSet([d, c, a, b, c], 3);
         lruset.observeRangeChange(function(plus, minus) {
@@ -38,7 +38,7 @@ describe("LruSet", function () {
         expect(lruset.add(d)).toBe(false);
     });
 
-    it("should dispatch LRU changes as singleton operation", function () {
+    it("dispatches LRU changes as singleton operation", function () {
         var set = LruSet([4, 3, 1, 2, 3], 3);
         var spy = sinon.spy();
         set.observeRangeWillChange(function (plus, minus) {

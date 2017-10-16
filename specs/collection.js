@@ -17,7 +17,7 @@ function describeCollection(Collection, values) {
     var c = values[2];
     var d = values[3];
 
-    function shouldHaveTheUsualContent(collection) {
+    function expectTheUsualContent(collection) {
         if (!collection.has)
             return;
 
@@ -34,12 +34,12 @@ function describeCollection(Collection, values) {
         expect(collection.length).toBe(3);
     }
 
-    it("should be constructable from an array", function () {
+    it("is constructable from an array", function () {
         var collection = Collection([a, b, c]);
-        shouldHaveTheUsualContent(collection);
+        expectTheUsualContent(collection);
     });
 
-    it("should be constructable from an foreachable", function () {
+    it("is constructable from an foreachable", function () {
         var collection = Collection({
             forEach: function (callback, thisp) {
                 callback.call(thisp, a);
@@ -47,7 +47,7 @@ function describeCollection(Collection, values) {
                 callback.call(thisp, c);
             }
         });
-        shouldHaveTheUsualContent(collection);
+        expectTheUsualContent(collection);
     });
 
     describe("add", function () {
@@ -59,7 +59,7 @@ function describeCollection(Collection, values) {
             expect(collection.add(a)).toBe(true);
             expect(collection.add(b)).toBe(true);
             expect(collection.add(c)).toBe(true);
-            shouldHaveTheUsualContent(collection);
+            expectTheUsualContent(collection);
         });
     });
 
@@ -71,25 +71,25 @@ function describeCollection(Collection, values) {
         it("should remove a value from the beginning of a collection", function () {
             var collection = Collection([d, a, b, c]);
             expect(collection.delete(d)).toBe(true);
-            shouldHaveTheUsualContent(collection);
+            expectTheUsualContent(collection);
         });
 
         it("should remove a value from the middle of a collection", function () {
             var collection = Collection([a, d, b, c]);
             expect(collection.delete(d)).toBe(true);
-            shouldHaveTheUsualContent(collection);
+            expectTheUsualContent(collection);
         });
 
         it("should remove a value from the end of a collection", function () {
             var collection = Collection([a, b, c, d]);
             expect(collection.delete(d)).toBe(true);
-            shouldHaveTheUsualContent(collection);
+            expectTheUsualContent(collection);
         });
 
         it("should fail to remove a value not in a collection", function () {
             var collection = Collection([a, b, c]);
             expect(collection.delete(d)).toBe(false);
-            shouldHaveTheUsualContent(collection);
+            expectTheUsualContent(collection);
         });
 
     });
@@ -154,11 +154,11 @@ function describeCollection(Collection, values) {
             expect(collection.only()).toBe(a);
         });
 
-        it("should be undefined if there are no values in the collection", function () {
+        it("is undefined if there are no values in the collection", function () {
             expect(Collection().only()).toBeUndefined();
         });
 
-        it("should be undefined if there are many values in the collection", function () {
+        it("is undefined if there are many values in the collection", function () {
             expect(Collection([a, b]).only()).toBeUndefined();
         });
 

@@ -11,7 +11,7 @@ describe("LruMap", function () {
     describeDict(LruMap);
     describeMap(LruMap);
 
-    it("should remove stale entries", function () {
+    it("removes stale entries", function () {
         var map = LruMap({a: 10, b: 20, c: 30}, 3);
         map.get("b");
         map.set("d", 40);
@@ -19,7 +19,7 @@ describe("LruMap", function () {
         expect(map.length).toBe(3);
     });
 
-    it("should not grow when re-adding", function () {
+    it("does not grow when re-adding", function () {
         var map = LruMap({a: 10, b: 20, c: 30}, 3);
 
         expect(map.keys()).toEqual(["a", "b", "c"]);
@@ -34,7 +34,7 @@ describe("LruMap", function () {
         expect(map.length).toBe(3);
     });
 
-    it("should grow when adding new values", function () {
+    it("grows when adding new values", function () {
         var map = LruMap({}, 3);
         expect(map.length).toBe(0);
 
@@ -63,7 +63,7 @@ describe("LruMap", function () {
         expect(map.length).toBe(3);
     });
 
-    it("should dispatch deletion for stale entries", function () {
+    it("dispatches deletion for stale entries", function () {
         var map = LruMap({a: 10, b: 20, c: 30}, 3);
         var spy = sinon.spy();
         map.observeMapChange(function (plus, minus, key, type) {

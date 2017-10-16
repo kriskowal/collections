@@ -81,11 +81,11 @@ describe("List", function () {
     describe("equals", function () {
         var list = List();
 
-        it("should be reflexive", function () {
+        it("is reflexive", function () {
             expect(list.equals(list)).toBe(true);
         });
 
-        it("should be better than nothing", function () {
+        it("is better than nothing", function () {
             expect(list.equals()).toBe(false);
         });
 
@@ -94,11 +94,11 @@ describe("List", function () {
     describe("compare", function () {
         var list = List();
 
-        it("should be reflexive", function () {
+        it("is reflexive", function () {
             expect(list.compare(list)).toBe(0);
         });
 
-        it("should be better than nothing", function () {
+        it("is better than nothing", function () {
             expect(list.compare()).toBe(1);
         });
 

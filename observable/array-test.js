@@ -11,13 +11,15 @@ var O = require("./observable");
 extendSpyExpectation();
 
 describe("Array", function () {
-    it("change dispatch properties should not be enumerable", function () {
-        // this verifies that dispatchesRangeChanges and dispatchesMapChanges
-        // are both non-enumerable, and any other properties that might get
-        // added in the future.
-        for (var name in [1, 2,, 3]) {
-            expect(isNaN(+name)).toBe(false);
-        }
+    describe("change dispatch properties", function () {
+        it("not enumerable", function () {
+            // this verifies that dispatchesRangeChanges and dispatchesMapChanges
+            // are both non-enumerable, and any other properties that might get
+            // added in the future.
+            for (var name in [1, 2,, 3]) {
+                expect(isNaN(+name)).toBe(false);
+            }
+        });
     });
 });
 

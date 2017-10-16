@@ -28,7 +28,7 @@ describe("Set", function () {
             return Set(values, is);
         }, [{}, {}, {}, {}], true);
 
-        it("should pop and shift", function () {
+        it("pops and shifts", function () {
             var a = {i: 2};
             var b = {i: 1};
             var c = {i: 0};
@@ -37,7 +37,7 @@ describe("Set", function () {
             expect(set.shift()).toBe(a);
         });
 
-        it("should dispatch range change on clear", function () {
+        it("dispatches range change on clear", function () {
             var set = Set([1, 2, 3]);
             var spy = sinon.spy();
             set.observeRangeChange(function (plus, minus, index, _set) {
@@ -48,7 +48,7 @@ describe("Set", function () {
             expect(spy).toHaveBeenCalledWith([], [1, 2, 3], 0);
         });
 
-        it("should dispatch range change on add", function () {
+        it("dispatches range change on add", function () {
             var set = Set([1, 3]);
             var spy = sinon.spy();
             set.observeRangeChange(function (plus, minus, index, _set) {
@@ -60,7 +60,7 @@ describe("Set", function () {
             expect(spy).toHaveBeenCalledWith([2], [], 2);
         });
 
-        it("should dispatch range change on delete", function () {
+        it("dispatches range change on delete", function () {
             var set = Set([1, 2, 3]);
             var spy = sinon.spy();
             set.observeRangeChange(function (plus, minus, index, _set) {
@@ -72,7 +72,7 @@ describe("Set", function () {
             expect(spy).toHaveBeenCalledWith([], [2], 1);
         });
 
-        it("should dispatch range change on pop", function () {
+        it("dispatches range change on pop", function () {
             var set = Set([1, 3, 2]);
             var spy = sinon.spy();
             set.observeRangeChange(function (plus, minus, index, _set) {
@@ -84,7 +84,7 @@ describe("Set", function () {
             expect(spy).toHaveBeenCalledWith([], [2], 2);
         });
 
-        it("should dispatch range change on shift", function () {
+        it("dispatches range change on shift", function () {
             var set = Set([1, 3, 2]);
             var spy = sinon.spy();
             set.observeRangeChange(function (plus, minus, index, _set) {
@@ -98,7 +98,7 @@ describe("Set", function () {
 
         // Need to reevaluate whether sets fully support range changes, or whether
         // they support merely set changes (no index).
-        it("should dispatch range change on shift then pop", function () {
+        it("dispatches range change on shift then pop", function () {
             var set = Set([1, 3]);
             set.observeRangeChange(function (plus, minus, index, _set) {
                 spy(plus, minus, index);

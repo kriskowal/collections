@@ -229,7 +229,7 @@ describe("ObservableObject", function () {
             expect(spy.callCount).toBe(10);
         });
 
-        it("should observe nested observer", function () {
+        it("observes nested observer", function () {
             var object = {};
             var spy = sinon.spy();
             var innerCancel = sinon.spy();
@@ -254,7 +254,7 @@ describe("ObservableObject", function () {
             expect(innerCancel.callCount).toBe(2);
         });
 
-        it("should note exceptions that interrupt property change dispatch", function () {
+        it("notes exceptions that interrupt property change dispatch", function () {
             var object = {};
             var observer = observePropertyChange(object, "foo", function (child) {
                 throw new Error("X");
@@ -390,7 +390,7 @@ describe("ObservableObject", function () {
 
         });
 
-        it("should not alter a property marked as observable", function () {
+        it("does not alter a property marked as observable", function () {
             var object = {};
             preventPropertyObserver(object, "foo");
             expect(Object.getOwnPropertyDescriptor(object, "foo")).toEqual({
@@ -407,7 +407,7 @@ describe("ObservableObject", function () {
             expect(spy).toHaveBeenCalledWith(10, undefined, "foo", object);
         });
 
-        it("should not alter a property marked as observable on the prototype", function () {
+        it("does not alter a property marked as observable on the prototype", function () {
             function Foo() {
             }
             preventPropertyObserver(Foo.prototype, "foo");

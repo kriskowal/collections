@@ -51,7 +51,7 @@ describe("Heap", function () {
 
     });
 
-    it("should be observable", function () {
+    it("is observable", function () {
 
         var heap = new Heap([1,2,3,4,5]);
         var top;
@@ -75,7 +75,7 @@ describe("Heap", function () {
 
     });
 
-    it("should delete properly", function () {
+    it("deletes properly", function () {
 
         var heap = new Heap([1, 2, 3, 4, 5, 6]);
         expect(heap.length).toEqual(6);

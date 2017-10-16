@@ -8,31 +8,31 @@ function describeDict(Dict) {
 
     describe("as Dict", function () {
 
-        it("should be constructable from entry duples", function () {
+        it("is constructable from entry duples", function () {
             var dict = Dict([["a", 10], ["b", 20]]);
-            shouldHaveTheUsualContent(dict);
+            expectTheUsualContent(dict);
         });
 
-        it("should be constructable from objects", function () {
+        it("is constructable from objects", function () {
             var dict = Dict({a: 10, b: 20});
-            shouldHaveTheUsualContent(dict);
+            expectTheUsualContent(dict);
         });
 
-        it("should be constructable from dicts", function () {
+        it("is constructable from dicts", function () {
             var dict = Dict(Dict({a: 10, b: 20}));
-            shouldHaveTheUsualContent(dict);
+            expectTheUsualContent(dict);
         });
 
         describe("delete", function () {
-            it("should be able to delete keys", function () {
+            it("is able to delete keys", function () {
                 var dict = Dict({a: 10, b: 20, c: 30});
                 expect(dict.delete("c")).toBe(true);
                 expect(dict.delete("c")).toBe(false);
-                shouldHaveTheUsualContent(dict);
+                expectTheUsualContent(dict);
             });
         });
 
-        it("should be able to contain hasOwnProperty", function () {
+        it("is able to contain hasOwnProperty", function () {
             var dict = Dict();
             expect(dict.set("hasOwnProperty", 10)).toBe(true);
             expect(dict.get("hasOwnProperty")).toBe(10);
@@ -41,7 +41,7 @@ function describeDict(Dict) {
             expect(dict.delete("hasOwnProperty")).toBe(false);
         });
 
-        it("should be able to contain __proto__", function () {
+        it("is able to contain __proto__", function () {
             var dict = Dict();
             expect(dict.set("__proto__", 10)).toBe(true);
             expect(dict.get("__proto__")).toBe(10);
@@ -106,7 +106,7 @@ function describeDict(Dict) {
 
 }
 
-function shouldHaveTheUsualContent(dict) {
+function expectTheUsualContent(dict) {
     expect(dict.has("a")).toBe(true);
     expect(dict.has("b")).toBe(true);
     expect(dict.has("c")).toBe(false);

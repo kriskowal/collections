@@ -85,7 +85,7 @@ describe("Deque", function () {
     // from https://github.com/petkaantonov/deque
 
     describe("get", function () {
-        it("should return undefined on nonsensical argument", function() {
+        it("returns undefined on nonsensical argument", function() {
             var a = new Deque([1,2,3,4]);
             expect(a.get(-5)).toBe(void 0);
             expect(a.get(-100)).toBe(void 0);
@@ -99,7 +99,7 @@ describe("Deque", function () {
         });
 
 
-        it("should support positive indexing", function() {
+        it("supports positive indexing", function() {
             var a = new Deque([1,2,3,4]);
             expect(a.get(0)).toBe(1);
             expect(a.get(1)).toBe(2);
@@ -107,7 +107,7 @@ describe("Deque", function () {
             expect(a.get(3)).toBe(4);
         });
 
-        it("should support negative indexing", function() {
+        it("supports negative indexing", function() {
             var a = new Deque([1,2,3,4]);
             expect(a.get(-1)).toBe(4);
             expect(a.get(-2)).toBe(3);

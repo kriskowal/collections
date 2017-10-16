@@ -290,7 +290,7 @@ function describeIterator(Iterator) {
     });
 
     describe("iterateEnumerate", function () {
-        it("should enumerate an array", function () {
+        it("enumerates an array", function () {
             var iterator = Iterator([1, 2, 3]).iterateEnumerate();
             expect(equalsOperator(iterator.next(), {value: [0, 1], index: 0, done: false})).toBe(true);
             expect(equalsOperator(iterator.next(), {value: [1, 2], index: 1, done: false})).toBe(true);
@@ -509,7 +509,7 @@ describe("Iterator.repeat", function () {
 
 describe("Iterator.enumerate", function () {
 
-    it("should enumerate an array", function () {
+    it("enumerates an array", function () {
         var iterator = Iterator.enumerate([1, 2, 3]);
         expect(equalsOperator(iterator.next(), {value: [0, 1], index: 0, done: false})).toBe(true);
         expect(equalsOperator(iterator.next(), {value: [1, 2], index: 1, done: false})).toBe(true);

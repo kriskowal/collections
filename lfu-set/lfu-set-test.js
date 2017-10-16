@@ -19,12 +19,12 @@ describe("LfuSet", function () {
         describeSet(LfuSet);
     });
 
-    it("should handle many repeated values", function () {
+    it("handles many repeated values", function () {
         var set = new LfuSet([1, 1, 1, 2, 2, 2, 1, 2]);
         expect(set.toArray()).toEqual([1, 2]);
     });
 
-    it("should remove stale entries", function () {
+    it("removes stale entries", function () {
         var set = LfuSet([3, 4, 1, 3, 2], 3);
 
         expect(set.length).toBe(3);
@@ -33,7 +33,7 @@ describe("LfuSet", function () {
         expect(set.toArray()).toEqual([2, 4, 3]);
     });
 
-    it("should emit LFU changes as singleton operation", function () {
+    it("emits LFU changes as singleton operation", function () {
         var a = 1, b = 2, c = 3, d = 4;
         var lfuset = LfuSet([d, c, a, b, c], 3);
         lfuset.observeRangeChange(function(plus, minus) {
@@ -43,7 +43,7 @@ describe("LfuSet", function () {
         expect(lfuset.add(d)).toBe(false);
     });
 
-    it("should dispatch LRU changes as singleton operation", function () {
+    it("dispatches LRU changes as singleton operation", function () {
         var set = LfuSet([4, 3, 1, 2, 3], 3);
         var spy = sinon.spy();
         set.observeRangeChange(function (plus, minus) {

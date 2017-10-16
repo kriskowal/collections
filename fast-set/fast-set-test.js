@@ -77,7 +77,7 @@ describe("Set", function () {
         expect(array).toEqual(set.toArray());
     });
 
-    it("should log", function () {
+    it("logs", function () {
         var set = new Set([1, 2, 3]);
         var lines = [];
         set.log(TreeLog.ascii, null, lines.push, lines);
@@ -91,7 +91,7 @@ describe("Set", function () {
         ]);
     });
 
-    it("should log objects by hash", function () {
+    it("logs objects by hash", function () {
         function Type(value) {
             this.value = value;
         }
@@ -118,7 +118,7 @@ describe("Set", function () {
         ]);
     });
 
-    it("should log objects by only one hash", function () {
+    it("logs objects by only one hash", function () {
         function Type(value) {
             this.value = value;
         }
@@ -142,7 +142,7 @@ describe("Set", function () {
         ]);
     });
 
-    describe("should log objects with a custom writer with multiple lines", function () {
+    describe("logs objects with a custom writer with multiple lines", function () {
         function Type(value) {
             this.value = value;
         }

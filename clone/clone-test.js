@@ -67,18 +67,18 @@ describe("clone", function () {
         });
     });
 
-    it("should clone zero levels of depth", function () {
+    it("clones zero levels of depth", function () {
         var clone = cloneOperator(graph, 0);
         expect(clone).toBe(graph);
     });
 
-    it("should clone object at one level of depth", function () {
+    it("clones object at one level of depth", function () {
         var clone = cloneOperator(graph, 1);
         expect(clone).toEqual(graph);
         expect(clone).not.toBe(graph);
     });
 
-    it("should clone object at two levels of depth", function () {
+    it("clones object at two levels of depth", function () {
         var clone = cloneOperator(graph, 2);
         expect(clone).toEqual(graph);
         expect(clone.object).not.toBe(graph.object);
@@ -86,27 +86,27 @@ describe("clone", function () {
         expect(clone.nestedObject.a).toBe(graph.nestedObject.a);
     });
 
-    it("should clone array at two levels of depth", function () {
+    it("clones array at two levels of depth", function () {
         var clone = cloneOperator(graph, 2);
         expect(clone).toEqual(graph);
     });
 
-    it("should clone identical values at least once", function () {
+    it("clones identical values at least once", function () {
         var clone = cloneOperator(graph);
         expect(clone.cycle).not.toBe(graph.cycle);
     });
 
-    it("should clone identical values only once", function () {
+    it("clones identical values only once", function () {
         var clone = cloneOperator(graph);
         expect(clone.cycle).toBe(clone);
     });
 
-    it("should clone clonable", function () {
+    it("clones clonable", function () {
         var clone = cloneOperator(graph);
         expect(clone.clonable).toBe(graph.clonable);
     });
 
-    it("should clone an object with a function property", function () {
+    it("clones an object with a function property", function () {
         var original = {foo: function () {}};
         var clone = cloneOperator(original);
         expect(clone.foo).toBe(original.foo);
@@ -115,25 +115,25 @@ describe("clone", function () {
 
     var object = {a: {a1: 10, a2: 20}, b: {b1: 10, b2: 20}};
 
-    it("should clone zero levels", function () {
+    it("clones zero levels", function () {
         expect(cloneOperator(object, 0)).toBe(object);
     });
 
-    it("should clone one level", function () {
+    it("clones one level", function () {
         var clone = cloneOperator(object, 1);
         expect(clone).toEqual(object);
         expect(clone).not.toBe(object);
         expect(clone.a).toBe(object.a);
     });
 
-    it("should clone two levels", function () {
+    it("clones two levels", function () {
         var clone = cloneOperator(object, 2);
         expect(clone).toEqual(object);
         expect(clone).not.toBe(object);
         expect(clone.a).not.toBe(object.a);
     });
 
-    it("should clone with reference cycles", function () {
+    it("clones with reference cycles", function () {
         var cycle = {};
         cycle.cycle = cycle;
         var clone = cloneOperator(cycle);
