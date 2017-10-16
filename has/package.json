@@ -5,12 +5,14 @@
   "homepage": "http://collectionsjs.com",
   "license": "MIT",
   "keywords": [
-    "pop",
     "polymoprhic",
     "operator",
     "has"
   ],
   "main": "./has.js",
+  "files": [
+    "object-has.js"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/kriskowal/collections"

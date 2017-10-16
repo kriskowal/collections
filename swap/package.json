@@ -11,6 +11,9 @@
     "operator"
   ],
   "main": "swap.js",
+  "files": [
+    "array.js"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/kriskowal/collections"

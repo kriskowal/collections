@@ -10,11 +10,15 @@
     "transpose",
     "matrix",
     "array",
-    "pop",
     "polymorphic",
     "operator"
   ],
   "main": "./zip.js",
+  "files": [
+    "unzip.js",
+    "array-zip.js",
+    "array-unzip.js"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/kriskowal/collections"

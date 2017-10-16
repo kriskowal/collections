@@ -5,12 +5,12 @@
   "homepage": "http://collectionsjs.com",
   "license": "BSD 3-Clause",
   "keywords": [
-    "pop",
     "polymorphic",
     "operator",
     "clone"
   ],
   "main": "clone.js",
+  "files": [],
   "repository": {
     "type": "git",
     "url": "https://github.com/kriskowal/collections"

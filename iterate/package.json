@@ -5,21 +5,22 @@
   "homepage": "http://collectionsjs.com",
   "license": "MIT",
   "keywords": [
-    "pop",
     "polymorphic",
     "operator",
     "iterate"
   ],
   "main": "iterate.js",
+  "files": [
+    "iteration.js",
+    "array.js",
+    "object.js"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/kriskowal/collections"
   },
   "bugs": {
     "url": "https://github.com/kriskowal/collections/issues"
-  },
-  "directories": {
-    "test": "test"
   },
   "dependencies": {
     "@collections/equals": "^1"

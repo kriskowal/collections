@@ -9,7 +9,6 @@
     "observe",
     "observers",
     "polymorphic",
-    "pop",
     "change",
     "object",
     "array",
@@ -18,6 +17,12 @@
     "range"
   ],
   "main": "observable.js",
+  "files": [
+    "array.js",
+    "map.js",
+    "object.js",
+    "range.js"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/kriskowal/collections"

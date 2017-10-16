@@ -5,12 +5,12 @@
   "homepage": "http://collectionsjs.com",
   "license": "3-Clause BSD",
   "keywords": [
-    "pop",
     "polymorphic",
     "operator",
     "compare"
   ],
   "main": "compare.js",
+  "files": [],
   "repository": {
     "type": "git",
     "url": "https://github.com/kriskowal/collections"

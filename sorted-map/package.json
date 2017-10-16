@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "homepage": "http://collectionsjs.com",
+  "license": "MIT",
   "keywords": [],
   "main": "./sorted-map.js",
+  "files": [],
   "repository": {
     "type": "git",
     "url": "https://github.com/kriskowal/collections"
