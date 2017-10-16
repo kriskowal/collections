@@ -1,4 +1,5 @@
 {
+  "name": "@collections/heap",
   "version": "1.0.0",
   "description": "",
   "homepage": "http://collectionsjs.com",
@@ -12,5 +13,12 @@
   },
   "bugs": {
     "url": "https://github.com/kriskowal/collections/issues"
+  },
+  "dependencies": {
+    "@collections/compare": "^1",
+    "@collections/copy": "^1",
+    "@collections/equals": "^1",
+    "@collections/generic-collection": "^1",
+    "@collections/observable": "^1"
   }
 }
