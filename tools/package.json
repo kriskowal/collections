@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "coveralls": "^3.0.0",
     "eslint": "^4.9.0",
     "istanbul": "^0.4.5"
   }

@@ -7,5 +7,5 @@ install:
   - "(cd tools; npm install)"
 script:
   - npm run lint
-  - npm test
   - npm run cover
+  - npm run cover:publish

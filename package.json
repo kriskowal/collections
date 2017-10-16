@@ -31,7 +31,8 @@
   "scripts": {
     "test": "node test.js",
     "lint": "eslint .",
-    "cover": "istanbul cover test.js spec && istanbul report html"
+    "cover": "istanbul cover test.js spec && istanbul report html",
+    "cover:publish": "< coverage/lcov.info coveralls"
   },
   "strategy": "flat",
   "dependencies": {
