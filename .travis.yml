@@ -5,4 +5,7 @@ node_js:
   - "8"
 install:
   - "(cd tools; npm install)"
-script: node test.js
+script:
+  - npm run lint
+  - npm test
+  - npm run cover

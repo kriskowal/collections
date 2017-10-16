@@ -30,6 +30,7 @@
   },
   "scripts": {
     "test": "node test.js",
+    "lint": "eslint .",
     "cover": "istanbul cover test.js spec && istanbul report html"
   },
   "strategy": "flat",
