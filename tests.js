@@ -4,6 +4,7 @@ require("./specs/array-test");
 require("./iterator/iterator-test");
 require("./iterate/iterate-test");
 
+require("./heap/heap-test");
 require("./list/list-test");
 require("./dict/dict-test");
 require("./deque/deque-test");
@@ -36,12 +37,15 @@ require("./observable/range-test");
 require("./observable/readme-test");
 
 require("./zip/zip-test");
-require("./zip/unzip-test");
 require("./zip/array-zip-test");
+require("./zip/unzip-test");
+require("./zip/array-unzip-test");
 
 require("./clear/object-test");
 require("./clear/clear-test");
 
+require("./clone/clone-test");
+require("./to-array/to-array-test");
 require("./compare/compare-test");
 require("./equals/equals-test");
 require("./has/has-test");

@@ -114,9 +114,17 @@ LruSet.prototype.one = function () {
 };
 
 LruSet.prototype.clear = function () {
+    var clearing;
+    if (this.dispatchesRangeChanges) {
+        clearing = this.toArray();
+        this.dispatchRangeWillChange([], clearing, 0);
+    }
     var length = this.length;
     this.store.clear();
     this.length = 0;
+    if (this.dispatchesRangeChanges) {
+        this.dispatchRangeChange([], clearing, 0);
+    }
     return length;
 };
 

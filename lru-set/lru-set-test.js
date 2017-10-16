@@ -19,7 +19,6 @@ describe("LruSet", function () {
         describeSet(LruSet);
     });
 
-
     it("should remove stale entries", function () {
         var set = LruSet([4, 3, 1, 2, 3], 3);
         expect(set.length).toBe(3);

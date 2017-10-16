@@ -1,10 +1,14 @@
 /* global describe, it, expect */
 "use strict";
 
+var sinon = require("sinon");
+var extendSpyExpectation = require("./spy-expectation");
 var Iterator = require("@collections/iterator");
 
 module.exports = describeSet;
 function describeSet(Set, sorted) {
+
+    extendSpyExpectation();
 
     describe("Set constructor", function () {
         it("should establish uniqueness of values", function () {
@@ -69,7 +73,7 @@ function describeSet(Set, sorted) {
         });
     }
 
-    it("can readd a deleted object", function () {
+    it("can re-add a deleted object", function () {
         var set = new Set();
         var object = {};
         set.add(object);
@@ -130,4 +134,16 @@ function describeSet(Set, sorted) {
         expect(Set([1, 2, 3]).symmetricDifference([2, 3, 4]).sorted()).toEqual([1, 4]);
     });
 
+    it("dispatches change events when cleared", function () {
+        var set = new Set([1, 2, 3]);
+
+        if (set.constructor.name == "FastSet") {
+            return;
+        }
+
+        var spy = sinon.spy();
+        set.observeRangeChange(spy);
+        set.clear();
+        expect(spy).toHaveBeenCalledWith([], [1, 2, 3], 0, set);
+    });
 }

@@ -4,8 +4,8 @@
 var Set = require("@collections/set");
 var Map = require("@collections/map");
 
-var cloneOperator = require("../pop-clone");
-var equalsOperator = require("pop-equals");
+var equalsOperator = require("@collections/equals");
+var cloneOperator = require("./clone");
 
 describe("clone", function () {
 

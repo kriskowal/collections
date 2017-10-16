@@ -41,6 +41,5 @@ function describeObservableMap(Map) {
         map.set("b", 20);
         expect(changeSpy).not.toHaveBeenCalled();
     });
-
 }
 

@@ -1,7 +1,7 @@
 /* global it, expect */
 "use strict";
 
-var unzip = require("./unzip");
+var unzip = require("./array-unzip");
 var cases = require("./specs");
 
 it("unzips (illustrative)", function () {

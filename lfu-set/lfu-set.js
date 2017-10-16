@@ -178,9 +178,17 @@ LfuSet.prototype.one = function () {
 };
 
 LfuSet.prototype.clear = function () {
+    var clearing;
+    if (this.dispatchesRangeChanges) {
+        clearing = this.toArray();
+        this.dispatchRangeWillChange([], clearing, 0);
+    }
     var length = this.store.clear();
     this.frequencyHead.next = this.frequencyHead;
     this.length = 0;
+    if (this.dispatchesRangeChanges) {
+        this.dispatchRangeChange([], clearing, 0);
+    }
     return length;
 };
 

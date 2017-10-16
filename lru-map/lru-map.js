@@ -80,4 +80,3 @@ LruMap.prototype.handleStoreRangeChange = function (plus, minus) {
         this.dispatchMapChange("delete", minus[0].key, undefined, minus[0].value);
     }
 };
-
