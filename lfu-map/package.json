@@ -1,0 +1,26 @@
+{
+  "name": "@collections/lfu-map",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "http://collectionsjs.com",
+  "license": "MIT",
+  "keywords": [],
+  "main": "./lfu-map.js",
+  "files": [],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kriskowal/collections"
+  },
+  "bugs": {
+    "url": "https://github.com/kriskowal/collections/issues"
+  },
+  "dependencies": {
+    "@collections/copy": "^1",
+    "@collections/equals": "^1",
+    "@collections/hash": "^1",
+    "@collections/lfu-set": "^1",
+    "@collections/generic-collection": "^1",
+    "@collections/generic-map": "^1",
+    "@collections/observable": "^1"
+  }
+}

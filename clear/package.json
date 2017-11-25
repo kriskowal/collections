@@ -1,0 +1,23 @@
+{
+  "name": "@collections/clear",
+  "version": "1.0.0",
+  "description": "Clears arrays, objects, and instances that implement the clear method.",
+  "homepage": "http://collectionsjs.com",
+  "license": "MIT",
+  "keywords": [
+    "polymorphic",
+    "operator",
+    "clear"
+  ],
+  "main": "./clear.js",
+  "files": [
+    "object.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kriskowal/collections"
+  },
+  "bugs": {
+    "url": "https://github.com/kriskowal/collections/issues"
+  }
+}

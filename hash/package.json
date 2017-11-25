@@ -1,0 +1,24 @@
+{
+  "name": "@collections/hash",
+  "version": "1.0.0",
+  "description": "A hash function for arbitrary objects",
+  "homepage": "http://collectionsjs.com",
+  "license": "MIT",
+  "keywords": [
+    "hash",
+    "polymorphic",
+    "operator"
+  ],
+  "main": "./hash.js",
+  "files": [],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kriskowal/collections"
+  },
+  "bugs": {
+    "url": "https://github.com/kriskowal/collections/issues"
+  },
+  "dependencies": {
+    "weak-map": "^1"
+  }
+}

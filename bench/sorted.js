@@ -1,9 +1,9 @@
-var SortedSet = require("../sorted-set");
-var SortedArraySet = require("../sorted-array-set");
+/* eslint no-console: [0] */
+"use strict";
 
-var Fuzz = require("../spec/fuzz");
-var iterations = 1000;
-var size = 10000;
+var SortedSet = require("@collections/sorted-set");
+var SortedArraySet = require("@collections/sorted-array-set");
+var Fuzz = require("../specs/set-fuzz");
 
 [10, 100, 100, 101, 105, 112, 125, 150, 200, 300, 500, 1000, 10000, 20000, 30000].forEach(function (size) {
 
@@ -36,17 +36,19 @@ var size = 10000;
         callback();
         var stop = hrtime();
         return stop - start;
-    };
+    }
 
-    var sortedSetSpeed = time(function () {
+    var sortedSetDuration = time(function () {
         bench(SortedSet);
     });
-    var sortedArraySetSpeed = time(function () {
+    var sortedArraySetDuration = time(function () {
         bench(SortedArraySet);
     });
 
-    console.log(size + ":", (sortedSetSpeed < sortedArraySetSpeed ? "SortedSet WINS" : "SortedArraySet WINS"));
-    console.log('     SortedSet:', sortedSetSpeed);
-    console.log('SortedArraySet:', sortedArraySetSpeed);
+    var victory = sortedSetDuration < sortedArraySetDuration ? "<winner" : "winner>";
+    console.log(("                " + size).slice(-14) + ": SortedSet " + victory + " SortedArraySet");
+    console.log("     SortedSet:", sortedSetDuration);
+    console.log("SortedArraySet:", sortedArraySetDuration);
+    console.log("");
 
 });

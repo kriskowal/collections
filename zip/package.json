@@ -1,0 +1,32 @@
+{
+  "name": "@collections/zip",
+  "version": "1.0.0",
+  "description": "Zip and unzip, also called matrix transpose",
+  "homepage": "http://collectionsjs.com",
+  "license": "MIT",
+  "keywords": [
+    "zip",
+    "unzip",
+    "transpose",
+    "matrix",
+    "array",
+    "polymorphic",
+    "operator"
+  ],
+  "main": "./zip.js",
+  "files": [
+    "unzip.js",
+    "array-zip.js",
+    "array-unzip.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kriskowal/collections"
+  },
+  "bugs": {
+    "url": "https://github.com/kriskowal/collections/issues"
+  },
+  "directories": {
+    "test": "test"
+  }
+}

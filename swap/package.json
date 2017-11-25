@@ -1,0 +1,24 @@
+{
+  "name": "@collections/swap",
+  "version": "1.0.0",
+  "description": "Range content change operator for arrays and array-like objects",
+  "homepage": "http://collectionsjs.com",
+  "license": "MIT",
+  "keywords": [
+    "array",
+    "swap",
+    "polymorphic",
+    "operator"
+  ],
+  "main": "swap.js",
+  "files": [
+    "array.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kriskowal/collections"
+  },
+  "bugs": {
+    "url": "https://github.com/kriskowal/collections/issues"
+  }
+}

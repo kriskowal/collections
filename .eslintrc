@@ -1,0 +1,17 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "node": true
+    },
+    "extends": "eslint:recommended",
+    "rules": {
+        "eqeqeq": [1, "allow-null"],
+        "indent": ["error", 4],
+        "linebreak-style": ["error", "unix"],
+        "no-redeclare": [0],
+        "quotes": ["error", "double"],
+        "semi": ["error", "always"],
+        "strict": ["error", "global"]
+    }
+}

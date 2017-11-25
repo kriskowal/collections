@@ -1,0 +1,13 @@
+
+.testing {
+    background-color: grey;
+}
+
+.testing.pass {
+    background-color: green;
+}
+
+.testing.fail {
+    background-color: red;
+}
+

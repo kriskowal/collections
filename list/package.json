@@ -1,0 +1,26 @@
+{
+  "name": "@collections/list",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "http://collectionsjs.com",
+  "license": "MIT",
+  "keywords": [],
+  "main": "./list.js",
+  "files": [],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kriskowal/collections"
+  },
+  "bugs": {
+    "url": "https://github.com/kriskowal/collections/issues"
+  },
+  "dependencies": {
+    "@collections/generic-collection": "^1",
+    "@collections/generic-order": "^1",
+    "@collections/observable": "^1",
+    "@collections/iterate": "^1",
+    "@collections/equals": "^1",
+    "@collections/to-array": "^1",
+    "@collections/copy": "^1"
+  }
+}

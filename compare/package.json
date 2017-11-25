@@ -1,0 +1,21 @@
+{
+  "name": "@collections/compare",
+  "version": "1.0.0",
+  "description": "Polymorphic deep comparison operator for arbitrary values",
+  "homepage": "http://collectionsjs.com",
+  "license": "3-Clause BSD",
+  "keywords": [
+    "polymorphic",
+    "operator",
+    "compare"
+  ],
+  "main": "compare.js",
+  "files": [],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kriskowal/collections"
+  },
+  "bugs": {
+    "url": "https://github.com/kriskowal/collections/issues"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "@collections/generic-collection",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "http://collectionsjs.com",
+  "license": "MIT",
+  "keywords": [],
+  "main": "./generic-collection.js",
+  "files": [],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kriskowal/collections"
+  },
+  "bugs": {
+    "url": "https://github.com/kriskowal/collections/issues"
+  },
+  "dependencies": {
+    "@collections/equals": "^1",
+    "@collections/compare": "^1",
+    "@collections/clone": "^1",
+    "@collections/zip": "^1"
+  }
+}
