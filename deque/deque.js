@@ -2,8 +2,6 @@
 
 var GenericCollection = require("@collections/generic-collection");
 var GenericOrder = require("@collections/generic-order");
-var ObservableRange = require("@collections/observable/range");
-var ObservableObject = require("@collections/observable/object");
 var Iteration = require("@collections/iterate/iteration");
 var copyProperties = require("@collections/copy");
 var equalsOperator = require("@collections/equals");
@@ -29,8 +27,6 @@ function Deque(values, capacity) {
 
 copyProperties(Deque.prototype, GenericCollection.prototype);
 copyProperties(Deque.prototype, GenericOrder.prototype);
-copyProperties(Deque.prototype, ObservableRange.prototype);
-copyProperties(Deque.prototype, ObservableObject.prototype);
 
 Deque.prototype.maxCapacity = (1 << 30) | 0;
 Deque.prototype.minCapacity = 16;
@@ -48,13 +44,16 @@ Deque.prototype.push = function (value /* or ...values */) {
     var argsLength = arguments.length;
     var length = this.length;
 
-    if (this.dispatchesRangeChanges) {
+    if (this.rangeWillChangeDispatcher != null || this.rangeChangeDispatcher != null) {
         var plus = new Array(argsLength);
         for (var argIndex = 0; argIndex < argsLength; ++argIndex) {
             plus[argIndex] = arguments[argIndex];
         }
         var minus = [];
-        this.dispatchRangeWillChange(plus, minus, length);
+    }
+
+    if (this.rangeWillChangeDispatcher != null) {
+        this.rangeWillChangeDispatcher.dispatch(plus, minus, length);
     }
 
     if (argsLength > 1) {
@@ -84,8 +83,8 @@ Deque.prototype.push = function (value /* or ...values */) {
         this.length = length + 1;
     }
 
-    if (this.dispatchesRangeChanges) {
-        this.dispatchRangeChange(plus, minus, length);
+    if (this.rangeChangeDispatcher != null) {
+        this.rangeChangeDispatcher.dispatch(plus, minus, length);
     }
 
     return this.length;
@@ -99,15 +98,15 @@ Deque.prototype.pop = function () {
     var index = (this.front + length - 1) & (this.capacity - 1);
     var result = this[index];
 
-    if (this.dispatchesRangeChanges) {
-        this.dispatchRangeWillChange([], [result], length - 1);
+    if (this.rangeWillChangeDispatcher != null) {
+        this.rangeWillChangeDispatcher.dispatch([], [result], length - 1);
     }
 
     this[index] = void 0;
     this.length = length - 1;
 
-    if (this.dispatchesRangeChanges) {
-        this.dispatchRangeChange([], [result], length - 1);
+    if (this.rangeChangeDispatcher != null) {
+        this.rangeChangeDispatcher.dispatch([], [result], length - 1);
     }
 
     return result;
@@ -118,16 +117,16 @@ Deque.prototype.shift = function () {
         var front = this.front;
         var result = this[front];
 
-        if (this.dispatchesRangeChanges) {
-            this.dispatchRangeWillChange([], [result], 0);
+        if (this.rangeWillChangeDispatcher != null) {
+            this.rangeWillChangeDispatcher.dispatch([], [result], 0);
         }
 
         this[front] = void 0;
         this.front = (front + 1) & (this.capacity - 1);
         this.length--;
 
-        if (this.dispatchesRangeChanges) {
-            this.dispatchRangeChange([], [result], 0);
+        if (this.rangeChangeDispatcher != null) {
+            this.rangeChangeDispatcher.dispatch([], [result], 0);
         }
 
         return result;
@@ -138,13 +137,16 @@ Deque.prototype.unshift = function (value /* or ...values */) {
     var length = this.length;
     var argsLength = arguments.length;
 
-    if (this.dispatchesRangeChanges) {
+    if (this.rangeWillChangeDispatcher != null || this.rangeChangeDispatcher != null) {
         var plus = new Array(argsLength);
         for (var argIndex = 0; argIndex < argsLength; ++argIndex) {
             plus[argIndex] = arguments[argIndex];
         }
         var minus = [];
-        this.dispatchRangeWillChange(plus, minus, 0);
+    }
+
+    if (this.rangeWillChangeDispatcher != null) {
+        this.rangeWillChangeDispatcher.dispatch(plus, minus, 0);
     }
 
     if (argsLength > 1) {
@@ -199,8 +201,8 @@ Deque.prototype.unshift = function (value /* or ...values */) {
         this.front = index;
     }
 
-    if (this.dispatchesRangeChanges) {
-        this.dispatchRangeChange(plus, minus, 0);
+    if (this.rangeChangeDispatcher != null) {
+        this.rangeChangeDispatcher.dispatch(plus, minus, 0);
     }
 
     return this.length;
@@ -486,4 +488,3 @@ function pow2AtLeast(n) {
     n = n | (n >> 16);
     return n + 1;
 }
-
