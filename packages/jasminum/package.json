@@ -1,0 +1,65 @@
+{
+  "name": "jasminum",
+  "version": "2.0.7",
+  "publishConfig": {
+    "tag": "future"
+  },
+  "description": "A light, modular, promissory, isomorphic Jasmine test scaffold clone",
+  "keywords": [
+    "jasmine",
+    "test",
+    "testing",
+    "bdd",
+    "promise",
+    "isomorphic"
+  ],
+  "main": "jasminum.js",
+  "bin": {
+    "jasminum": "runner.js",
+    "jasminum-phantom": "phantom/runner.js"
+  },
+  "browser": {
+    "platform-reporter": "browser/reporter"
+  },
+  "dependencies": {
+    "colors": "^0.6.2",
+    "glob": "^3.2.8",
+    "joey": "^2.0.1",
+    "knox": ">=0.8.9 <0.9.0",
+    "mr": "^2.0.3",
+    "optimist": "^0.6.1",
+    "pop-compare": "^1.0.0",
+    "pop-equals": "^1.0.0",
+    "pop-has": "^1.0.0",
+    "q": "^2.0.3",
+    "q-io": "^2.0.2",
+    "qs": "^0.6.6",
+    "regexp-escape": "0.0.1",
+    "saucelabs": ">=0.1.1 <0.2.0",
+    "url": "^0.7.9",
+    "util": "^0.10.3",
+    "wd": ">=0.2.15 <0.3.0"
+  },
+  "scripts": {
+    "test": "npm run test:node && npm run test:phantom && npm run lint",
+    "test:node": "node runner.js test",
+    "test:phantom": "node phantom/runner.js test",
+    "deploy": "node scripts/deploy.js",
+    "saucelabs": "node scripts/saucelabs.js",
+    "lint": ""
+  },
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/montagejs/jasminum.git"
+  },
+  "author": "Kris Kowal <kris@cixar.com>",
+  "license": "BSD 3-Clause",
+  "bugs": {
+    "url": "https://github.com/montagejs/jasminum/issues"
+  },
+  "homepage": "https://github.com/montagejs/jasminum"
+}
