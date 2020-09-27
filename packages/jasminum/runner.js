@@ -14,7 +14,6 @@ var argv = optimist
 Error.stackTraceLimit = Infinity;
 
 search(argv._).then(function (files) {
-
     var suite = new Suite("").describe(function () {
         files.forEach(function (file) {
             describe(file, function () {
@@ -38,6 +37,8 @@ search(argv._).then(function (files) {
     return suite.runAndReport({
         report: report
     });
-})
-.done();
+}).catch(function (err) {
+  console.error(err);
+  process.exitCode = 1;
+});
 

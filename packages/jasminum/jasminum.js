@@ -1,15 +1,4 @@
-
 var BaseSuite = require("./suite");
-var Q = require("q");
-
-function Promise(setup) {
-    var deferred = Q.defer();
-    setup(deferred.resolve, deferred.reject);
-    return deferred.promise;
-}
-
-Promise.resolve = Q;
-
 module.exports = Suite;
 
 function Suite() {

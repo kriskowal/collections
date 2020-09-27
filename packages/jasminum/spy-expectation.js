@@ -1,6 +1,6 @@
 
 var Expectation = require("./expectation");
-var has = require("pop-has");
+var has = require("@collections/has");
 
 module.exports = SpyExpectation;
 function SpyExpectation(value, report) {

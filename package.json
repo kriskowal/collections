@@ -33,7 +33,7 @@
     "url": "http://github.com/kriskowal/collections.git"
   },
   "scripts": {
-    "test": "jasminum packages/*/*-test.js"
+    "test": "jasminum packages/*/{,*/}*-test.js"
   },
   "devDependencies": {
     "coveralls": "^3.0.0",
