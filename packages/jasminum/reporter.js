@@ -1,6 +1,6 @@
 
 var util = require("util");
-require("colors");
+var ansiColor = require("ansi-color").set;
 
 // TODO consider piping isTTY through querystring to disable colors if phantom
 // results are piped on the Node.js side.
@@ -12,6 +12,13 @@ var colors = (
     typeof process.stdout !== "undefined" &&
     process.stdout.isTTY
 );
+
+function color(message, color) {
+  if (colors) {
+    return ansiColor(message, color);
+  }
+  return message;
+}
 
 function getStackTrace() {
     var stack = new Error("").stack;
@@ -25,7 +32,7 @@ function getStackTrace() {
 function annotateStackTrace(stack) {
     if (stack && colors) {
         stack = stack.replace(/\n    ([^\n]+\-(?:spec|test)\.js[^\n]+)/g, function ($0, $1) {
-            return ("\n  → " + $1).bold;
+            return color("\n  → " + $1, "bold");
         });
     }
     return stack;
@@ -59,14 +66,9 @@ Reporter.prototype.start = function (test) {
     child.skipped = false;
     var message = (Array(child.depth + 1).join("❯") + " " + test.type + " " + test.name + (test.async ? " async".white : ""));
     if (test.skip) {
-        message = message + " (skipped)";
-        if (colors) {
-            message = message.cyan;
-        }
+        message = color(message + " (skipped)", "cyan");
     } else {
-        if (colors) {
-            message = message.grey;
-        }
+        message = color(message, "black+bold");
     }
     child.message = message;
     if (!this.showFails) {
@@ -77,7 +79,7 @@ Reporter.prototype.start = function (test) {
 
 Reporter.prototype.end = function (test) {
     if (this.showFails && this.failed) {
-        console.log((Array(this.depth + 1).join("↑") + " " + test.type + " " + test.name).grey);
+        console.log(color(Array(this.depth + 1).join("↑") + " " + test.type + " " + test.name, "black+bold"));
     }
     if (this.failed && this.parent && this.parent.parent) {
         this.parent.failed = true;
@@ -111,9 +113,9 @@ Reporter.prototype.assert = function (guard, isNot, messages, objects) {
                 }
                 if (colors) {
                     if (passed !== this.test.shouldFail) {
-                        message = message.green;
+                        message = color(message, "green");
                     } else {
-                        message = message.red;
+                        message = color(message, "red");
                     }
                 }
                 console.log(message);
@@ -150,7 +152,7 @@ Reporter.prototype.error = function (error, test) {
     if (this.test.shouldFail) {
         this.failed = false;
     } else {
-        console.log(colors ? "error".red : "error");
+        console.log(color("error", "red"));
         if (typeof error.stack === "string") {
             console.log(annotateStackTrace(error.stack));
         } else if (error) {
@@ -166,11 +168,7 @@ Reporter.prototype.enter = function () {
         var self = this;
         this.exitListener = function (code) {
             self.failed++;
-            if (colors) {
-                console.log("test never completes".red);
-            } else {
-                console.log("test never completes");
-            }
+            console.log(color("test never completes", "red"));
             self.exit(code !== 0);
         };
         process.on("exit", this.exitListener);
@@ -179,33 +177,33 @@ Reporter.prototype.enter = function () {
 
 Reporter.prototype.summarize = function (suite) {
     if (colors && !this.failed && this.passed) {
-        console.log((this.passed + " passed tests").green);
+        console.log(color(this.passed + " passed tests", "green"));
     } else {
         console.log(this.passed + " passed tests");
     }
     if (colors && !this.failedAssertions && this.passedAssertions && !this.failed && this.passed) {
-        console.log((this.passedAssertions + " passed assertions").green);
+        console.log(color(this.passedAssertions + " passed assertions", "green"));
     } else {
         console.log(this.passedAssertions + " passed assertions");
     }
     if (colors && this.failed) {
-        console.log((this.failed + " failed tests").red);
+        console.log(color(this.failed + " failed tests", "red"));
     } else {
         console.log(this.failed + " failed tests");
     }
     if (colors && this.failedAssertions) {
-        console.log((this.failedAssertions + " failed assertions").red);
+        console.log(color(this.failedAssertions + " failed assertions", "red"));
     } else {
         console.log(this.failedAssertions + " failed assertions");
     }
     if (colors && this.errors) {
-        console.log((this.errors + " errors").red);
+        console.log(color(this.errors + " errors", "red"));
     } else {
         console.log(this.errors + " errors");
     }
     var skipped = suite.testCount - this.passed - this.failed;
     if (colors && skipped) {
-        console.log((skipped + " skipped tests").cyan);
+        console.log(color(skipped + " skipped tests", "cyan"));
     } else if (skipped) {
         console.log(skipped + " skipped tests");
     }
@@ -227,4 +225,3 @@ Reporter.prototype.exit = function (exiting) {
         }
     }
 };
-
