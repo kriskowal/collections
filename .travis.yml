@@ -1,11 +1,7 @@
 language: node_js
 node_js:
-  - "4"
-  - "6"
-  - "8"
+  - "14"
 install:
-  - "(cd tools; npm install)"
+  - yarn install
 script:
-  - npm run lint
-  - npm run cover
-  - npm run cover:publish
+  - yarn test
