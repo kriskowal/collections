@@ -1,8 +1,13 @@
 
-require("regexp-escape");
-var compare = require("pop-compare");
-var equals = require("pop-equals");
-var has = require("pop-has");
+var compare = require("@collections/compare");
+var equals = require("@collections/equals");
+var has = require("@collections/has");
+
+// From http://stackoverflow.com/a/5306111/106302
+// Originally from http://simonwillison.net/2006/Jan/20/escape/ (dead link)
+function escapeRegexp(value) {
+    return value.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+}
 
 module.exports = Expectation;
 function Expectation(value, report) {
@@ -148,7 +153,7 @@ Expectation.prototype.toBeBetween = function (low, high) {
 
 function match(a, b) {
     if (typeof b === "string") {
-        b = new RegExp(RegExp.escape(b));
+        b = new RegExp(escapeRegexp(b));
     }
     return b.exec(a) != null;
 }

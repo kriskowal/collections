@@ -1,8 +1,6 @@
 
 # Jasminum
 
-[![Release Compatibility Matrix](https://s3-us-west-2.amazonaws.com/jasminum/v2/saucelabs-matrix.svg)](https://saucelabs.com/u/kriskowal-jasminum)
-
 > *“Jasmine (taxonomic name Jasminum /ˈdʒæzmɨnəm/) is a genus of shrubs and
 > vines in the olive family (Oleaceae)”*
 > &mdash;&nbsp;[Wikipedia](http://en.wikipedia.org/wiki/Jasmine)
@@ -12,18 +10,16 @@ Jasminum is a JavaScript testing scaffold. Jasminum is designed to accept
 but modular and extensible core, supports and uses promises for asynchronous
 tests, and has an “isomorphic” API, meaning Jasminum tests can be run without
 modification between Node.js and browsers using CommonJS module loaders
-including [Browserify][], [Mr][], or [Mop][].
+including [Browserify][].
 
 [Jasmine 1.3]: http://pivotal.github.io/jasmine/
 [Browserify]: https://github.com/substack/node-browserify 
-[Mr]: https://github.com/montagejs/mr
-[Mop]: https://github.com/montagejs/mop
 
 Jasminum is built for debugging and isolation, not merely a regression
 trip-wire. Instead of trying to patch the universe so that all context gets
 funneled into pretty reports, Jasminum reports to the console. You do not need
 to isolate which test was running when that message got dumped to the console.
-Jasminum includes reporters for Node.js, PhantomJS, and browser based tests. The
+Jasminum includes reporters for Node.js and browser based tests. The
 reporter only highlights lines of interest. It highlights the spec in stack
 traces. The test summary only shows green if all tests pass. The test summary
 only shows red if any tests fail. The test summary only highlights skipped tests
@@ -77,21 +73,6 @@ tests. Because the test runner does not know whether to show the name of the
 test until it fails, test names, and all of their parent suite names, will be
 logged *after* the test fails instead of before. Arrows draw your attention to
 this nuance.
-
-With [PhantomJS] installed, Jasminum can run the same tests in the PhantomJS
-headless browser. The interface and reports are identical.
-
-```
-❯ jasminum-phantom test
-1 tests passed
-1 assertions passed
-0 tests failed
-0 assertions failed
-0 errors
-0 tests skipped
-```
-
-[PhantomJS]: http://phantomjs.org/
 
 You can create an “isomorphic” test runner that you can use to run tests in
 Node.js directly, or using a browser module loader, or to measure test coverage.
@@ -162,7 +143,6 @@ This will cause `npm run cover` to run coverage and display the results.
     },
     "scripts": {
         "test": "jasminum test",
-        "test:phantom": "jasminum-phantom test",
         "cover": "istanbul cover test/index.js && istanbul report html && opener coverage/index.html"
     }
 }

@@ -1,6 +1,4 @@
 
-var Q = require("q");
-
 describe("expectations", function () {
 
     var a = {}, b = {};
@@ -497,7 +495,7 @@ describe("asynchronous tests", function () {
     var completed = false;
 
     it("accepts a promise", function () {
-        return Q().delay(100)
+        return Promise.resolve()
         .then(function () {
             completed = true;
         });
@@ -512,11 +510,11 @@ describe("asynchronous tests", function () {
     });
 
     it("[should fail] expects the resolution of a promse to be undefined", function () {
-        return Q(10);
+        return Promise.resolve(10);
     });
 
     it("[should fail] expects the promise ot be fulfilled", function () {
-        return Q().then(function () {
+        return Promise.resolve().then(function () {
             throw new Error("Should fail");
         });
     });

@@ -1,17 +1,16 @@
 
-var Q = require("q");
-var glob = Q.denodeify(require("glob"));
-var fs = require("fs");
+var glob = require("glob-promise");
+var fs = require("fs").promises;
 var path = require("path");
 
 module.exports = search;
 function search(args) {
     return args.reduceRight(function (next, arg) {
         return function (list) {
-            return Q.ninvoke(fs, "stat", arg)
+            return fs.stat(arg)
             .then(function (stats) {
                 if (stats.isFile()) {
-                    return Q.ninvoke(fs, "realpath", arg)
+                    return fs.realpath(arg)
                     .then(function (realpath) {
                         list.push(realpath);
                         return next(list);
@@ -28,7 +27,7 @@ function search(args) {
             });
         };
     }, function (list) {
-        return Q(list);
+        return Promise.resolve(list);
     })([]);
 }
 
