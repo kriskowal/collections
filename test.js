@@ -1,4 +1,3 @@
-/* global Promise */
 "use strict";
 
 var Suite = require("jasminum/suite");

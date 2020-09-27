@@ -1,6 +1,7 @@
 "use strict";
 
 var arrayUnzip = require("./array-unzip");
+var toArray = require("@collections/to-array");
 
 // Polymorphic unzip uses collection.toArray() (for non-array collection
 // implementations) to convert the table or any of its rows into array before
@@ -16,7 +17,7 @@ function unzip(table) {
     // However, only construct a new table if necessary.
     var arrayTable;
     if (!Array.isArray(table)) {
-        table = arrayTable = table.toArray();
+        table = arrayTable = toArray(table);
     }
     for (var index = 0, length = table.length; index < length; index++) {
         var row = table[index];

@@ -1,6 +1,10 @@
 {
-  "name": "@collections/project",
+  "name": "collections",
   "private": true,
+  "useWorkspaces": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "version": "1.0.0",
   "description": "data structures with idiomatic JavaScript collection interfaces",
   "homepage": "http://github.com/kriskowal/collections",
@@ -29,58 +33,11 @@
     "url": "http://github.com/kriskowal/collections.git"
   },
   "scripts": {
-    "test": "node test.js",
-    "lint": "eslint .",
-    "cover": "istanbul cover test.js spec && istanbul report html",
-    "cover:publish": "< coverage/lcov.info coveralls"
-  },
-  "strategy": "flat",
-  "dependencies": {
-    "@collections/clear": "^1",
-    "@collections/clone": "^1",
-    "@collections/compare": "^1",
-    "@collections/copy": "^1",
-    "@collections/deque": "^1",
-    "@collections/dict": "^1",
-    "@collections/equals": "^1",
-    "@collections/fast-map": "^1",
-    "@collections/fast-set": "^1",
-    "@collections/generic-collection": "^1",
-    "@collections/generic-map": "^1",
-    "@collections/generic-order": "^1",
-    "@collections/generic-set": "^1",
-    "@collections/has": "^1",
-    "@collections/hash": "^1",
-    "@collections/heap": "^1",
-    "@collections/iterate": "^1",
-    "@collections/iterator": "^1",
-    "@collections/lfu-map": "^1",
-    "@collections/lfu-set": "^1",
-    "@collections/list": "^1",
-    "@collections/lru-map": "^1",
-    "@collections/lru-set": "^1",
-    "@collections/map": "^1",
-    "@collections/mini-map": "^1",
-    "@collections/observable": "^1",
-    "@collections/operators": "^1",
-    "@collections/permute": "^1",
-    "@collections/set": "^1",
-    "@collections/sorted-array": "^1",
-    "@collections/sorted-array-map": "^1",
-    "@collections/sorted-array-set": "^1",
-    "@collections/sorted-map": "^1",
-    "@collections/sorted-set": "^1",
-    "@collections/swap": "^1",
-    "@collections/to-array": "^1",
-    "@collections/tree-log": "^1",
-    "jasminum": "^1",
-    "sinon": "^1",
-    "weak-map": "^1"
+    "test": "jasminum packages/*/*-test.js"
   },
   "devDependencies": {
-    "colors": "^1",
-    "optimist": "~0.6",
-    "sinon": "^1",
-    "weak-map": "^1"
+    "coveralls": "^3.0.0",
+    "eslint": "^4.9.0",
+    "istanbul": "^0.4.5"
   }
 }
