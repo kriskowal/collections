@@ -33,11 +33,13 @@
     "url": "http://github.com/kriskowal/collections.git"
   },
   "scripts": {
-    "test": "node packages/jasminum/runner.js packages/*/*-test.js"
+    "test": "node packages/jasminum/runner.js packages/*/*-test.js",
+    "lint": "eslint '**/*.js'",
+    "fmt": "eslint --fix '**/*.js'"
   },
   "devDependencies": {
     "coveralls": "^3.0.0",
-    "eslint": "^4.9.0",
+    "eslint": "^7.10.0",
     "istanbul": "^0.4.5"
   }
 }
