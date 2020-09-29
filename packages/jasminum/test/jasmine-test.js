@@ -18,9 +18,9 @@
  An expectation in Jasmine is an assertion that can be either true or false. A spec with all true expectations is a passing spec. A spec with one or more expectations that evaluate to false is a failing spec.
  */
 describe("A suite", function() {
-  it("contains spec with an expectation", function() {
-    expect(true).toBe(true);
-  });
+    it("contains spec with an expectation", function() {
+        expect(true).toBe(true);
+    });
 });
 
 /**
@@ -29,13 +29,13 @@ describe("A suite", function() {
  Since `describe` and `it` blocks are functions, they can contain any executable code necessary to implement the test. JavaScript scoping rules apply, so variables declared in a `describe` are available to any `it` block inside the suite.
  */
 describe("A suite is just a function", function() {
-  var a;
+    var a;
 
-  it("and so is a spec", function() {
-    a = true;
+    it("and so is a spec", function() {
+        a = true;
 
-    expect(a).toBe(true);
-  });
+        expect(a).toBe(true);
+    });
 });
 
 /**
@@ -44,24 +44,24 @@ describe("A suite is just a function", function() {
  Expectations are built with the function `expect` which takes a value, called the actual. It is chained with a Matcher function, which takes the expected value.
  */
 describe("The 'toBe' matcher compares with ===", function() {
-  /**
+    /**
    ### Matchers
 
    Each matcher implements a boolean comparison between the actual value and the expected value. It is responsible for reporting to Jasmine if the expectation is true or false. Jasmine will then pass or fail the spec.
    */
 
-  it("and has a positive case ", function() {
-    expect(true).toBe(true);
-  });
+    it("and has a positive case ", function() {
+        expect(true).toBe(true);
+    });
 
-  /**
+    /**
    Any matcher can evaluate to a negative assertion by chaining the call to `expect` with a `not` before calling the matcher.
 
    */
 
-  it("and can have a negative case", function() {
-    expect(false).not.toBe(true);
-  });
+    it("and can have a negative case", function() {
+        expect(false).not.toBe(true);
+    });
 });
 
 /**
@@ -74,122 +74,122 @@ describe("The 'toBe' matcher compares with ===", function() {
 
 describe("Included matchers:", function() {
 
-  it("The 'toBe' matcher compares with ===", function() {
-    var a = 12;
-    var b = a;
+    it("The 'toBe' matcher compares with ===", function() {
+        var a = 12;
+        var b = a;
 
-    expect(a).toBe(b);
-    expect(a).not.toBe(null);
-  });
-
-  describe("The 'toEqual' matcher", function() {
-
-    it("works for simple literals and variables", function() {
-      var a = 12;
-      expect(a).toEqual(12);
+        expect(a).toBe(b);
+        expect(a).not.toBe(null);
     });
 
-    it("should work for objects", function() {
-      var foo = {
-        a: 12,
-        b: 34
-      };
-      var bar = {
-        a: 12,
-        b: 34
-      };
-      expect(foo).toEqual(bar);
+    describe("The 'toEqual' matcher", function() {
+
+        it("works for simple literals and variables", function() {
+            var a = 12;
+            expect(a).toEqual(12);
+        });
+
+        it("should work for objects", function() {
+            var foo = {
+                a: 12,
+                b: 34
+            };
+            var bar = {
+                a: 12,
+                b: 34
+            };
+            expect(foo).toEqual(bar);
+        });
     });
-  });
 
-  it("The 'toMatch' matcher is for regular expressions", function() {
-    var message = 'foo bar baz';
+    it("The 'toMatch' matcher is for regular expressions", function() {
+        var message = "foo bar baz";
 
-    expect(message).toMatch(/bar/);
-    expect(message).toMatch('bar');
-    expect(message).not.toMatch(/quux/);
-  });
+        expect(message).toMatch(/bar/);
+        expect(message).toMatch("bar");
+        expect(message).not.toMatch(/quux/);
+    });
 
-  it("The 'toBeDefined' matcher compares against `undefined`", function() {
-    var a = {
-      foo: 'foo'
-    };
+    it("The 'toBeDefined' matcher compares against `undefined`", function() {
+        var a = {
+            foo: "foo"
+        };
 
-    expect(a.foo).toBeDefined();
-    expect(a.bar).not.toBeDefined();
-  });
+        expect(a.foo).toBeDefined();
+        expect(a.bar).not.toBeDefined();
+    });
 
-  it("The `toBeUndefined` matcher compares against `undefined`", function() {
-    var a = {
-      foo: 'foo'
-    };
+    it("The `toBeUndefined` matcher compares against `undefined`", function() {
+        var a = {
+            foo: "foo"
+        };
 
-    expect(a.foo).not.toBeUndefined();
-    expect(a.bar).toBeUndefined();
-  });
+        expect(a.foo).not.toBeUndefined();
+        expect(a.bar).toBeUndefined();
+    });
 
-  it("The 'toBeNull' matcher compares against null", function() {
-    var a = null;
-    var foo = 'foo';
+    it("The 'toBeNull' matcher compares against null", function() {
+        var a = null;
+        var foo = "foo";
 
-    expect(null).toBeNull();
-    expect(a).toBeNull();
-    expect(foo).not.toBeNull();
-  });
+        expect(null).toBeNull();
+        expect(a).toBeNull();
+        expect(foo).not.toBeNull();
+    });
 
-  it("The 'toBeTruthy' matcher is for boolean casting testing", function() {
-    var a, foo = 'foo';
+    it("The 'toBeTruthy' matcher is for boolean casting testing", function() {
+        var a, foo = "foo";
 
-    expect(foo).toBeTruthy();
-    expect(a).not.toBeTruthy();
-  });
+        expect(foo).toBeTruthy();
+        expect(a).not.toBeTruthy();
+    });
 
-  it("The 'toBeFalsy' matcher is for boolean casting testing", function() {
-    var a, foo = 'foo';
+    it("The 'toBeFalsy' matcher is for boolean casting testing", function() {
+        var a, foo = "foo";
 
-    expect(a).toBeFalsy();
-    expect(foo).not.toBeFalsy();
-  });
+        expect(a).toBeFalsy();
+        expect(foo).not.toBeFalsy();
+    });
 
-  it("The 'toContain' matcher is for finding an item in an Array", function() {
-    var a = ['foo', 'bar', 'baz'];
+    it("The 'toContain' matcher is for finding an item in an Array", function() {
+        var a = ["foo", "bar", "baz"];
 
-    expect(a).toContain('bar');
-    expect(a).not.toContain('quux');
-  });
+        expect(a).toContain("bar");
+        expect(a).not.toContain("quux");
+    });
 
-  it("The 'toBeLessThan' matcher is for mathematical comparisons", function() {
-    var pi = 3.1415926, e = 2.78;
+    it("The 'toBeLessThan' matcher is for mathematical comparisons", function() {
+        var pi = 3.1415926, e = 2.78;
 
-    expect(e).toBeLessThan(pi);
-    expect(pi).not.toBeLessThan(e);
-  });
+        expect(e).toBeLessThan(pi);
+        expect(pi).not.toBeLessThan(e);
+    });
 
-  it("The 'toBeGreaterThan' is for mathematical comparisons", function() {
-    var pi = 3.1415926, e = 2.78;
+    it("The 'toBeGreaterThan' is for mathematical comparisons", function() {
+        var pi = 3.1415926, e = 2.78;
 
-    expect(pi).toBeGreaterThan(e);
-    expect(e).not.toBeGreaterThan(pi);
-  });
+        expect(pi).toBeGreaterThan(e);
+        expect(e).not.toBeGreaterThan(pi);
+    });
 
-  it("The 'toBeCloseTo' matcher is for precision math comparison", function() {
-    var pi = 3.1415926, e = 2.78;
+    it("The 'toBeCloseTo' matcher is for precision math comparison", function() {
+        var pi = 3.1415926, e = 2.78;
 
-    expect(pi).not.toBeCloseTo(e, 2);
-    expect(pi).toBeCloseTo(e, 0);
-  });
+        expect(pi).not.toBeCloseTo(e, 2);
+        expect(pi).toBeCloseTo(e, 0);
+    });
 
-  it("The 'toThrow' matcher is for testing if a function throws an exception", function() {
-    var foo = function() {
-      return 1 + 2;
-    };
-    var bar = function() {
-      return a + 1;
-    };
+    it("The 'toThrow' matcher is for testing if a function throws an exception", function() {
+        var foo = function() {
+            return 1 + 2;
+        };
+        var bar = function() {
+            return a + 1;
+        };
 
-    expect(foo).not.toThrow();
-    expect(bar).toThrow();
-  });
+        expect(foo).not.toThrow();
+        expect(bar).toThrow();
+    });
 });
 
 /**
@@ -200,20 +200,20 @@ describe("Included matchers:", function() {
  [bdd]: http://en.wikipedia.org/wiki/Behavior-driven_development
  */
 describe("A spec", function() {
-  it("is just a function, so it can contain any code", function() {
-    var foo = 0;
-    foo += 1;
+    it("is just a function, so it can contain any code", function() {
+        var foo = 0;
+        foo += 1;
 
-    expect(foo).toEqual(1);
-  });
+        expect(foo).toEqual(1);
+    });
 
-  it("can have more than one expectation", function() {
-    var foo = 0;
-    foo += 1;
+    it("can have more than one expectation", function() {
+        var foo = 0;
+        foo += 1;
 
-    expect(foo).toEqual(1);
-    expect(true).toEqual(true);
-  });
+        expect(foo).toEqual(1);
+        expect(true).toEqual(true);
+    });
 });
 
 /**
@@ -226,25 +226,25 @@ describe("A spec", function() {
  */
 
 describe("A spec (with setup and tear-down)", function() {
-  var foo;
+    var foo;
 
-  beforeEach(function() {
-    foo = 0;
-    foo += 1;
-  });
+    beforeEach(function() {
+        foo = 0;
+        foo += 1;
+    });
 
-  afterEach(function() {
-    foo = 0;
-  });
+    afterEach(function() {
+        foo = 0;
+    });
 
-  it("is just a function, so it can contain any code", function() {
-    expect(foo).toEqual(1);
-  });
+    it("is just a function, so it can contain any code", function() {
+        expect(foo).toEqual(1);
+    });
 
-  it("can have more than one expectation", function() {
-    expect(foo).toEqual(1);
-    expect(true).toEqual(true);
-  });
+    it("can have more than one expectation", function() {
+        expect(foo).toEqual(1);
+        expect(true).toEqual(true);
+    });
 });
 
 /**
@@ -254,37 +254,37 @@ describe("A spec (with setup and tear-down)", function() {
 
  */
 describe("A spec", function() {
-  var foo;
-
-  beforeEach(function() {
-    foo = 0;
-    foo += 1;
-  });
-
-  afterEach(function() {
-    foo = 0;
-  });
-
-  it("is just a function, so it can contain any code", function() {
-    expect(foo).toEqual(1);
-  });
-
-  it("can have more than one expectation", function() {
-    expect(foo).toEqual(1);
-    expect(true).toEqual(true);
-  });
-
-  describe("nested inside a second describe", function() {
-    var bar;
+    var foo;
 
     beforeEach(function() {
-      bar = 1;
+        foo = 0;
+        foo += 1;
     });
 
-    it("can reference both scopes as needed ", function() {
-      expect(foo).toEqual(bar);
+    afterEach(function() {
+        foo = 0;
     });
-  });
+
+    it("is just a function, so it can contain any code", function() {
+        expect(foo).toEqual(1);
+    });
+
+    it("can have more than one expectation", function() {
+        expect(foo).toEqual(1);
+        expect(true).toEqual(true);
+    });
+
+    describe("nested inside a second describe", function() {
+        var bar;
+
+        beforeEach(function() {
+            bar = 1;
+        });
+
+        it("can reference both scopes as needed ", function() {
+            expect(foo).toEqual(bar);
+        });
+    });
 });
 
 /**
@@ -294,16 +294,16 @@ describe("A spec", function() {
 
  */
 xdescribe("A spec", function() {
-  var foo;
+    var foo;
 
-  beforeEach(function() {
-    foo = 0;
-    foo += 1;
-  });
+    beforeEach(function() {
+        foo = 0;
+        foo += 1;
+    });
 
-  xit("is just a function, so it can contain any code", function() {
-    expect(foo).toEqual(1);
-  });
+    xit("is just a function, so it can contain any code", function() {
+        expect(foo).toEqual(1);
+    });
 });
 
 /**
@@ -315,45 +315,45 @@ xdescribe("A spec", function() {
  */
 
 describe("A spy", function() {
-  var foo, bar = null;
+    var foo, bar = null;
 
-  beforeEach(function() {
-    foo = {
-      setBar: function(value) {
-        bar = value;
-      }
-    };
+    beforeEach(function() {
+        foo = {
+            setBar: function(value) {
+                bar = value;
+            }
+        };
 
-    spyOn(foo, 'setBar');
+        spyOn(foo, "setBar");
 
-    foo.setBar(123);
-    foo.setBar(456, 'another param');
-  });
+        foo.setBar(123);
+        foo.setBar(456, "another param");
+    });
 
-  it("tracks that the spy was called", function() {
-    expect(foo.setBar).toHaveBeenCalled();
-  });
+    it("tracks that the spy was called", function() {
+        expect(foo.setBar).toHaveBeenCalled();
+    });
 
-  it("tracks its number of calls", function() {
-    expect(foo.setBar.calls.length).toEqual(2);
-  });
+    it("tracks its number of calls", function() {
+        expect(foo.setBar.calls.length).toEqual(2);
+    });
 
-  it("tracks all the arguments of its calls", function() {
-    expect(foo.setBar).toHaveBeenCalledWith(123);
-    expect(foo.setBar).toHaveBeenCalledWith(456, 'another param');
-  });
+    it("tracks all the arguments of its calls", function() {
+        expect(foo.setBar).toHaveBeenCalledWith(123);
+        expect(foo.setBar).toHaveBeenCalledWith(456, "another param");
+    });
 
-  it("allows access to the most recent call", function() {
-    expect(foo.setBar.mostRecentCall.args[0]).toEqual(456);
-  });
+    it("allows access to the most recent call", function() {
+        expect(foo.setBar.mostRecentCall.args[0]).toEqual(456);
+    });
 
-  it("allows access to other calls", function() {
-    expect(foo.setBar.calls[0].args[0]).toEqual(123);
-  });
+    it("allows access to other calls", function() {
+        expect(foo.setBar.calls[0].args[0]).toEqual(123);
+    });
 
-  it("stops all execution on a function", function() {
-    expect(bar).toBeNull();
-  });
+    it("stops all execution on a function", function() {
+        expect(bar).toBeNull();
+    });
 });
 
 /**
@@ -362,35 +362,35 @@ describe("A spy", function() {
  By chaining the spy with `andCallThrough`, the spy will still track all calls to it but in addition it will delegate to the actual implementation.
  */
 describe("A spy, when configured to call through", function() {
-  var foo, bar, fetchedBar;
+    var foo, bar, fetchedBar;
 
-  beforeEach(function() {
-    foo = {
-      setBar: function(value) {
-        bar = value;
-      },
-      getBar: function() {
-        return bar;
-      }
-    };
+    beforeEach(function() {
+        foo = {
+            setBar: function(value) {
+                bar = value;
+            },
+            getBar: function() {
+                return bar;
+            }
+        };
 
-    spyOn(foo, 'getBar').andCallThrough();
+        spyOn(foo, "getBar").andCallThrough();
 
-    foo.setBar(123);
-    fetchedBar = foo.getBar();
-  });
+        foo.setBar(123);
+        fetchedBar = foo.getBar();
+    });
 
-  it("tracks that the spy was called", function() {
-    expect(foo.getBar).toHaveBeenCalled();
-  });
+    it("tracks that the spy was called", function() {
+        expect(foo.getBar).toHaveBeenCalled();
+    });
 
-  it("should not affect other functions", function() {
-    expect(bar).toEqual(123);
-  });
+    it("should not affect other functions", function() {
+        expect(bar).toEqual(123);
+    });
 
-  it("when called returns the requested value", function() {
-    expect(fetchedBar).toEqual(123);
-  });
+    it("when called returns the requested value", function() {
+        expect(fetchedBar).toEqual(123);
+    });
 });
 
 /**
@@ -399,35 +399,35 @@ describe("A spy, when configured to call through", function() {
  By chaining the spy with `andReturn`, all calls to the function will return a specific value.
  */
 describe("A spy, when faking a return value", function() {
-  var foo, bar, fetchedBar;
+    var foo, bar, fetchedBar;
 
-  beforeEach(function() {
-    foo = {
-      setBar: function(value) {
-        bar = value;
-      },
-      getBar: function() {
-        return bar;
-      }
-    };
+    beforeEach(function() {
+        foo = {
+            setBar: function(value) {
+                bar = value;
+            },
+            getBar: function() {
+                return bar;
+            }
+        };
 
-    spyOn(foo, 'getBar').andReturn(745);
+        spyOn(foo, "getBar").andReturn(745);
 
-    foo.setBar(123);
-    fetchedBar = foo.getBar();
-  });
+        foo.setBar(123);
+        fetchedBar = foo.getBar();
+    });
 
-  it("tracks that the spy was called", function() {
-    expect(foo.getBar).toHaveBeenCalled();
-  });
+    it("tracks that the spy was called", function() {
+        expect(foo.getBar).toHaveBeenCalled();
+    });
 
-  it("should not affect other functions", function() {
-    expect(bar).toEqual(123);
-  });
+    it("should not affect other functions", function() {
+        expect(bar).toEqual(123);
+    });
 
-  it("when called returns the requested value", function() {
-    expect(fetchedBar).toEqual(745);
-  });
+    it("when called returns the requested value", function() {
+        expect(fetchedBar).toEqual(745);
+    });
 });
 
 /**
@@ -436,37 +436,37 @@ describe("A spy, when faking a return value", function() {
  By chaining the spy with `andCallFake`, all calls to the spy will delegate to the supplied function.
  */
 describe("A spy, when faking a return value", function() {
-  var foo, bar, fetchedBar;
+    var foo, bar, fetchedBar;
 
-  beforeEach(function() {
-    foo = {
-      setBar: function(value) {
-        bar = value;
-      },
-      getBar: function() {
-        return bar;
-      }
-    };
+    beforeEach(function() {
+        foo = {
+            setBar: function(value) {
+                bar = value;
+            },
+            getBar: function() {
+                return bar;
+            }
+        };
 
-    spyOn(foo, 'getBar').andCallFake(function() {
-      return 1001;
+        spyOn(foo, "getBar").andCallFake(function() {
+            return 1001;
+        });
+
+        foo.setBar(123);
+        fetchedBar = foo.getBar();
     });
 
-    foo.setBar(123);
-    fetchedBar = foo.getBar();
-  });
+    it("tracks that the spy was called", function() {
+        expect(foo.getBar).toHaveBeenCalled();
+    });
 
-  it("tracks that the spy was called", function() {
-    expect(foo.getBar).toHaveBeenCalled();
-  });
+    it("should not affect other functions", function() {
+        expect(bar).toEqual(123);
+    });
 
-  it("should not affect other functions", function() {
-    expect(bar).toEqual(123);
-  });
-
-  it("when called returns the requested value", function() {
-    expect(fetchedBar).toEqual(1001);
-  });
+    it("when called returns the requested value", function() {
+        expect(fetchedBar).toEqual(1001);
+    });
 });
 
 /**
@@ -476,33 +476,33 @@ describe("A spy, when faking a return value", function() {
 
  */
 describe("A spy, when created manually", function() {
-  var whatAmI;
+    var whatAmI;
 
-  beforeEach(function() {
-    whatAmI = jasmine.createSpy('whatAmI');
+    beforeEach(function() {
+        whatAmI = jasmine.createSpy("whatAmI");
 
-    whatAmI("I", "am", "a", "spy");
-  });
+        whatAmI("I", "am", "a", "spy");
+    });
 
-  it("is named, which helps in error reporting", function() {
-    expect(whatAmI.identity).toEqual('whatAmI');
-  });
+    it("is named, which helps in error reporting", function() {
+        expect(whatAmI.identity).toEqual("whatAmI");
+    });
 
-  it("tracks that the spy was called", function() {
-    expect(whatAmI).toHaveBeenCalled();
-  });
+    it("tracks that the spy was called", function() {
+        expect(whatAmI).toHaveBeenCalled();
+    });
 
-  it("tracks its number of calls", function() {
-    expect(whatAmI.calls.length).toEqual(1);
-  });
+    it("tracks its number of calls", function() {
+        expect(whatAmI.calls.length).toEqual(1);
+    });
 
-  it("tracks all the arguments of its calls", function() {
-    expect(whatAmI).toHaveBeenCalledWith("I", "am", "a", "spy");
-  });
+    it("tracks all the arguments of its calls", function() {
+        expect(whatAmI).toHaveBeenCalledWith("I", "am", "a", "spy");
+    });
 
-  it("allows access to the most recent call", function() {
-    expect(whatAmI.mostRecentCall.args[0]).toEqual("I");
-  });
+    it("allows access to the most recent call", function() {
+        expect(whatAmI.mostRecentCall.args[0]).toEqual("I");
+    });
 });
 
 /**
@@ -511,33 +511,33 @@ describe("A spy, when created manually", function() {
  In order to create a mock with multiple spies, use `jasmine.createSpyObj` and pass an array of strings. It returns an object that has a property for each string that is a spy.
  */
 describe("Multiple spies, when created manually", function() {
-  var tape;
+    var tape;
 
-  beforeEach(function() {
-    tape = jasmine.createSpyObj('tape', ['play', 'pause', 'stop', 'rewind']);
+    beforeEach(function() {
+        tape = jasmine.createSpyObj("tape", ["play", "pause", "stop", "rewind"]);
 
-    tape.play();
-    tape.pause();
-    tape.rewind(0);
-  });
+        tape.play();
+        tape.pause();
+        tape.rewind(0);
+    });
 
-  it("creates spies for each requested function", function() {
-    expect(tape.play).toBeDefined();
-    expect(tape.pause).toBeDefined();
-    expect(tape.stop).toBeDefined();
-    expect(tape.rewind).toBeDefined();
-  });
+    it("creates spies for each requested function", function() {
+        expect(tape.play).toBeDefined();
+        expect(tape.pause).toBeDefined();
+        expect(tape.stop).toBeDefined();
+        expect(tape.rewind).toBeDefined();
+    });
 
-  it("tracks that the spies were called", function() {
-    expect(tape.play).toHaveBeenCalled();
-    expect(tape.pause).toHaveBeenCalled();
-    expect(tape.rewind).toHaveBeenCalled();
-    expect(tape.stop).not.toHaveBeenCalled();
-  });
+    it("tracks that the spies were called", function() {
+        expect(tape.play).toHaveBeenCalled();
+        expect(tape.pause).toHaveBeenCalled();
+        expect(tape.rewind).toHaveBeenCalled();
+        expect(tape.stop).not.toHaveBeenCalled();
+    });
 
-  it("tracks all the arguments of its calls", function() {
-    expect(tape.rewind).toHaveBeenCalledWith(0);
-  });
+    it("tracks all the arguments of its calls", function() {
+        expect(tape.rewind).toHaveBeenCalledWith(0);
+    });
 });
 
 /**
@@ -547,21 +547,21 @@ describe("Multiple spies, when created manually", function() {
  */
 
 describe("jasmine.any", function() {
-  it("matches any value", function() {
-    expect({}).toEqual(jasmine.any(Object));
-    expect(12).toEqual(jasmine.any(Number));
-  });
-
-  describe("when used with a spy", function() {
-    it("is useful for comparing arguments", function() {
-      var foo = jasmine.createSpy('foo');
-      foo(12, function() {
-        return true;
-      });
-
-      expect(foo).toHaveBeenCalledWith(jasmine.any(Number), jasmine.any(Function));
+    it("matches any value", function() {
+        expect({}).toEqual(jasmine.any(Object));
+        expect(12).toEqual(jasmine.any(Number));
     });
-  });
+
+    describe("when used with a spy", function() {
+        it("is useful for comparing arguments", function() {
+            var foo = jasmine.createSpy("foo");
+            foo(12, function() {
+                return true;
+            });
+
+            expect(foo).toHaveBeenCalledWith(jasmine.any(Number), jasmine.any(Function));
+        });
+    });
 });
 
 /**
@@ -571,47 +571,47 @@ describe("jasmine.any", function() {
 
  */
 xdescribe("Manually ticking the Jasmine Mock Clock", function() {
-  var timerCallback;
+    var timerCallback;
 
-  /**
+    /**
    It is installed with a call to `jasmine.Clock.useMock` in a spec or suite that needs to call the timer functions.
    */
-  beforeEach(function() {
-    timerCallback = jasmine.createSpy('timerCallback');
-    jasmine.Clock.useMock();
-  });
+    beforeEach(function() {
+        timerCallback = jasmine.createSpy("timerCallback");
+        jasmine.Clock.useMock();
+    });
 
-  /**
+    /**
    Calls to any registered callback are triggered when the clock is ticked forward via the `jasmine.Clock.tick` function, which takes a number of milliseconds.
    */
-  it("causes a timeout to be called synchronously", function() {
-    setTimeout(function() {
-      timerCallback();
-    }, 100);
+    it("causes a timeout to be called synchronously", function() {
+        setTimeout(function() {
+            timerCallback();
+        }, 100);
 
-    expect(timerCallback).not.toHaveBeenCalled();
+        expect(timerCallback).not.toHaveBeenCalled();
 
-    jasmine.Clock.tick(101);
+        jasmine.Clock.tick(101);
 
-    expect(timerCallback).toHaveBeenCalled();
-  });
+        expect(timerCallback).toHaveBeenCalled();
+    });
 
-  it("causes an interval to be called synchronously", function() {
-    setInterval(function() {
-      timerCallback();
-    }, 100);
+    it("causes an interval to be called synchronously", function() {
+        setInterval(function() {
+            timerCallback();
+        }, 100);
 
-    expect(timerCallback).not.toHaveBeenCalled();
+        expect(timerCallback).not.toHaveBeenCalled();
 
-    jasmine.Clock.tick(101);
-    expect(timerCallback.callCount).toEqual(1);
+        jasmine.Clock.tick(101);
+        expect(timerCallback.callCount).toEqual(1);
 
-    jasmine.Clock.tick(50);
-    expect(timerCallback.callCount).toEqual(1);
+        jasmine.Clock.tick(50);
+        expect(timerCallback.callCount).toEqual(1);
 
-    jasmine.Clock.tick(50);
-    expect(timerCallback.callCount).toEqual(2);
-  });
+        jasmine.Clock.tick(50);
+        expect(timerCallback.callCount).toEqual(2);
+    });
 });
 
 /**
@@ -621,38 +621,38 @@ xdescribe("Manually ticking the Jasmine Mock Clock", function() {
 
  */
 xdescribe("Asynchronous specs", function() {
-  var value, flag;
+    var value, flag;
 
-  it("should support async execution of test preparation and expectations", function() {
+    it("should support async execution of test preparation and expectations", function() {
 
-    /**
+        /**
      Specs are written by defining a set of blocks with calls to `runs`, which usually finish with an asynchronous call.
      */
-    runs(function() {
-      flag = false;
-      value = 0;
+        runs(function() {
+            flag = false;
+            value = 0;
 
-      setTimeout(function() {
-        flag = true;
-      }, 500);
-    });
+            setTimeout(function() {
+                flag = true;
+            }, 500);
+        });
 
-    /**
+        /**
      The `waitsFor` block takes a latch function, a failure message, and a timeout.
 
      The latch function polls until it returns true or the timeout expires, whichever comes first. If the timeout expires, the spec fails with the error message.
      */
-    waitsFor(function() {
-      value++;
-      return flag;
-    }, "The Value should be incremented", 750);
+        waitsFor(function() {
+            value++;
+            return flag;
+        }, "The Value should be incremented", 750);
 
-    /**
+        /**
      Once the asynchronous conditions have been met, another `runs` block defines final test behavior. This is usually expectations based on state after the asynch call returns.
      */
-    runs(function() {
-      expect(value).toBeGreaterThan(0);
+        runs(function() {
+            expect(value).toBeGreaterThan(0);
+        });
     });
-  });
 });
 

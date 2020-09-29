@@ -26,26 +26,26 @@ Test.prototype.run = function (report, Promise) {
             return Promise.resolve().then(function () {
                 return self.beforeEach(Promise, context, report);
             })
-            .then(function () {
-                return self.call(self.callback, Promise, context, report, "during");
-            })
-            .finally(function () {
-                return self.afterEach(Promise, context, report);
-            })
+                .then(function () {
+                    return self.call(self.callback, Promise, context, report, "during");
+                })
+                .finally(function () {
+                    return self.afterEach(Promise, context, report);
+                });
         } else {
             report.skip(self);
         }
     })
-    .then(function (value) {
-        report.assert(value === undefined, false, ["expected test to return or resolve undefined but got"], [value]);
-    }, function (error) {
-        report.error(error, self);
-    })
-    .finally(function () {
-        report.end(self);
-        setCurrentTest();
-        setCurrentReport();
-    });
+        .then(function (value) {
+            report.assert(value === undefined, false, ["expected test to return or resolve undefined but got"], [value]);
+        }, function (error) {
+            report.error(error, self);
+        })
+        .finally(function () {
+            report.end(self);
+            setCurrentTest();
+            setCurrentReport();
+        });
 };
 
 Test.prototype.beforeEach = function (Promise, context, report) {
@@ -105,7 +105,7 @@ Test.prototype.call = function (callback, Promise, context, report, phase) {
 };
 
 Test.prototype.runSync = function (report) {
-    var report = report.start(this)
+    var report = report.start(this);
     setCurrentTest(this);
     setCurrentReport(report);
     try {

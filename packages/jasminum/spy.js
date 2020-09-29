@@ -5,7 +5,7 @@ module.exports = createSpy;
 function createSpy(identity, spied) {
     console.warn("Jasmine-style spies are deprecated. Consider using `sinon` or another.");
     function spy() {
-        var args = Array.prototype.slice.call(arguments)
+        var args = Array.prototype.slice.call(arguments);
         var call = {
             args: args
         };
