@@ -79,7 +79,7 @@ describe("expectations", function () {
         });
     });
 
-    describe("not.toBeDefined", function () {;
+    describe("not.toBeDefined", function () {
         it("only identifies undefined", function () {
             expect().toBe(undefined);
         });
@@ -476,7 +476,7 @@ describe("expectables", function () {
         ], [
             this.value
         ]);
-    }
+    };
 
     it("can delegate to another object's expect method", function () {
         expect(new Duck()).toQuackLikeADuck();
@@ -496,9 +496,9 @@ describe("asynchronous tests", function () {
 
     it("accepts a promise", function () {
         return Promise.resolve()
-        .then(function () {
-            completed = true;
-        });
+            .then(function () {
+                completed = true;
+            });
     });
 
     it("can use a done function", function (done) {

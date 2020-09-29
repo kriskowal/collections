@@ -88,14 +88,14 @@ Suite.prototype.run = function (report, Promise) {
                 return ready.then(function () {
                     return child.run(suiteReport, Promise);
                 });
-            }, Promise.resolve())
+            }, Promise.resolve());
         } else {
             suiteReport.skip(self);
         }
     })
-    .finally(function () {
-        suiteReport.end(self);
-    });
+        .finally(function () {
+            suiteReport.end(self);
+        });
 
 };
 
@@ -128,12 +128,12 @@ Suite.prototype.runAndReport = function (options) {
         report.enter();
     }
     return this.run(report, options.Promise)
-    .then(function () {
-        report.summarize(self, options)
-        if (report.exit) {
-            return report.exit();
-        }
-    });
+        .then(function () {
+            report.summarize(self, options);
+            if (report.exit) {
+                return report.exit();
+            }
+        });
 };
 
 Suite.prototype.runAndReportSync = function (options) {
@@ -143,8 +143,8 @@ Suite.prototype.runAndReportSync = function (options) {
     if (report.enter) {
         report.enter();
     }
-    this.runSync(report, options)
-    report.summarize(self, options)
+    this.runSync(report, options);
+    report.summarize(self, options);
     if (report.exit) {
         report.exit();
     }

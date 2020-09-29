@@ -38,7 +38,7 @@ search(argv._).then(function (files) {
         report: report
     });
 }).catch(function (err) {
-  console.error(err);
-  process.exitCode = 1;
+    console.error(err);
+    process.exitCode = 1;
 });
 

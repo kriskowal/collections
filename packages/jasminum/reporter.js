@@ -14,10 +14,10 @@ var colors = (
 );
 
 function color(message, color) {
-  if (colors) {
-    return ansiColor(message, color);
-  }
-  return message;
+    if (colors) {
+        return ansiColor(message, color);
+    }
+    return message;
 }
 
 function getStackTrace() {
@@ -31,7 +31,7 @@ function getStackTrace() {
 
 function annotateStackTrace(stack) {
     if (stack && colors) {
-        stack = stack.replace(/\n    ([^\n]+\-(?:spec|test)\.js[^\n]+)/g, function ($0, $1) {
+        stack = stack.replace(/\n {4}([^\n]+\-(?:spec|test)\.js[^\n]+)/g, function ($0, $1) {
             return color("\n  → " + $1, "bold");
         });
     }
