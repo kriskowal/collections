@@ -5,7 +5,7 @@ var createSpy = require("./spy");
 var createSpyObject = require("./spy-object");
 
 // DEPRECATED
-jasmine = {
+globalThis.jasmine = {
     createSpy: createSpy,
     createSpyObj: createSpyObject,
     any: any
@@ -17,7 +17,7 @@ var currentSuite;
 var currentReport;
 var currentTest;
 
-describe = function (name, callback) {
+globalThis.describe = function (name, callback) {
     if (!currentSuite) {
         throw new Error("Can't call describe when there is no active suite");
     }
@@ -25,7 +25,7 @@ describe = function (name, callback) {
     suite.describe(callback);
 };
 
-xdescribe = function (name, callback) {
+globalThis.xdescribe = function (name, callback) {
     if (!currentSuite) {
         throw new Error("Can't call xdescribe when there is no active suite");
     }
@@ -34,7 +34,7 @@ xdescribe = function (name, callback) {
     suite.describe(callback);
 };
 
-ddescribe = function (name, callback) {
+globalThis.ddescribe = function (name, callback) {
     if (!currentSuite) {
         throw new Error("Can't call ddescribe when there is no active suite");
     }
@@ -43,14 +43,14 @@ ddescribe = function (name, callback) {
     suite.describe(callback);
 };
 
-it = function (name, callback) {
+globalThis.it = function (name, callback) {
     if (!currentSuite) {
         throw new Error("Can't call it when there is no active suite");
     }
     currentSuite.nestTest(name, callback);
 };
 
-iit = function (name, callback) {
+globalThis.iit = function (name, callback) {
     if (!currentSuite) {
         throw new Error("Can't call iit when there is no active suite");
     }
@@ -59,7 +59,7 @@ iit = function (name, callback) {
     test.exclusive = true;
 };
 
-xit = function (name, callback) {
+globalThis.xit = function (name, callback) {
     if (!currentSuite) {
         throw new Error("Can't call xit when there is no active suite");
     }
@@ -67,21 +67,21 @@ xit = function (name, callback) {
     test.skip = true;
 };
 
-beforeEach = function (callback) {
+globalThis.beforeEach = function (callback) {
     if (!currentSuite) {
         throw new Error("Cannot use `beforeEach` outside of a 'define' block");
     }
     currentSuite.beforeEach = callback;
 };
 
-afterEach = function (callback) {
+globalThis.afterEach = function (callback) {
     if (!currentSuite) {
         throw new Error("Cannot use `afterEach` outside of a 'define' block");
     }
     currentSuite.afterEach = callback;
 };
 
-expect = function (value) {
+globalThis.expect = function (value) {
     if (!currentReport) {
         throw new Error("Cannot declare an expectation outside of an 'it' block");
     }
@@ -95,14 +95,14 @@ expect = function (value) {
     }
 };
 
-spyOn = function (object, name) {
+globalThis.spyOn = function (object, name) {
     object[name] = createSpy(name, object[name]);
     return object[name];
 };
 
 // For internal linkage
 
-getCurrentSuite = function () {
+globalThis.getCurrentSuite = function () {
     if (currentSuite) {
         return currentSuite;
     } else if (currentTest) {
@@ -110,23 +110,22 @@ getCurrentSuite = function () {
     }
 };
 
-setCurrentSuite = function (suite) {
+globalThis.setCurrentSuite = function (suite) {
     currentSuite = suite;
 };
 
-getCurrentReport = function () {
+globalThis.getCurrentReport = function () {
     return currentReport;
 };
 
-setCurrentReport = function (report) {
+globalThis.setCurrentReport = function (report) {
     currentReport = report;
 };
 
-getCurrentTest = function () {
+globalThis.getCurrentTest = function () {
     return currentTest;
 };
 
-setCurrentTest = function (test) {
+globalThis.setCurrentTest = function (test) {
     currentTest = test;
 };
-
