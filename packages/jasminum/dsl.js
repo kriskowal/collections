@@ -1,7 +1,4 @@
-/* global describe, xdescribe, ddescribe, it, xit, iit,
-   expect, beforeEach, afterEach, spyOn, getCurrentSuite,
-   setCurrentSuite, getCurrentTest, setCurrentTest,
-   getCurrentReport, setCurrentReport, jasmine */
+"use strict";
 
 var any = require("./any");
 var createSpy = require("./spy");

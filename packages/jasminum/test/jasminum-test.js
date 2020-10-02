@@ -1,3 +1,4 @@
+"use strict";
 
 describe("expectations", function () {
 
@@ -210,7 +211,7 @@ describe("expectations", function () {
             expect(1).toBeLessThan(2);
         });
         it("compares comparables", function () {
-            expect({compare: function (other) {
+            expect({compare: function (_other) {
                 return -1;
             }}).toBeLessThan(10);
         });
@@ -221,7 +222,7 @@ describe("expectations", function () {
             expect(1).not.toBeLessThan(0);
         });
         it("compares comparables", function () {
-            expect({compare: function (other) {
+            expect({compare: function (_other) {
                 return 0;
             }}).not.toBeLessThan(10);
         });
@@ -232,7 +233,7 @@ describe("expectations", function () {
             expect(1).toBeGreaterThan(0);
         });
         it("compares comparables", function () {
-            expect({compare: function (other) {
+            expect({compare: function (_other) {
                 return 1;
             }}).toBeGreaterThan(10);
         });
@@ -243,7 +244,7 @@ describe("expectations", function () {
             expect(1).not.toBeGreaterThan(2);
         });
         it("compares comparables", function () {
-            expect({compare: function (other) {
+            expect({compare: function (_other) {
                 return 0;
             }}).not.toBeGreaterThan(10);
         });
@@ -255,7 +256,7 @@ describe("expectations", function () {
             expect(1).toBeNear(0, 1);
         });
         it("compares comparables", function () {
-            expect({compare: function (other) {
+            expect({compare: function (_other) {
                 return 10;
             }}).toBeNear(0, 10);
         });
@@ -267,7 +268,7 @@ describe("expectations", function () {
             expect(1).not.toBeNear(0, .9);
         });
         it("compares comparables", function () {
-            expect({compare: function (other) {
+            expect({compare: function (_other) {
                 return 10;
             }}).not.toBeNear(0, 9);
         });

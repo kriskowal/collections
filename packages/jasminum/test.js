@@ -1,4 +1,4 @@
-// vim:ts=4:sts=4:sw=4:
+"use strict";
 
 module.exports = Test;
 
@@ -83,6 +83,7 @@ Test.prototype.heritage = function () {
 };
 
 Test.prototype.call = function (callback, Promise, context, report, phase) {
+    var test = this;
     if (callback.length === 1) {
         return new Promise(function (resolve, reject) {
             var isDone;

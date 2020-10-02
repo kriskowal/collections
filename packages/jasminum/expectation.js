@@ -1,3 +1,4 @@
+"use strict";
 
 var compare = require("@collections/compare");
 var equals = require("@collections/equals");
@@ -38,11 +39,6 @@ function expectationBinaryMethod(operator, operatorName) {
             ]
         );
     };
-}
-
-function equalsRight(left, right) {
-    // So that right can be an Any object with an equals override
-    return equals(right, left);
 }
 
 Expectation.prototype.toEqual = Expectation.binaryMethod(equals, "to equal");

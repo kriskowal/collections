@@ -1,3 +1,4 @@
+"use strict";
 
 var glob = require("glob-promise");
 var fs = require("fs").promises;

@@ -1,3 +1,4 @@
+"use strict";
 
 var Expectation = require("./expectation");
 var has = require("@collections/has");

@@ -1,3 +1,4 @@
+"use strict";
 
 var util = require("util");
 var ansiColor = require("ansi-color").set;
@@ -31,7 +32,7 @@ function getStackTrace() {
 
 function annotateStackTrace(stack) {
     if (stack && colors) {
-        stack = stack.replace(/\n {4}([^\n]+\-(?:spec|test)\.js[^\n]+)/g, function ($0, $1) {
+        stack = stack.replace(/\n {4}([^\n]+-(?:spec|test)\.js[^\n]+)/g, function ($0, $1) {
             return color("\n  → " + $1, "bold");
         });
     }
@@ -95,7 +96,7 @@ Reporter.prototype.end = function (test) {
     }
 };
 
-Reporter.prototype.skip = function (test) {
+Reporter.prototype.skip = function (_test) {
     this.skipped = true;
     this.root.skipped++;
 };
@@ -148,7 +149,7 @@ Reporter.prototype.assert = function (guard, isNot, messages, objects) {
     }
 };
 
-Reporter.prototype.error = function (error, test) {
+Reporter.prototype.error = function (error, _test) {
     if (this.test.shouldFail) {
         this.failed = false;
     } else {
