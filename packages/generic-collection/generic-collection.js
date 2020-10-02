@@ -43,7 +43,7 @@ GenericCollection.prototype.deleteEach = function (values, equals) {
 
 GenericCollection.prototype.forEach = function (callback /*, thisp*/) {
     var thisp = arguments[1];
-    return this.reduce(function (undefined, value, key, object, depth) {
+    return this.reduce(function (_undefined, value, key, object, depth) {
         callback.call(thisp, value, key, object, depth);
     }, undefined);
 };
@@ -51,7 +51,7 @@ GenericCollection.prototype.forEach = function (callback /*, thisp*/) {
 GenericCollection.prototype.map = function (callback /*, thisp*/) {
     var thisp = arguments[1];
     var result = [];
-    this.reduce(function (undefined, value, key, object, depth) {
+    this.reduce(function (_undefined, value, key, object, depth) {
         result.push(callback.call(thisp, value, key, object, depth));
     }, undefined);
     return result;
@@ -62,7 +62,7 @@ GenericCollection.prototype.enumerate = function (start) {
         start = 0;
     }
     var result = [];
-    this.reduce(function (undefined, value) {
+    this.reduce(function (_undefined, value) {
         result.push([start++, value]);
     }, undefined);
     return result;
@@ -98,7 +98,7 @@ GenericCollection.prototype.toArray = function () {
 // toObject would not be meaningful.
 GenericCollection.prototype.toObject = function () {
     var object = {};
-    this.reduce(function (undefined, value, key) {
+    this.reduce(function (_undefined, value, key) {
         object[key] = value;
     }, undefined);
     return object;
@@ -107,7 +107,7 @@ GenericCollection.prototype.toObject = function () {
 GenericCollection.prototype.filter = function (callback /*, thisp*/) {
     var thisp = arguments[1];
     var result = this.constructClone();
-    this.reduce(function (undefined, value, key, object, depth) {
+    this.reduce(function (_undefined, value, key, object, depth) {
         if (callback.call(thisp, value, key, object, depth)) {
             result.add(value, key);
         }
@@ -177,7 +177,7 @@ GenericCollection.prototype.sum = function (zero) {
 GenericCollection.prototype.average = function (zero) {
     var sum = zero === undefined ? 0 : zero;
     var count = zero === undefined ? 0 : zero;
-    this.reduce(function (undefined, value) {
+    this.reduce(function (_undefined, value) {
         sum += value;
         count += 1;
     }, undefined);

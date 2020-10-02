@@ -1,3 +1,4 @@
+"use strict";
 
 /**
  * @classdesc An object that considers itself equivalent to any object of the

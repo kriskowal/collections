@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+"use strict";
 
 var search = require("./search");
 var optimist = require("optimist");

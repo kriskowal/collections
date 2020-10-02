@@ -1,3 +1,5 @@
+"use strict";
+
 var BaseSuite = require("./suite");
 module.exports = Suite;
 

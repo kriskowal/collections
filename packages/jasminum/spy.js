@@ -1,3 +1,4 @@
+"use strict";
 
 var SpyExpectation = require("./spy-expectation");
 

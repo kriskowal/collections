@@ -1,3 +1,5 @@
+"use strict";
+
 // https://github.com/pivotal/jasmine/blob/gh-pages/src/introduction-1.3.1.js
 
 /**
@@ -184,7 +186,7 @@ describe("Included matchers:", function() {
             return 1 + 2;
         };
         var bar = function() {
-            return a + 1;
+            throw new Error();
         };
 
         expect(foo).not.toThrow();

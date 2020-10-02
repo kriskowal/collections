@@ -1,3 +1,4 @@
+"use strict";
 
 var body = document.querySelector("body");
 body.classList.add("testing");
@@ -88,7 +89,7 @@ Reporter.prototype.assert = function (guard, isNot, messages, objects) {
     }
 };
 
-Reporter.prototype.error = function (error, test) {
+Reporter.prototype.error = function (error, _test) {
     this.failed = true;
     this.root.errors++;
     if (this.test.shouldFail) {
