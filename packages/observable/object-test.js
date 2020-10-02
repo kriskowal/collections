@@ -21,6 +21,8 @@ var makePropertyObservable = ObservableObject.makePropertyObservable;
 var preventPropertyObserver = ObservableObject.preventPropertyObserver;
 var dispatchPropertyChange = ObservableObject.dispatchPropertyChange;
 
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+
 describe("ObservableObject", function () {
 
     extendSpyExpectation();
@@ -378,7 +380,7 @@ describe("ObservableObject", function () {
             var observer = observePropertyChange(object, "foo", spy);
 
             object.foo = 20;
-            expect(object.hasOwnProperty("foo")).toBe(false);
+            expect(hasOwnProperty.call(object, "foo")).toBe(false);
             expect(object.foo).toBe(20);
             expect(spy).toHaveBeenCalledWith(20, 10, "foo", object);
 
@@ -412,10 +414,10 @@ describe("ObservableObject", function () {
             }
             preventPropertyObserver(Foo.prototype, "foo");
             var object = new Foo();
-            expect(object.hasOwnProperty("foo")).toBe(false);
+            expect(hasOwnProperty.call(object, "foo")).toBe(false);
             var spy = sinon.spy();
             var observer = observePropertyChange(object, "foo", spy);
-            expect(object.hasOwnProperty("foo")).toBe(false);
+            expect(hasOwnProperty.call(object, "foo")).toBe(false);
             expect(object.foo).toBe(undefined);
             expect(Object.getOwnPropertyDescriptor(object, "foo")).toBe(undefined);
             object.foo = 10;
