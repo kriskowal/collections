@@ -39,7 +39,7 @@
   },
   "devDependencies": {
     "coveralls": "^3.0.0",
-    "eslint": "^7.10.0",
+    "eslint": "^5",
     "istanbul": "^0.4.5"
   }
 }
