@@ -22,43 +22,43 @@ var objectPrototype = Object.prototype;
  */
 module.exports = cloneOperator;
 function cloneOperator(value, depth, memo) {
-    if (value != null && value.valueOf) {
-        value = value.valueOf();
-    }
-    if (depth == null) { // null or undefined
-        depth = Infinity;
-    } else if (depth === 0) {
-        return value;
-    }
-    if (value != null && typeof value === "object") {
-        memo = memo || new MiniMap();
-        if (!memo.has(value)) {
-            if (value && typeof value.clone === "function") {
-                memo.set(value, value.clone(depth, memo));
-            } else {
-                var isArray = Array.isArray(value);
-                var prototype = getPrototypeOf(value);
-                if (
-                    isArray ||
+  if (value != null && value.valueOf) {
+    value = value.valueOf();
+  }
+  if (depth == null) { // null or undefined
+    depth = Infinity;
+  } else if (depth === 0) {
+    return value;
+  }
+  if (value != null && typeof value === "object") {
+    memo = memo || new MiniMap();
+    if (!memo.has(value)) {
+      if (value && typeof value.clone === "function") {
+        memo.set(value, value.clone(depth, memo));
+      } else {
+        var isArray = Array.isArray(value);
+        var prototype = getPrototypeOf(value);
+        if (
+          isArray ||
                     prototype === null ||
                     prototype === objectPrototype
-                ) {
-                    var clone = isArray ? [] : {};
-                    memo.set(value, clone);
-                    for (var key in value) {
-                        clone[key] = cloneOperator(
-                            value[key],
-                            depth - 1,
-                            memo
-                        );
-                    }
-                } else {
-                    throw new Error("Can't clone " + value);
-                }
-            }
+        ) {
+          var clone = isArray ? [] : {};
+          memo.set(value, clone);
+          for (var key in value) {
+            clone[key] = cloneOperator(
+              value[key],
+              depth - 1,
+              memo
+            );
+          }
+        } else {
+          throw new Error("Can't clone " + value);
         }
-        return memo.get(value);
+      }
     }
-    return value;
+    return memo.get(value);
+  }
+  return value;
 }
 

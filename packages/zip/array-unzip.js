@@ -4,35 +4,35 @@
 
 module.exports = unzip;
 function unzip(table) {
-    var transpose = [];
-    var rows = table.length;
-    var row, length;
-    var index, jndex;
+  var transpose = [];
+  var rows = table.length;
+  var row, length;
+  var index, jndex;
 
     // Mathematically, the degenerate case is an empty array where each inner
     // value would be of infinite length.
-    if (!rows) {
+  if (!rows) {
         // Within this array, the nothingness is infinite.
-        return [];
-    }
+    return [];
+  }
 
-    length = Infinity;
+  length = Infinity;
 
     // Find the shortest row, this will be the length of the transpose.
-    for (index = 0; index < rows; index++) {
-        row = table[index];
-        if (row.length < length) {
-            length = row.length;
-        }
+  for (index = 0; index < rows; index++) {
+    row = table[index];
+    if (row.length < length) {
+      length = row.length;
     }
+  }
 
     // Populate the transpose.
-    for (index = 0; index < length; index++) {
-        row = transpose[index] = [];
-        for (jndex = 0; jndex < rows; jndex++) {
-            row[jndex] = table[jndex][index];
-        }
+  for (index = 0; index < length; index++) {
+    row = transpose[index] = [];
+    for (jndex = 0; jndex < rows; jndex++) {
+      row[jndex] = table[jndex][index];
     }
+  }
 
-    return transpose;
+  return transpose;
 }

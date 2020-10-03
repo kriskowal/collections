@@ -7,24 +7,24 @@ var ObservableRange = require("@collections/observable/range");
 
 describe("ObservableRange", function () {
 
-    describe("observeRangeChange", function () {
+  describe("observeRangeChange", function () {
 
-        extendSpyExpectation();
+    extendSpyExpectation();
 
-        it("observe, dispatch", function () {
-            var range = Object.create(ObservableRange.prototype);
-            var spy;
+    it("observe, dispatch", function () {
+      var range = Object.create(ObservableRange.prototype);
+      var spy;
 
-            var observer = range.observeRangeChange(function (plus, minus, index) {
-                spy(plus, minus, index);
-            });
+      var observer = range.observeRangeChange(function (plus, minus, index) {
+        spy(plus, minus, index);
+      });
 
-            spy = sinon.spy();
-            range.dispatchRangeChange([1, 2, 3], [], 0);
-            expect(spy).toHaveBeenCalledWith([1, 2, 3], [], 0);
+      spy = sinon.spy();
+      range.dispatchRangeChange([1, 2, 3], [], 0);
+      expect(spy).toHaveBeenCalledWith([1, 2, 3], [], 0);
 
-            observer.cancel();
-        });
+      observer.cancel();
     });
+  });
 
 });

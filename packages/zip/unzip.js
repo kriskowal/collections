@@ -9,28 +9,28 @@ var toArray = require("@collections/to-array");
 
 module.exports = unzip;
 function unzip(table) {
-    if (typeof table.unzip === "function") {
-        return table.unzip();
-    }
+  if (typeof table.unzip === "function") {
+    return table.unzip();
+  }
     // Ensure that the table we pass to the non-polymorphic unzip is an array
     // of arrays.
     // However, only construct a new table if necessary.
-    var arrayTable;
-    if (!Array.isArray(table)) {
-        table = arrayTable = toArray(table);
-    }
-    for (var index = 0, length = table.length; index < length; index++) {
-        var row = table[index];
-        if (!Array.isArray(row)) {
+  var arrayTable;
+  if (!Array.isArray(table)) {
+    table = arrayTable = toArray(table);
+  }
+  for (var index = 0, length = table.length; index < length; index++) {
+    var row = table[index];
+    if (!Array.isArray(row)) {
             // Construct a copy of the table in which to replace non-array
             // values.
-            if (!arrayTable) {
+      if (!arrayTable) {
                 // Table is known to be an array because we would have replaced
                 // it already otherwise.
-                arrayTable = table.slice();
-            }
-            arrayTable[index] = row.toArray();
-        }
+        arrayTable = table.slice();
+      }
+      arrayTable[index] = row.toArray();
     }
-    return arrayUnzip(arrayTable || table);
+  }
+  return arrayUnzip(arrayTable || table);
 }

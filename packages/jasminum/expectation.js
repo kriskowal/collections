@@ -7,38 +7,38 @@ var has = require("@collections/has");
 // From http://stackoverflow.com/a/5306111/106302
 // Originally from http://simonwillison.net/2006/Jan/20/escape/ (dead link)
 function escapeRegexp(value) {
-    return value.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+  return value.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 }
 
 module.exports = Expectation;
 function Expectation(value, report) {
-    this.value = value;
-    this.report = report;
-    this.isNot = false;
-    this.not = Object.create(this);
-    this.not.isNot = true;
-    this.not.not = this;
+  this.value = value;
+  this.report = report;
+  this.isNot = false;
+  this.not = Object.create(this);
+  this.not.isNot = true;
+  this.not.not = this;
 }
 
 Expectation.prototype.assert = function (guard, messages, objects) {
-    return this.report.assert(guard, this.isNot, messages, objects);
+  return this.report.assert(guard, this.isNot, messages, objects);
 };
 
 Expectation.binaryMethod = expectationBinaryMethod;
 function expectationBinaryMethod(operator, operatorName) {
-    return function (value) {
-        this.assert(
-            operator.call(this, this.value, value),
-            [
-                "expected",
-                "[not] " + operatorName
-            ],
-            [
-                this.value,
-                value
-            ]
-        );
-    };
+  return function (value) {
+    this.assert(
+      operator.call(this, this.value, value),
+      [
+        "expected",
+        "[not] " + operatorName
+      ],
+      [
+        this.value,
+        value
+      ]
+    );
+  };
 }
 
 Expectation.prototype.toEqual = Expectation.binaryMethod(equals, "to equal");
@@ -46,142 +46,142 @@ Expectation.prototype.toEqual = Expectation.binaryMethod(equals, "to equal");
 Expectation.prototype.toBe = Expectation.binaryMethod(is, "to be");
 
 Expectation.prototype.toNotBe = function (value) {
-    console.warn(new Error("toNotBe is deprecated. Use not.toBe").stack);
-    return this.not.toBe(value);
+  console.warn(new Error("toNotBe is deprecated. Use not.toBe").stack);
+  return this.not.toBe(value);
 };
 
 Expectation.prototype.toBeUndefined = function () {
-    return this.toBe(undefined);
+  return this.toBe(undefined);
 };
 
 Expectation.prototype.toBeDefined = function () {
-    return this.not.toBe(undefined);
+  return this.not.toBe(undefined);
 };
 
 Expectation.prototype.toBeNull = function () {
-    return this.toBe(null);
+  return this.toBe(null);
 };
 
 Expectation.prototype.toBeTruthy = Expectation.binaryMethod(Boolean, "to be truthy");
 
 Expectation.prototype.toBeFalsy = function () {
-    return this.not.toBeTruthy();
+  return this.not.toBeTruthy();
 };
 
 Expectation.prototype.toContain = Expectation.binaryMethod(has, "to contain");
 
 function lessThan(a, b) {
-    return compare(a, b) < 0;
+  return compare(a, b) < 0;
 }
 
 Expectation.prototype.toBeLessThan = Expectation.binaryMethod(lessThan, "to be less than");
 
 function greaterThan(a, b) {
-    return compare(a, b) > 0;
+  return compare(a, b) > 0;
 }
 
 Expectation.prototype.toBeGreaterThan = Expectation.binaryMethod(greaterThan, "to be greater than");
 
 function near(a, b, epsilon) {
-    var difference = Math.abs(compare(a, b));
-    if (difference === 0) {
-        return equals(a, b);
-    } else {
-        return difference <= epsilon;
-    }
+  var difference = Math.abs(compare(a, b));
+  if (difference === 0) {
+    return equals(a, b);
+  } else {
+    return difference <= epsilon;
+  }
 }
 
 Expectation.prototype.toBeNear = function (value, epsilon) {
-    this.assert(
-        near(this.value, value, epsilon),
-        [
-            "expected",
-            "[not] to be near",
-            "within",
-            "above or below"
-        ],
-        [
-            this.value,
-            value,
-            epsilon
-        ]
-    );
+  this.assert(
+    near(this.value, value, epsilon),
+    [
+      "expected",
+      "[not] to be near",
+      "within",
+      "above or below"
+    ],
+    [
+      this.value,
+      value,
+      epsilon
+    ]
+  );
 };
 
 function close(a, b, precision) {
-    return near(a, b, Math.pow(10, -precision));
+  return near(a, b, Math.pow(10, -precision));
 }
 
 Expectation.prototype.toBeCloseTo = function (value, precision) {
-    this.assert(
-        close(this.value, value, precision),
-        [
-            "expected",
-            "[not] to be close to",
-            "within",
-            "digits of precision"
-        ],
-        [
-            this.value,
-            value,
-            precision
-        ]
-    );
+  this.assert(
+    close(this.value, value, precision),
+    [
+      "expected",
+      "[not] to be close to",
+      "within",
+      "digits of precision"
+    ],
+    [
+      this.value,
+      value,
+      precision
+    ]
+  );
 };
 
 Expectation.prototype.toBeBetween = function (low, high) {
-    this.assert(
-        compare(low, this.value) <= 0 &&
+  this.assert(
+    compare(low, this.value) <= 0 &&
         compare(high, this.value) > 0,
-        [
-            "expected",
-            "[not] to be within the interval",
-            "inclusive to",
-            "exclusive"
-        ],
-        [
-            this.value,
-            low,
-            high
-        ]
-    );
+    [
+      "expected",
+      "[not] to be within the interval",
+      "inclusive to",
+      "exclusive"
+    ],
+    [
+      this.value,
+      low,
+      high
+    ]
+  );
 };
 
 function match(a, b) {
-    if (typeof b === "string") {
-        b = new RegExp(escapeRegexp(b));
-    }
-    return b.exec(a) != null;
+  if (typeof b === "string") {
+    b = new RegExp(escapeRegexp(b));
+  }
+  return b.exec(a) != null;
 }
 
 Expectation.prototype.toMatch = Expectation.binaryMethod(match, "to match");
 
 Expectation.prototype.toThrow = function () {
-    if (typeof this.value !== "function") {
-        this.report.assert(false, false, [
-            "expected function but got"
-        ], [this.value]);
-        return;
+  if (typeof this.value !== "function") {
+    this.report.assert(false, false, [
+      "expected function but got"
+    ], [this.value]);
+    return;
+  }
+  try {
+    this.value();
+    this.assert(false, [
+      "expected function [not] to throw",
+    ], []);
+  } catch (error) {
+    if (this.isNot) {
+      this.assert(true, [
+        "expected function not to throw but threw"
+      ], [error]);
+    } else {
+      this.assert(true, [
+        "expected function to throw"
+      ], []);
     }
-    try {
-        this.value();
-        this.assert(false, [
-            "expected function [not] to throw",
-        ], []);
-    } catch (error) {
-        if (this.isNot) {
-            this.assert(true, [
-                "expected function not to throw but threw"
-            ], [error]);
-        } else {
-            this.assert(true, [
-                "expected function to throw"
-            ], []);
-        }
-    }
+  }
 };
 
 function is(x, y) {
-    return x === y || (x !== x && y !== y);
+  return x === y || (x !== x && y !== y);
 }
 

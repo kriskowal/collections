@@ -8,59 +8,59 @@ var ObservableMap = require("@collections/observable/map");
 
 describe("ObservableMap", function () {
 
-    extendSpyExpectation();
+  extendSpyExpectation();
 
-    describe("observeMapChange", function () {
-        it("observe, dispatch", function () {
+  describe("observeMapChange", function () {
+    it("observe, dispatch", function () {
 
-            var map = Object.create(ObservableMap.prototype);
-            var spy;
+      var map = Object.create(ObservableMap.prototype);
+      var spy;
 
-            var observer = map.observeMapChange(function (plus, minus, key, type, object) {
-                spy(plus, minus, key, type, object);
-            });
+      var observer = map.observeMapChange(function (plus, minus, key, type, object) {
+        spy(plus, minus, key, type, object);
+      });
 
-            spy = sinon.spy();
-            map.dispatchMapChange("create", "foo", 10, undefined);
-            expect(spy).toHaveBeenCalledWith(10, undefined, "foo", "create", map);
+      spy = sinon.spy();
+      map.dispatchMapChange("create", "foo", 10, undefined);
+      expect(spy).toHaveBeenCalledWith(10, undefined, "foo", "create", map);
 
-        });
-
-        it("observe, cancel, dispatch", function () {
-
-            var map = Object.create(ObservableMap.prototype);
-            var spy;
-
-            var observer = map.observeMapChange(function (plus, minus, key, type, object) {
-                spy(plus, minus, key, type, object);
-            });
-
-            spy = sinon.spy();
-            observer.cancel();
-            map.dispatchMapChange("create", "foo", 10, undefined);
-            expect(spy).not.toHaveBeenCalled();
-
-        });
-
-        it("observe, dispatch, cancel, dispatch", function () {
-
-            var map = Object.create(ObservableMap.prototype);
-            var spy;
-
-            var observer = map.observeMapChange(function (plus, minus, key, type, object) {
-                spy(plus, minus, key, type, object);
-            });
-
-            spy = sinon.spy();
-            map.dispatchMapChange("create", "foo", 10, undefined);
-            expect(spy).toHaveBeenCalledWith(10, undefined, "foo", "create", map);
-
-            observer.cancel();
-            spy = sinon.spy();
-            map.dispatchMapChange("create", "foo", 10, undefined);
-            expect(spy).not.toHaveBeenCalled();
-        });
     });
+
+    it("observe, cancel, dispatch", function () {
+
+      var map = Object.create(ObservableMap.prototype);
+      var spy;
+
+      var observer = map.observeMapChange(function (plus, minus, key, type, object) {
+        spy(plus, minus, key, type, object);
+      });
+
+      spy = sinon.spy();
+      observer.cancel();
+      map.dispatchMapChange("create", "foo", 10, undefined);
+      expect(spy).not.toHaveBeenCalled();
+
+    });
+
+    it("observe, dispatch, cancel, dispatch", function () {
+
+      var map = Object.create(ObservableMap.prototype);
+      var spy;
+
+      var observer = map.observeMapChange(function (plus, minus, key, type, object) {
+        spy(plus, minus, key, type, object);
+      });
+
+      spy = sinon.spy();
+      map.dispatchMapChange("create", "foo", 10, undefined);
+      expect(spy).toHaveBeenCalledWith(10, undefined, "foo", "create", map);
+
+      observer.cancel();
+      spy = sinon.spy();
+      map.dispatchMapChange("create", "foo", 10, undefined);
+      expect(spy).not.toHaveBeenCalled();
+    });
+  });
 
 });
 

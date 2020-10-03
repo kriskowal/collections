@@ -30,148 +30,148 @@ describe("Set", function () {
     // Set().min()
     // Set().max()
 
-    function newSet(values) {
-        return new Set(values);
+  function newSet(values) {
+    return new Set(values);
+  }
+
+  [Set, newSet].forEach(function (Set) {
+    describeCollection(Set, [1, 2, 3, 4], true);
+    describeCollection(Set, [{id: 0}, {id: 1}, {id: 2}, {id: 3}], true);
+    describeSet(Set);
+  });
+
+  it("can use hash delegate methods", function () {
+    function Item(key, value) {
+      this.key = key;
+      this.value = value;
     }
 
-    [Set, newSet].forEach(function (Set) {
-        describeCollection(Set, [1, 2, 3, 4], true);
-        describeCollection(Set, [{id: 0}, {id: 1}, {id: 2}, {id: 3}], true);
-        describeSet(Set);
+    Item.prototype.hash = function () {
+      return "" + this.key;
+    };
+
+    var set = new Set();
+    set.add(new Item(1, "a"));
+    set.add(new Item(3, "b"));
+    set.add(new Item(2, "c"));
+    set.add(new Item(2, "d"));
+
+    expect(set.buckets.keys().sort()).toEqual(["1", "2", "3"]);
+
+  });
+
+  it("can iterate with forEach", function () {
+    var values = [false, null, undefined, 0, 1, {}];
+    var set = new Set(values);
+    set.forEach(function (value) {
+      var index = values.indexOf(value);
+      values.splice(index, 1);
     });
+    expect(values.length).toBe(0);
+  });
 
-    it("can use hash delegate methods", function () {
-        function Item(key, value) {
-            this.key = key;
-            this.value = value;
-        }
+  it("can iterate with an iterator", function () {
+    var set = new Set([1, 2, 3, 4, 5, 6]);
+    var iterator = new Iterator(set);
+    var array = iterator.toArray();
+    expect(array).toEqual(set.toArray());
+  });
 
-        Item.prototype.hash = function () {
-            return "" + this.key;
-        };
+  it("logs", function () {
+    var set = new Set([1, 2, 3]);
+    var lines = [];
+    set.log(TreeLog.ascii, null, lines.push, lines);
+    expect(lines).toEqual([
+      "+-+ 1",
+      "| '-- 1",
+      "+-+ 2",
+      "| '-- 2",
+      "'-+ 3",
+      "  '-- 3"
+    ]);
+  });
 
-        var set = new Set();
-        set.add(new Item(1, "a"));
-        set.add(new Item(3, "b"));
-        set.add(new Item(2, "c"));
-        set.add(new Item(2, "d"));
+  it("logs objects by hash", function () {
+    function Type(value) {
+      this.value = value;
+    }
+    Type.prototype.hash = function () {
+      return this.value;
+    };
+    var set = new Set([
+      new Type(1),
+      new Type(1),
+      new Type(2),
+      new Type(2)
+    ]);
+    var lines = [];
+    set.log(TreeLog.ascii, function (node, write) {
+      write(" " + JSON.stringify(node.value));
+    }, lines.push, lines);
+    expect(lines).toEqual([
+      "+-+ 1",
+      "| +-- {\"value\":1}",
+      "| '-- {\"value\":1}",
+      "'-+ 2",
+      "  +-- {\"value\":2}",
+      "  '-- {\"value\":2}"
+    ]);
+  });
 
-        expect(set.buckets.keys().sort()).toEqual(["1", "2", "3"]);
+  it("logs objects by only one hash", function () {
+    function Type(value) {
+      this.value = value;
+    }
+    Type.prototype.hash = function () {
+      return this.value;
+    };
+    var set = new Set([
+      new Type(1),
+      new Type(1)
+    ]);
+    var lines = [];
+    set.log(TreeLog.ascii, null, lines.push, lines);
+    expect(lines).toEqual([
+      "'-+ 1",
+      "  +-- {",
+      "  |       \"value\": 1",
+      "  |   }",
+      "  '-- {",
+      "          \"value\": 1",
+      "      }"
+    ]);
+  });
 
+  describe("logs objects with a custom writer with multiple lines", function () {
+    function Type(value) {
+      this.value = value;
+    }
+    Type.prototype.hash = function () {
+      return this.value;
+    };
+    var set = new Set([
+      new Type(1),
+      new Type(1)
+    ]);
+    var lines = [];
+    set.log(TreeLog.ascii, function (node, below, above) {
+      above(" . ");
+      below("-+ " + node.value.value);
+      below(" ' ");
+    }, lines.push, lines);
+    [
+      "'-+ 1",
+      "  |   . ",
+      "  +---+ 1",
+      "  |   ' ",
+      "  |   . ",
+      "  '---+ 1",
+      "      ' "
+    ].forEach(function (line, index) {
+      it("line " + index, function () {
+        expect(lines[index]).toEqual(line);
+      });
     });
-
-    it("can iterate with forEach", function () {
-        var values = [false, null, undefined, 0, 1, {}];
-        var set = new Set(values);
-        set.forEach(function (value) {
-            var index = values.indexOf(value);
-            values.splice(index, 1);
-        });
-        expect(values.length).toBe(0);
-    });
-
-    it("can iterate with an iterator", function () {
-        var set = new Set([1, 2, 3, 4, 5, 6]);
-        var iterator = new Iterator(set);
-        var array = iterator.toArray();
-        expect(array).toEqual(set.toArray());
-    });
-
-    it("logs", function () {
-        var set = new Set([1, 2, 3]);
-        var lines = [];
-        set.log(TreeLog.ascii, null, lines.push, lines);
-        expect(lines).toEqual([
-            "+-+ 1",
-            "| '-- 1",
-            "+-+ 2",
-            "| '-- 2",
-            "'-+ 3",
-            "  '-- 3"
-        ]);
-    });
-
-    it("logs objects by hash", function () {
-        function Type(value) {
-            this.value = value;
-        }
-        Type.prototype.hash = function () {
-            return this.value;
-        };
-        var set = new Set([
-            new Type(1),
-            new Type(1),
-            new Type(2),
-            new Type(2)
-        ]);
-        var lines = [];
-        set.log(TreeLog.ascii, function (node, write) {
-            write(" " + JSON.stringify(node.value));
-        }, lines.push, lines);
-        expect(lines).toEqual([
-            "+-+ 1",
-            "| +-- {\"value\":1}",
-            "| '-- {\"value\":1}",
-            "'-+ 2",
-            "  +-- {\"value\":2}",
-            "  '-- {\"value\":2}"
-        ]);
-    });
-
-    it("logs objects by only one hash", function () {
-        function Type(value) {
-            this.value = value;
-        }
-        Type.prototype.hash = function () {
-            return this.value;
-        };
-        var set = new Set([
-            new Type(1),
-            new Type(1)
-        ]);
-        var lines = [];
-        set.log(TreeLog.ascii, null, lines.push, lines);
-        expect(lines).toEqual([
-            "'-+ 1",
-            "  +-- {",
-            "  |       \"value\": 1",
-            "  |   }",
-            "  '-- {",
-            "          \"value\": 1",
-            "      }"
-        ]);
-    });
-
-    describe("logs objects with a custom writer with multiple lines", function () {
-        function Type(value) {
-            this.value = value;
-        }
-        Type.prototype.hash = function () {
-            return this.value;
-        };
-        var set = new Set([
-            new Type(1),
-            new Type(1)
-        ]);
-        var lines = [];
-        set.log(TreeLog.ascii, function (node, below, above) {
-            above(" . ");
-            below("-+ " + node.value.value);
-            below(" ' ");
-        }, lines.push, lines);
-        [
-            "'-+ 1",
-            "  |   . ",
-            "  +---+ 1",
-            "  |   ' ",
-            "  |   . ",
-            "  '---+ 1",
-            "      ' "
-        ].forEach(function (line, index) {
-            it("line " + index, function () {
-                expect(lines[index]).toEqual(line);
-            });
-        });
-    });
+  });
 
 });

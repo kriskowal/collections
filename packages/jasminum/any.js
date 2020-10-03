@@ -6,17 +6,17 @@
  */
 module.exports = Any;
 function Any(constructor) {
-    if (!(this instanceof Any)) {
-        return new Any(constructor);
-    }
-    this.constructor = constructor;
+  if (!(this instanceof Any)) {
+    return new Any(constructor);
+  }
+  this.constructor = constructor;
 }
 
 Any.prototype.equals = function (other) {
-    if (typeof other === "object") {
-        return other instanceof this.constructor;
-    } else {
-        return typeof other === typeof this.constructor();
-    }
+  if (typeof other === "object") {
+    return other instanceof this.constructor;
+  } else {
+    return typeof other === typeof this.constructor();
+  }
 };
 

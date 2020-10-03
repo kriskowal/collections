@@ -30,7 +30,7 @@
     },
     "rules": {
         "eqeqeq": [1, "allow-null"],
-        "indent": ["error", 4, {"ignoreComments": true}],
+        "indent": ["error", 2, {"ignoreComments": true}],
         "linebreak-style": ["error", "unix"],
         "no-redeclare": [0],
         "no-unused-vars": ["error", {"argsIgnorePattern": "^_"}],
