@@ -30,50 +30,50 @@
 */
 module.exports = compare;
 function compare(a, b, compare) {
-    var difference;
+  var difference;
     // unbox objects
     // mercifully handles the Date case
-    if (a && typeof a.valueOf === "function") {
-        a = a.valueOf();
-    }
-    if (b && typeof b.valueOf === "function") {
-        b = b.valueOf();
-    }
+  if (a && typeof a.valueOf === "function") {
+    a = a.valueOf();
+  }
+  if (b && typeof b.valueOf === "function") {
+    b = b.valueOf();
+  }
     // x !== x is only true if x is NaN. NaN is "incomparable" and both
     // equivalent and incomparable values always return 0.
-    if (a === b || a !== a || b !== b)
-        return 0;
-    var aType = typeof a;
-    var bType = typeof b;
-    if (aType === "number" && bType === "number")
-        return a - b;
-    if (aType === "string" && bType === "string")
-        return a < b ? -Infinity : Infinity;
-    // the possibility of equality elimiated above
-    compare = compare || module.exports;
-    if (Array.isArray(a) && Array.isArray(b)) {
-        for (var index in a) {
-            if (!(index in b)) {
-                return Infinity;
-            } else {
-                difference = compare(a[index], b[index], compare);
-                if (difference) {
-                    return difference;
-                }
-            }
-        }
-        for (var index in b) {
-            if (!(index in a)) {
-                return -Infinity;
-            }
-        }
-        return a.length - b.length;
-    }
-    if (a && typeof a.compare === "function")
-        return a.compare(b, compare);
-    // not commutative, the relationship is reversed
-    if (b && typeof b.compare === "function")
-        return -b.compare(a, compare);
+  if (a === b || a !== a || b !== b)
     return 0;
+  var aType = typeof a;
+  var bType = typeof b;
+  if (aType === "number" && bType === "number")
+    return a - b;
+  if (aType === "string" && bType === "string")
+    return a < b ? -Infinity : Infinity;
+    // the possibility of equality elimiated above
+  compare = compare || module.exports;
+  if (Array.isArray(a) && Array.isArray(b)) {
+    for (var index in a) {
+      if (!(index in b)) {
+        return Infinity;
+      } else {
+        difference = compare(a[index], b[index], compare);
+        if (difference) {
+          return difference;
+        }
+      }
+    }
+    for (var index in b) {
+      if (!(index in a)) {
+        return -Infinity;
+      }
+    }
+    return a.length - b.length;
+  }
+  if (a && typeof a.compare === "function")
+    return a.compare(b, compare);
+    // not commutative, the relationship is reversed
+  if (b && typeof b.compare === "function")
+    return -b.compare(a, compare);
+  return 0;
 }
 

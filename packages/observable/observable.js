@@ -9,11 +9,11 @@ exports.makeArrayObservable = Oa.makeArrayObservable;
 
 var name;
 for (name in Oo) {
-    exports[name] = Oo[name];
+  exports[name] = Oo[name];
 }
 for (name in Or) {
-    exports[name] = Or[name];
+  exports[name] = Or[name];
 }
 for (name in Om) {
-    exports[name] = Om[name];
+  exports[name] = Om[name];
 }

@@ -9,114 +9,114 @@ var toArray = require("@collections/to-array");
 
 exports.toNumber = toNumber;
 function toNumber(value) {
-    if (typeof value === "string" || typeof value === "number") {
-        return +value;
-    }
+  if (typeof value === "string" || typeof value === "number") {
+    return +value;
+  }
 }
 
 exports.toString = toString;
 function toString(value) {
-    if (typeof value === "string" || typeof value === "number") {
-        return "" + value;
-    }
+  if (typeof value === "string" || typeof value === "number") {
+    return "" + value;
+  }
 }
 
 exports.toArray = toArray;
 
 exports.not = not;
 function not(value) {
-    return !value;
+  return !value;
 }
 
 exports.neg = neg;
 function neg(n) {
-    return -n;
+  return -n;
 }
 
 exports.pow = pow;
 function pow(a, b) {
-    return Math.pow(a, b);
+  return Math.pow(a, b);
 }
 
 exports.root = root;
 function root(a, b) {
-    return Math.pow(a, 1 / b);
+  return Math.pow(a, 1 / b);
 }
 
 exports.log = log;
 function log(a, b) {
-    return Math.log(a) / Math.log(b);
+  return Math.log(a) / Math.log(b);
 }
 
 exports.mul = mul;
 function mul(a, b) {
-    return a * b;
+  return a * b;
 }
 
 exports.div = div;
 function div(a, b) {
-    return a / b;
+  return a / b;
 }
 
 exports.mod = mod;
 function mod(a, b) {
-    return ((a % b) + b) % b;
+  return ((a % b) + b) % b;
 }
 
 exports.rem = rem;
 function rem(a, b) {
-    return a % b;
+  return a % b;
 }
 
 exports.add = add;
 function add(a, b) {
-    return a + b;
+  return a + b;
 }
 
 exports.sub = sub;
 function sub(a, b) {
-    return a - b;
+  return a - b;
 }
 
 exports.ceil = ceil;
 function ceil(n) {
-    if (typeof n === "number") {
-        return Math.ceil(n);
-    }
+  if (typeof n === "number") {
+    return Math.ceil(n);
+  }
 }
 
 exports.floor = floor;
 function floor(n) {
-    if (typeof n === "number") {
-        return Math.floor(n);
-    }
+  if (typeof n === "number") {
+    return Math.floor(n);
+  }
 }
 
 exports.round = round;
 function round(n) {
-    if (typeof n === "number") {
-        return Math.round(n);
-    }
+  if (typeof n === "number") {
+    return Math.round(n);
+  }
 }
 
 exports.lessThan = lessThan;
 function lessThan(a, b) {
-    return compare(a, b) < 0;
+  return compare(a, b) < 0;
 }
 
 exports.greaterThan = greaterThan;
 function greaterThan(a, b) {
-    return compare(a, b) > 0;
+  return compare(a, b) > 0;
 }
 
 exports.lessThanOrEqual = lessThanOrEqual;
 function lessThanOrEqual(a, b) {
-    return compare(a, b) <= 0;
+  return compare(a, b) <= 0;
 }
 
 exports.greaterThanOrEqual = greaterThanOrEqual;
 function greaterThanOrEqual(a, b) {
-    return compare(a, b) >= 0;
+  return compare(a, b) >= 0;
 }
 
 /**
@@ -134,16 +134,16 @@ function greaterThanOrEqual(a, b) {
 */
 exports.is = is;
 function is(a, b) {
-    if (a === b) {
+  if (a === b) {
         // 0 === -0, but they are not identical
-        return a !== 0 || 1 / a === 1 / b;
-    }
+    return a !== 0 || 1 / a === 1 / b;
+  }
     // NaN !== NaN, but they are identical.
     // NaNs are the only non-reflexive value, i.e., if a !== a,
     // then a is a NaN.
     // isNaN is broken: it converts its argument to number, so
     // isNaN("foo") => true
-    return a !== a && b !== b;
+  return a !== a && b !== b;
 }
 
 exports.equals = equals;
@@ -152,70 +152,70 @@ exports.compare = compare;
 
 exports.and = and;
 function and(a, b) {
-    return a && b;
+  return a && b;
 }
 
 exports.or = or;
 function or(a, b) {
-    return a || b;
+  return a || b;
 }
 
 exports.defined = defined;
 function defined(value) {
-    return value != null;
+  return value != null;
 }
 
 exports.startsWith = startsWith;
 function startsWith(a, b) {
-    return a.lastIndexOf(b, 0) === 0;
+  return a.lastIndexOf(b, 0) === 0;
 }
 
 exports.endsWith = endsWith;
 function endsWith(a, b) {
-    var index = a.length - b.length;
-    if (index < 0) {
-        return false;
-    }
-    return a.indexOf(b, index) === index;
+  var index = a.length - b.length;
+  if (index < 0) {
+    return false;
+  }
+  return a.indexOf(b, index) === index;
 }
 
 exports.contains = contains;
 function contains(a, b) {
-    var expression = new RegExp(RegExp.escape(b));
-    return expression.test(a);
+  var expression = new RegExp(RegExp.escape(b));
+  return expression.test(a);
 }
 
 exports.join = join;
 function join(a, b) {
-    return a.join(b || "");
+  return a.join(b || "");
 }
 
 exports.split = split;
 function split(a, b) {
-    return a.split(b || "");
+  return a.split(b || "");
 }
 
 exports.range = range;
 function range(stop) {
-    var range = [];
-    for (var start = 0; start < stop; start++) {
-        range.push(start);
-    }
-    return range;
+  var range = [];
+  for (var start = 0; start < stop; start++) {
+    range.push(start);
+  }
+  return range;
 }
 
 exports.clone = clone;
 
 exports.isObject = isObject;
 function isObject(object) {
-    return object != null && typeof object === "object";
+  return object != null && typeof object === "object";
 }
 
 exports.valueOf = valueOf;
 function valueOf(value) {
-    if (value != null && typeof value.valueOf === "function") {
-        value = value.valueOf();
-    }
-    return value;
+  if (value != null && typeof value.valueOf === "function") {
+    value = value.valueOf();
+  }
+  return value;
 }
 

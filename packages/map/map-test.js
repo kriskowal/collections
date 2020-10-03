@@ -7,5 +7,5 @@ var Map = require("@collections/map");
 var describeMap = require("../specs/map");
 
 describe("Map", function () {
-    describeMap(Map); // Subsumes describeDict
+  describeMap(Map); // Subsumes describeDict
 });

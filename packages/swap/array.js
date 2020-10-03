@@ -7,38 +7,38 @@ var array_slice = Array.prototype.slice;
 
 module.exports = swap;
 function swap(array, start, minusLength, plus) {
-    var index, offset;
+  var index, offset;
 
     // Unrolled implementation into JavaScript for a couple reasons.
     // Calling splice can cause large stack sizes for large swaps. Also,
     // splice cannot handle array holes.
-    if (plus) {
-        if (!Array.isArray(plus)) {
-            plus = array_slice.call(plus);
-        }
-    } else {
-        plus = Array.empty;
+  if (plus) {
+    if (!Array.isArray(plus)) {
+      plus = array_slice.call(plus);
     }
+  } else {
+    plus = Array.empty;
+  }
 
-    if (start < 0) {
-        start = array.length + start;
-    } else if (start > array.length) {
-        array.length = start;
-    }
+  if (start < 0) {
+    start = array.length + start;
+  } else if (start > array.length) {
+    array.length = start;
+  }
 
-    if (start + minusLength > array.length) {
+  if (start + minusLength > array.length) {
         // Truncate minus length if it extends beyond the length
-        minusLength = array.length - start;
-    } else if (minusLength < 0) {
+    minusLength = array.length - start;
+  } else if (minusLength < 0) {
         // It is the JavaScript way.
-        minusLength = 0;
-    }
+    minusLength = 0;
+  }
 
-    var diff = plus.length - minusLength;
-    var oldLength = array.length;
-    var newLength = array.length + diff;
+  var diff = plus.length - minusLength;
+  var oldLength = array.length;
+  var newLength = array.length + diff;
 
-    if (diff > 0) {
+  if (diff > 0) {
         // Head Tail Plus Minus
         // H H H H M M T T T T
         // H H H H P P P P T T T T
@@ -55,27 +55,27 @@ function swap(array, start, minusLength, plus) {
         //             ^ start + minus.length
         //                     ^ length
         //                   ^ length - 1
-        for (index = oldLength - 1; index >= start + minusLength; index--) {
-            offset = index + diff;
-            if (index in array) {
-                array[offset] = array[index];
-            } else {
+    for (index = oldLength - 1; index >= start + minusLength; index--) {
+      offset = index + diff;
+      if (index in array) {
+        array[offset] = array[index];
+      } else {
                 // Oddly, PhantomJS complains about deleting array
                 // properties, unless you assign undefined first.
-                array[offset] = void 0;
-                delete array[offset];
-            }
-        }
+        array[offset] = void 0;
+        delete array[offset];
+      }
     }
-    for (index = 0; index < plus.length; index++) {
-        if (index in plus) {
-            array[start + index] = plus[index];
-        } else {
-            array[start + index] = void 0;
-            delete array[start + index];
-        }
+  }
+  for (index = 0; index < plus.length; index++) {
+    if (index in plus) {
+      array[start + index] = plus[index];
+    } else {
+      array[start + index] = void 0;
+      delete array[start + index];
     }
-    if (diff < 0) {
+  }
+  if (diff < 0) {
         // Head Tail Plus Minus
         // H H H H M M M M T T T T
         // H H H H P P T T T T
@@ -92,16 +92,16 @@ function swap(array, start, minusLength, plus) {
         //             ^------^ tail after
         //                     ^ length - diff
         //                     ^ newLength
-        for (index = start + plus.length; index < oldLength - diff; index++) {
-            offset = index - diff;
-            if (offset in array) {
-                array[index] = array[offset];
-            } else {
-                array[index] = void 0;
-                delete array[index];
-            }
-        }
+    for (index = start + plus.length; index < oldLength - diff; index++) {
+      offset = index - diff;
+      if (offset in array) {
+        array[index] = array[offset];
+      } else {
+        array[index] = void 0;
+        delete array[index];
+      }
     }
-    array.length = newLength;
+  }
+  array.length = newLength;
 }
 

@@ -6,6 +6,6 @@ var describeDict = require("../specs/dict");
 var describeObservableMap = require("../specs/observable-map");
 
 describe("Dict", function () {
-    describeDict(Dict);
-    describeObservableMap(Dict);
+  describeDict(Dict);
+  describeObservableMap(Dict);
 });

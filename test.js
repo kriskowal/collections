@@ -3,7 +3,7 @@
 var Suite = require("jasminum/suite");
 
 var suite = new Suite("Collections").describe(function () {
-    require("./tests");
+  require("./tests");
 });
 
 suite.runAndReport({Promise: Promise});

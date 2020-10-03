@@ -41,66 +41,66 @@ var objectPrototype = Object.prototype;
 */
 module.exports = equals;
 function equals(a, b, equals, memo) {
-    equals = equals || module.exports;
+  equals = equals || module.exports;
     // unbox objects
-    if (a != null && typeof a.valueOf === "function") {
-        a = a.valueOf();
-    }
-    if (b != null && typeof b.valueOf === "function") {
-        b = b.valueOf();
-    }
-    if (a === b)
-        return true;
+  if (a != null && typeof a.valueOf === "function") {
+    a = a.valueOf();
+  }
+  if (b != null && typeof b.valueOf === "function") {
+    b = b.valueOf();
+  }
+  if (a === b)
+    return true;
     // Equivocate null and undefined.
-    if (a == null)
-        return b == null;
+  if (a == null)
+    return b == null;
     // NaN !== NaN, but they are equal.
     // NaNs are the only non-reflexive value, i.e., if x !== x,
     // then x is a NaN.
     // isNaN is broken: it converts its argument to number, so
     // isNaN("foo") => true
-    if (a !== a)
-        return b !== b;
-    if (!a || !b)
-        return false;
-    if (typeof a === "object") {
-        memo = memo || new MiniMap();
-        if (memo.has(a)) {
-            return true;
-        }
-        memo.set(a, true);
+  if (a !== a)
+    return b !== b;
+  if (!a || !b)
+    return false;
+  if (typeof a === "object") {
+    memo = memo || new MiniMap();
+    if (memo.has(a)) {
+      return true;
     }
-    if (typeof a.equals === "function") {
-        return a.equals(b, equals, memo);
-    }
+    memo.set(a, true);
+  }
+  if (typeof a.equals === "function") {
+    return a.equals(b, equals, memo);
+  }
     // commutative
-    if (typeof b.equals === "function") {
-        return b.equals(a, equals, memo);
-    }
-    if ((Array.isArray(a) || Array.isArray(b)) && a.length !== b.length) {
-        return false;
-    }
-    if (typeof a === "object" && typeof b === "object") {
-        if (
-            getPrototypeOf(a) === objectPrototype &&
+  if (typeof b.equals === "function") {
+    return b.equals(a, equals, memo);
+  }
+  if ((Array.isArray(a) || Array.isArray(b)) && a.length !== b.length) {
+    return false;
+  }
+  if (typeof a === "object" && typeof b === "object") {
+    if (
+      getPrototypeOf(a) === objectPrototype &&
             getPrototypeOf(b) === objectPrototype ||
             Array.isArray(a) ||
             Array.isArray(b)
-        ) {
-            for (var name in a) {
-                if (!equals(a[name], b[name], equals, memo)) {
-                    return false;
-                }
-            }
-            for (var name in b) {
-                if (!(name in a)) {
-                    return false;
-                }
-            }
-            return true;
+    ) {
+      for (var name in a) {
+        if (!equals(a[name], b[name], equals, memo)) {
+          return false;
         }
+      }
+      for (var name in b) {
+        if (!(name in a)) {
+          return false;
+        }
+      }
+      return true;
     }
-    return false;
+  }
+  return false;
 }
 
 // Because a return value of 0 from a `compare` function  may mean either
