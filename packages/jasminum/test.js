@@ -29,8 +29,18 @@ Test.prototype.run = function (report, Promise) {
         .then(function () {
           return self.call(self.callback, Promise, context, report, "during");
         })
-        .finally(function () {
-          return self.afterEach(Promise, context, report);
+        .then(function (value) {
+          return self.afterEach(Promise, context, report)
+            .then(function (_ignoreValue) {
+              return value;
+            });
+        }, function (error) {
+          return self.afterEach(Promise, context, report)
+            .then(function (_ignoreValue) {
+              throw error;
+            }, function (alsoError) {
+              throw new Error(error.message + " and " + alsoError.message);
+            });
         });
     } else {
       report.skip(self);
@@ -38,10 +48,13 @@ Test.prototype.run = function (report, Promise) {
   })
     .then(function (value) {
       report.assert(value === undefined, false, ["expected test to return or resolve undefined but got"], [value]);
+
+      report.end(self);
+      setCurrentTest();
+      setCurrentReport();
     }, function (error) {
       report.error(error, self);
-    })
-    .finally(function () {
+
       report.end(self);
       setCurrentTest();
       setCurrentReport();

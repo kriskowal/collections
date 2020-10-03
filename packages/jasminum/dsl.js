@@ -4,8 +4,21 @@ var any = require("./any");
 var createSpy = require("./spy");
 var createSpyObject = require("./spy-object");
 
+function getGlobalThis() {
+  if (typeof globalThis === "object") {
+    return globalThis;
+  } else if (typeof global === "object") {
+    return global;
+  } else if (typeof self === "object") {
+    return self;
+  }
+  throw new TypeError("Cannot find a candidate stand-in for `globalThis`, neither that nor `global` nor `self` are in scope");
+}
+
+var root = getGlobalThis();
+
 // DEPRECATED
-globalThis.jasmine = {
+root.jasmine = {
   createSpy: createSpy,
   createSpyObj: createSpyObject,
   any: any
@@ -17,7 +30,7 @@ var currentSuite;
 var currentReport;
 var currentTest;
 
-globalThis.describe = function (name, callback) {
+root.describe = function (name, callback) {
   if (!currentSuite) {
     throw new Error("Can't call describe when there is no active suite");
   }
@@ -25,7 +38,7 @@ globalThis.describe = function (name, callback) {
   suite.describe(callback);
 };
 
-globalThis.xdescribe = function (name, callback) {
+root.xdescribe = function (name, callback) {
   if (!currentSuite) {
     throw new Error("Can't call xdescribe when there is no active suite");
   }
@@ -34,7 +47,7 @@ globalThis.xdescribe = function (name, callback) {
   suite.describe(callback);
 };
 
-globalThis.ddescribe = function (name, callback) {
+root.ddescribe = function (name, callback) {
   if (!currentSuite) {
     throw new Error("Can't call ddescribe when there is no active suite");
   }
@@ -43,14 +56,14 @@ globalThis.ddescribe = function (name, callback) {
   suite.describe(callback);
 };
 
-globalThis.it = function (name, callback) {
+root.it = function (name, callback) {
   if (!currentSuite) {
     throw new Error("Can't call it when there is no active suite");
   }
   currentSuite.nestTest(name, callback);
 };
 
-globalThis.iit = function (name, callback) {
+root.iit = function (name, callback) {
   if (!currentSuite) {
     throw new Error("Can't call iit when there is no active suite");
   }
@@ -59,7 +72,7 @@ globalThis.iit = function (name, callback) {
   test.exclusive = true;
 };
 
-globalThis.xit = function (name, callback) {
+root.xit = function (name, callback) {
   if (!currentSuite) {
     throw new Error("Can't call xit when there is no active suite");
   }
@@ -67,21 +80,21 @@ globalThis.xit = function (name, callback) {
   test.skip = true;
 };
 
-globalThis.beforeEach = function (callback) {
+root.beforeEach = function (callback) {
   if (!currentSuite) {
     throw new Error("Cannot use `beforeEach` outside of a 'define' block");
   }
   currentSuite.beforeEach = callback;
 };
 
-globalThis.afterEach = function (callback) {
+root.afterEach = function (callback) {
   if (!currentSuite) {
     throw new Error("Cannot use `afterEach` outside of a 'define' block");
   }
   currentSuite.afterEach = callback;
 };
 
-globalThis.expect = function (value) {
+root.expect = function (value) {
   if (!currentReport) {
     throw new Error("Cannot declare an expectation outside of an 'it' block");
   }
@@ -95,14 +108,14 @@ globalThis.expect = function (value) {
   }
 };
 
-globalThis.spyOn = function (object, name) {
+root.spyOn = function (object, name) {
   object[name] = createSpy(name, object[name]);
   return object[name];
 };
 
 // For internal linkage
 
-globalThis.getCurrentSuite = function () {
+root.getCurrentSuite = function () {
   if (currentSuite) {
     return currentSuite;
   } else if (currentTest) {
@@ -110,22 +123,22 @@ globalThis.getCurrentSuite = function () {
   }
 };
 
-globalThis.setCurrentSuite = function (suite) {
+root.setCurrentSuite = function (suite) {
   currentSuite = suite;
 };
 
-globalThis.getCurrentReport = function () {
+root.getCurrentReport = function () {
   return currentReport;
 };
 
-globalThis.setCurrentReport = function (report) {
+root.setCurrentReport = function (report) {
   currentReport = report;
 };
 
-globalThis.getCurrentTest = function () {
+root.getCurrentTest = function () {
   return currentTest;
 };
 
-globalThis.setCurrentTest = function (test) {
+root.setCurrentTest = function (test) {
   currentTest = test;
 };

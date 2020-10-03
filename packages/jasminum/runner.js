@@ -7,6 +7,8 @@ var optimist = require("optimist");
 var Suite = require("./jasminum");
 var Reporter = require("./reporter");
 
+var colors = require("./colors");
+
 var argv = optimist
   .boolean(["p", "passes"])
   .boolean(["f", "failures"])
@@ -19,7 +21,7 @@ search(argv._).then(function (files) {
     files.forEach(function (file) {
       describe(file, function () {
         if (process.stdout.isTTY) {
-          console.log(file.grey);
+          console.log(colors.color(file, "black+bold"));
         } else {
           console.log(file);
         }
