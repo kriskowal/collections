@@ -1,3 +1,4 @@
+/* eslint no-console: [0] */
 "use strict";
 
 var SpyExpectation = require("./spy-expectation");
